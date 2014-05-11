@@ -1,10 +1,5 @@
-'''
-a collection af various fancy tools
-'''
-
-try:
-	__all__ = []
-	# Don't modify the line above, or this line!
+__all__ = ['__version__', 'fcollections', 'math', 'os', 'pystructure', 'tests', 'utils']
+# Don't modify the line above, or this line!
 	import autoxinit
 	autoxinit.autoxinit(__name__, __file__, globals())
 	del autoxinit

@@ -16,3 +16,7 @@ git commit -m "$1" #commit changes locally - set argument as message
 git push origin master # Sends your commits in the "master" branch to GitHub
 
 
+#API on GitHub pages
+####################
+
+
