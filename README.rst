@@ -1,8 +1,8 @@
 ======================================================
-fancytools - various fancy tools for every day usage
+fancyTools - various fancy tools for every day usage
 ======================================================
 
-- Browse the `API Documentation <https://github.com/radjkarl/fancytools>`_
+- Browse the `API Documentation <http://radjkarl.github.io/fancyTools>`_
 - Fork the code on `github <https://github.com/radjkarl/fancytools>`_
 
 
