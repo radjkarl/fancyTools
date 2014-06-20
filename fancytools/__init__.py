@@ -1,6 +1,6 @@
+__all__ = ['__version__', 'fcollections', 'io', 'math', 'os', 'pystructure', 'tests', 'utils']
+# Don't modify the line above, or this line!
 try:
-	__all__ = ['__version__', 'fcollections', 'math', 'os', 'pystructure', 'tests', 'utils']
-	# Don't modify the line above, or this line!
 	import autoxinit
 	autoxinit.autoxinit(__name__, __file__, globals())
 	del autoxinit

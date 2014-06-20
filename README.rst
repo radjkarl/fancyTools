@@ -29,7 +29,7 @@ To run all tests type::
 Import Classes/Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^
  
-**fancytools** uses `autoXinit <https://github.com/radjkarl/autoXinit>`_ to automatically import all classes and modules in a package. Therefore you can import the function *stitchModules* via::
+**fancytools** uses `autoXinit <https://pypi.python.org/pypi/autoxinit>`_ to automatically import all classes and modules in a package. Therefore you can import the function *stitchModules* via::
 
     from fancytools.pystructure import stitchModules
 

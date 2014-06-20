@@ -1,4 +1,4 @@
-__all__ = ['PathStr', 'StartMenuEntry', 'copyTree', 'countLines', 'isAdmin', 'legalizeFilename', 'pathStr', 'setup', 'userName', '_LinuxStartMenuEntry', '_WindowsStartMenuEntry', 'copytree', 'setuptoolsSetup']
+__all__ = ['PathStr', 'StartMenuEntry', 'copyTree', 'countLines', 'isAdmin', 'legalizeFilename', 'osWalkLimited', 'pathStr', 'setup', 'userName', '_LinuxStartMenuEntry', '_WindowsStartMenuEntry', 'copytree', 'setuptoolsSetup']
 # Don't modify the line above, or this line!
 import autoxinit
 autoxinit.autoxinit(__name__, __file__, globals())
