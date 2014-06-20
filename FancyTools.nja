@@ -1,29 +1,7 @@
 {
-  "mainFile": "", 
-  "use-tabs": true, 
   "venv": "", 
-  "relatedProjects": [], 
-  "name": "fancytools", 
-  "license": "GNU General Public License v3", 
-  "url": "", 
-  "pythonPath": "python", 
-  "preExecScript": "", 
-  "additional_builtins": [], 
-  "programParams": "", 
-  "indentation": 4, 
-  "PYTHONPATH": "", 
-  "supported-extensions": [
-    ".py", 
-    ".html", 
-    ".jpg", 
-    ".png", 
-    ".ui", 
-    ".css", 
-    ".json", 
-    ".js", 
-    ".ini"
-  ], 
   "project-type": "Import from sources", 
-  "postExecScript": "", 
+  "name": "fancy", 
+  "license": "GNU General Public License v3", 
   "description": ""
 }

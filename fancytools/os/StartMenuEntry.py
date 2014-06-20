@@ -56,7 +56,7 @@ MimeType=PYZ''' %(
 
 
 
-class _WindowsStartMenuEntry(object):
+class _WindowsStartMenuEntry:
 
 	def __init__(self, name, target,
 				icon, directory,
