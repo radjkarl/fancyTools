@@ -11,7 +11,7 @@ class MultiList(object):
 	print l.eggs => [3,4]
 	print l[1] ==> [2,4]
 	'''
-
+#TODO: better as named numpy.array
 	def __init__(self, *names):
 		self._lists = []
 		for name in names:
