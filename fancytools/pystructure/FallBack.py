@@ -19,6 +19,7 @@ class FallBack(object):
 		self.wrappedModule = sys.modules[ownModuleName]
 		self.fallbackModule = fallbackModule
 		self.print_warning = print_warning
+		self._print_waring_is_callable = callable(self.print_warning)
 		#register Fallback-wrapper in sys:
 		sys.modules[ownModuleName] = self
 
@@ -27,7 +28,7 @@ class FallBack(object):
 		try:
 			return getattr(self.wrappedModule, name)
 		except AttributeError:
-			if self.print_warning:
+			if (not self._print_waring_is_callable and self.print_warning) or self.print_warning():				
 				print 'WARING: no %s class exists for %s yet ... continue using fallback' %(
 					self.wrappedModule.__name__,name)
 			return getattr(self.fallbackModule, name)
