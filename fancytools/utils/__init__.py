@@ -1,4 +1,4 @@
-__all__ = ['Logger', 'formatedTime', 'incrementName', 'statusBar']
+__all__ = ['Logger', 'StreamSignal', 'formatedTime', 'incrementName', 'statusBar']
 # Don't modify the line above, or this line!
 import autoxinit
 autoxinit.autoxinit(__name__, __file__, globals())

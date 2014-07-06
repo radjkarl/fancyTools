@@ -1,4 +1,4 @@
-__all__ = ['FallBack', 'getMembers', 'getNestedClassStructure', 'runAllInDir', 'stitchModules', 'getAvClassNamesInModule', 'getAvClassNamesInPackage', 'getAvailableClassesInModule', 'getAvailableClassesInPackage', 'getClassInModuleFromName', 'getClassInPackageFromName', 'GetCallablesInPackage', 'NestedOrderedDict']
+__all__ = ['FallBack', 'GetCallablesInPackage', 'getMembers', 'runAllInDir', 'stitchModules', 'NestedOrderedDict', 'getAvClassNamesInModule', 'getAvClassNamesInPackage', 'getAvailableClassesInModule', 'getAvailableClassesInPackage', 'getClassInModuleFromName', 'getClassInPackageFromName']
 # Don't modify the line above, or this line!
 import autoxinit
 autoxinit.autoxinit(__name__, __file__, globals())

@@ -10,5 +10,6 @@ encoding//fancytools/os/setup.py=utf-8
 encoding//fancytools/pystructure/FallBack.py=utf-8
 encoding//fancytools/pystructure/getMembers.py=utf-8
 encoding//fancytools/pystructure/runAllInDir.py=utf-8
+encoding//fancytools/pystructure/stitchModules.py=utf-8
 encoding//fancytools/utils/Logger.py=utf-8
 encoding//fancytools/utils/formatedTime.py=utf-8

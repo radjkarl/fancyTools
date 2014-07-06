@@ -9,7 +9,7 @@ import inspect
 
 
 class GetCallablesInPackage(NestedOrderedDict):
-    def __init__(self, mainModule, include_classes=True, include_functions=False ):
+    def __init__(self, mainModule, include_classes=True, include_functions=False, max_level=None ):
         NestedOrderedDict.__init__(self)
         self._include_classes = include_classes
         self._include_functions = include_functions
