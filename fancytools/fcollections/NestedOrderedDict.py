@@ -38,6 +38,23 @@ class NestedOrderedDict(OrderedDict):
 			else:
 				value.path = key
 
+
+
+	def __repr__(self):
+		'''limit the number of shown items to 5 and give it a more dict-like view'''
+		contents = ''
+		n = 0
+		for n, (key, item) in enumerate(self.iteritems()):
+			contents += '%s: %s, ' %(key,item)
+			if n == 5:
+				break
+		if contents:
+			contents = contents[:-2]
+		if n == 5:
+			contents += ', ...'
+		return '%s({%s})' %(self.__class__.__name__, contents)
+
+
 if __name__ == '__main__':
 
 	one = NestedOrderedDict()
@@ -53,5 +70,6 @@ if __name__ == '__main__':
 	four['5'] = five
 
 	#get items:
+	print one
 	print four.path
 #	print one['2, 3']
