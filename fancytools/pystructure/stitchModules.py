@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 def stitchModules(module, fallbackModule):
 		'''
 		complete missing attributes with those in fallbackModule
@@ -29,6 +30,7 @@ def stitchModules(module, fallbackModule):
 		for name, attr in fallbackModule.__dict__.iteritems():
 			if name not in module.__dict__:
 				module.__dict__[name] = attr
+
 
 
 if __name__ == "__main__":

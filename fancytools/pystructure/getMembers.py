@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+# __all__ = [
+# 		'getAvailableClassesInModule', 
+# 		'getAvailableClassesInPackage', 
+# 		'getAvClassNamesInPackage',
+# 		'getAvClassNamesInModule',
+# 		'getClassInPackageFromName',
+# 		'getClassInModuleFromName']
 
 import inspect
 

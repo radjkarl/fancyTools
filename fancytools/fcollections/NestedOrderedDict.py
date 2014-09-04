@@ -3,7 +3,6 @@
 #from pyqtgraph.pgcollections import OrderedDict
 from ordereddict import OrderedDict
 
-
 class NestedOrderedDict(OrderedDict):
 	'''
 	an ordered dict allowing the acces of nested items e.g.

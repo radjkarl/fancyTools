@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import find_packages
-from setuptools import setup as setuptoolsSetup
 import os
 import shutil
+from setuptools import find_packages
+from setuptools import setup as setuptoolsSetup
+
 
 def setup(package):
 	
@@ -43,3 +44,4 @@ def setup(package):
 	bPath = os.path.join(mainPath,'build')
 	if os.path.exists(bPath):
 		shutil.rmtree(bPath)
+

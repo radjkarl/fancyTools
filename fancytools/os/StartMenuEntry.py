@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
+import stat
+from isAdmin import isAdmin
+
+
 #import sys
 #import site
-import stat
-
-from isAdmin import isAdmin
 #print isAdmin
 class _LinuxStartMenuEntry(object):
 

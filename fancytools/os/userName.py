@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 import os
+
 try:
 	import pwd
 except ImportError:
@@ -7,7 +7,9 @@ except ImportError:
 	pwd = None
 
 def userName():
+	'''return the user-name of the current user'''
 	if pwd:
 		return pwd.getpwuid(os.geteuid()).pw_name
 	else:
 		return getpass.getuser()
+

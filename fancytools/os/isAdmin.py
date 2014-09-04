@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import ctypes, os
 
-
 def isAdmin():
 	try:
 		is_admin = os.getuid() == 0

@@ -12,3 +12,4 @@ def linspace2(a, b, n):
 		for i in range(len(a)):
 			a[i] += diff01
 	return a
+

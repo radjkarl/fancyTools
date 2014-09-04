@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+import sys
 
 
 class FIFObuffer(object):
@@ -80,6 +81,7 @@ class FIFObuffer(object):
 
 	def __getitem__(self, key):
 		return self.array()[key]
+
 
 if __name__ == '__main__':
 	print 'todo'

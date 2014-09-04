@@ -3,28 +3,35 @@ Created on 3 Jul 2014
 
 @author: elkb4
 '''
-import fancytools
-from fancytools.fcollections import NestedOrderedDict
+import importlib
 import inspect
 
+import fancytools
+from fancytools.fcollections.NestedOrderedDict import NestedOrderedDict
 
 class GetCallablesInPackage(NestedOrderedDict):
     '''
     *exclude 'private' modules beginning with '_'
     '''
-    def __init__(self, mainModule, modules_in_structure=False, 
+    def __init__(self, package, modules_in_structure=False, 
                  include_classes=True, include_functions=False, 
-                 max_level=None, del_empty_pck=True):
+                 min_level=0, max_level=None, del_empty_pck=True):
+        '''
+        @param package: package or string of path to package
+        '''
+
         NestedOrderedDict.__init__(self)
         self._include_classes = include_classes
         self._include_functions = include_functions
-
-        self._mainmod = mainModule
+        if isinstance(package, basestring):
+            package = importlib.import_module(package)
+        self._package = package
         self._modules_in_structure = modules_in_structure
+        self._min_level = min_level
         self._max_level = max_level
-        self._objects = [mainModule]
+        self._objects = [package]
         
-        self._buildLimitsRecursive(mainModule, self, 0)
+        self._buildRecursive(package, self, 0)
         
         if del_empty_pck:
             self._cleanRecursive(self)
@@ -35,7 +42,7 @@ class GetCallablesInPackage(NestedOrderedDict):
         delete all NestedOrderedDict that haven't any entries
         '''
         for key, item in subSelf.iteritems():
-            if isinstance(item, NestedOrderedDict):
+            if self.isNestedDict(item):
                 if not item:
                     subSelf.pop(key)
                 else:
@@ -43,20 +50,20 @@ class GetCallablesInPackage(NestedOrderedDict):
             
     
     
-    def _buildLimitsRecursive(self, module, subSelf, level):
+    def _buildRecursive(self, module, subSelf, level):
 
         for (name, obj) in inspect.getmembers(module):
             # take only 'public' modules
             if name[0] == '_':
                 continue
-           # print name, level
+            #print name, level
             if inspect.ismodule(obj):
                 #don't handle modules thats have been used before:
                 if obj in self._objects:
                     continue
                 self._objects.append(obj)
 
-                if obj.__name__.startswith(self._mainmod.__name__):
+                if obj.__name__.startswith(self._package.__name__):
                     #either use module for submenus or check whether module is actually a package:
                     if self._modules_in_structure or obj.__file__.endswith('__init__.pyc'):
                       #  is_pck = True
@@ -64,26 +71,33 @@ class GetCallablesInPackage(NestedOrderedDict):
                         if not self._max_level or level <= self._max_level:
                         #if self._max_level:
                             l = subSelf[name] = NestedOrderedDict()
-                            self._buildLimitsRecursive(obj, l, level+1)
+                            self._buildRecursive(obj, l, level+1)
                     else:
                         #use same menu for all classes of all files on one folder/module
-                        self._buildLimitsRecursive(obj, subSelf, level)
+                        self._buildRecursive(obj, subSelf, level)
                     
-            else: 
+            elif level >= self._min_level: 
                     # if object is a class 
-                    if ( not self._include_classes or ( self._include_classes and inspect.isclass(obj) ) or 
+                    if ( 
+                        ( self._include_classes and inspect.isclass(obj) ) or #( not self._include_classes or ( self._include_classes and inspect.isclass(obj) ) or 
                     # and/or a function 
-                       ( not self._include_functions or ( self._include_functions and inspect.isfunction(obj)) ) ):
+                       ( self._include_functions and inspect.isfunction(obj) ) #( not self._include_functions or ( self._include_functions and inspect.isfunction(obj)) )
+                        ):
                         # if object belongs to its parent module (mod is not imported)
                         # OR module paths are the same (in case of from mod import cls and cls.name == mod.name)
-                        if obj.__module__ == module.__name__ or obj.__module__.startswith(module.__name__):
-                            subSelf[name] = obj
+                        try:
+                            if self.belongsToModule(obj, module):
+                                subSelf[name] = obj
+                        except AttributeError:
+                            pass # obj has no __module__ is e.g. a string
 
-
+    @staticmethod
+    def belongsToModule(obj, module):
+        return obj.__module__ == module.__name__ or obj.__module__.startswith(module.__name__)
     
     def buildHirarchy(self, horizontal_operation=None, vertical_operation=None):
         def buildRecursive(pkey, pval):
-            if isinstance(pval, NestedOrderedDict):
+            if self.isNestedDict(pval):
                 if vertical_operation:
                     vertical_operation(pkey, pval) 
                 for key, val in pval.iteritems():
@@ -93,14 +107,15 @@ class GetCallablesInPackage(NestedOrderedDict):
                 if horizontal_operation:
                     horizontal_operation(pkey, pval) 
     
-        buildRecursive(self._mainmod.__name__, self)       
+        buildRecursive(self._package.__name__, self)       
 
- 
-
+    @staticmethod
+    def isNestedDict(instance):
+        return isinstance(instance, NestedOrderedDict)
 
 
 if __name__ == '__main__':
-    import sys
+
     g = GetCallablesInPackage(fancytools, include_functions=True)
     print g
     

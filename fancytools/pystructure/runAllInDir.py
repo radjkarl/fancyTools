@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
 import pkgutil
 import runpy
-import os
 
 def runAllInDir(dir_path):
 	#pkgpath = os.path.abspath(os.curdir)
@@ -17,4 +17,4 @@ def runAllInDir(dir_path):
 			print '... %s' %modname
 			#module = importer.find_module(modname).load_module(modname)
 			runpy.run_module(modname, init_globals=None, run_name='__main__', alter_sys=False)
-	
+

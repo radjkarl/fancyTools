@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 def countLines(filename):
 	'''
@@ -20,3 +19,4 @@ def countLines(filename):
 		return lines
 	finally:
 		f.close()
+

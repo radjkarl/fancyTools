@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 def nearestPosition2(array, value, lastPos):
 	'''
 	return the index of that value that is most similar in the array
@@ -36,3 +35,4 @@ def nearestPosition2(array, value, lastPos):
 		except IndexError:# hit the border
 			return lastPos - p
 		d1 = d2
+
