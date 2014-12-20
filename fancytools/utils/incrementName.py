@@ -1,7 +1,7 @@
 
 def incrementName(nameList, name):
 	'''	
-	return a name that is unique in a given namelist through attaching a number to it
+	return a name that is unique in a given nameList through attaching a number to it
 	
 	>>> l = []
 

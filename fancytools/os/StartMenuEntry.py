@@ -4,25 +4,14 @@ import stat
 from isAdmin import isAdmin
 
 
-#import sys
-#import site
-#print isAdmin
 class _LinuxStartMenuEntry(object):
 
-	def __init__(self, name, target,
-				icon, directory,
-				version, description, categories):
-		self.name = name
-		self.icon = icon
-		self.directory = directory
-		self.version = version
-		self.categories = categories
-		self.description = description
-		self.target = target
+	def __init__(self, **kwargs):
+		self.opts = kwargs
 		if isAdmin():
-			self.filename = '/usr/share/applications/%s.desktop' %name
+			self.filename = '/usr/share/applications/%s.desktop' %self.opts['name']
 		else:
-			self.filename = os.path.expanduser("~")+ '/.local/share/applications/%s.desktop' %name
+			self.filename = os.path.expanduser("~")+ '/.local/share/applications/%s.desktop' %self.opts['name']
 
 
 	def create(self):
@@ -41,11 +30,15 @@ Icon=%s
 Exec=python %s
 Terminal=false
 Type=Application
-Categories=Application;Science;Graphics;Office;
+Categories=%s
 MimeType=PYZ''' %(
-		self.version,
-		self.name,
-		self.description, self.icon,self.target)
+		self.opts['version'],
+		self.opts['name'],
+		self.opts['description'], 
+		self.opts['icon'],
+		self.opts['target'],
+		self.opts['categories']
+		)
 			#enable unicode-characters ('ä' etc.) and write to file
 			f.write( text.encode('UTF-8') )
 		os.chmod(self.filename, os.stat(self.filename).st_mode | stat.S_IEXEC)
@@ -57,14 +50,10 @@ MimeType=PYZ''' %(
 
 
 
-class _WindowsStartMenuEntry:
+class _WindowsStartMenuEntry(object):
 
-	def __init__(self, name, target,
-				icon, directory,
-				version, description, categories):
-		self.name = name
-		self.icon = icon
-		self.directory = directory
+	def __init__(self, **kwargs):
+		self.opts = kwargs
 		import win32com.client
 
 		self.sh = win32com.client.Dispatch( "WScript.Shell" )
@@ -75,21 +64,21 @@ class _WindowsStartMenuEntry:
 		self.path = self.sh.SpecialFolders(folder)
 		assert( os.path.isdir(self.path) )
 
-		if self.directory:
-			self.path= os.path.join( self.path, self.directory)
-		self.lnkPath = os.path.join( self.path, name + ".lnk" )
+		if self.opts['directory']:
+			self.path= os.path.join( self.path, self.opts['directory'])
+		self.lnkPath = os.path.join( self.path, self.opts['name'] + ".lnk" )
 		self.lnk = self.sh.CreateShortcut( self.lnkPath )
-		self.lnk.TargetPath = target
+		self.lnk.TargetPath = self.opts['target']
 
 
 	def create(self):
 		#create shortcut group is not existent:
 		if ( not os.path.isdir(self.path) ) :
 			os.makedirs(self.path)
-		if self.icon:
-			if not self.icon.lower().endswith('.ico'):
+		if self.opts['icon']:
+			if not self.opts['icon'].lower().endswith('.ico'):
 				raise ValueError('only icons of type ICO are accepted')
-			self.lnk.IconLocation = self.icon
+			self.lnk.IconLocation = self.opts['icon']
 		self.lnk.Save()
 
 
@@ -97,26 +86,41 @@ class _WindowsStartMenuEntry:
 		if ( os.path.exists(self.lnkPath) ) :
 			os.remove(self.lnkPath)
 			#if shortcut-group is empty now: delete it
-			if self.directory and not os.listdir(self.path):
+			if self.opts['directory'] and not os.listdir(self.path):
 				os.removedirs(self.path)
 
 
 
 class StartMenuEntry(object):
 	'''
-	this class creates a shortcut for a given target in the startmenu of the
-	used os depending either systemwide or user specific
+	this class creates a shortcut for a given target in the start menu of the
+	used os depending either system wide or user specific
+	
+	===========   =========================================================
+	kwargs        description
+	===========   =========================================================
+	icon          [path of the program icon]
+	directory     [start dir of the program],
+	version       [version number]
+	description   [of the program]
+	categories    e.g. "Application;Science;Graphics;Office;" # Linux only
+	===========   =========================================================
+
 	
 	>>> entry = StartMenuEntry('myLittleTest', 'www.python.org')
 	>>> entry.create()
-	>>> raw_input('Now look for the entry in your start menu and press Enter if you found it')
-	>>> entry.remove()
 	
+	Now look for the entry in your start menu
+	
+	>>> entry.remove()
 	'''
-	def __init__(self, name, target,
-				icon=None,directory=None,
-				version='-', description='', categories=''):
-
+	def __init__(self, name, target,**kwargs):
+		#update kwargs with defaults if not already defined
+		defaults = dict(icon=None, directory=None,
+				        version='-', description='', categories='')
+		kwargs.update({k:v for k,v in defaults.iteritems() if k})
+		
+		#check the os to setup further procedures
 		if os.name == 'posix': #for linux-systems
 			self.__class__ = _LinuxStartMenuEntry
 		elif os.name == 'nt':
@@ -124,19 +128,9 @@ class StartMenuEntry(object):
 		else:
 			raise OSError('creating start menu entries is not implemented for mac at the moment')
 
-		self.__init__(name, target, icon, directory, version, description, categories)
+		self.__init__(name=name, target=target, **kwargs)
 
 
-
-
-
-#name = "Visit Microsoft's website"
-#target = "http://www.microsoft.com"
-#directory = "My Start Menu Shortcuts"
-
-#_WindowsStartMenuEntry(name,target,
-	#icon='C:\Windows\System32\PerfCenterCpl.ico').create()
-
-			#iconPath = os.path.join(self.instpath, self.identity.LOGO)#'%s/nIOp/media/logo.svg' %path
-
-#self.identity.LAUNCHER_FILE
+if __name__ == "__main__":
+     import doctest
+     doctest.testmod()

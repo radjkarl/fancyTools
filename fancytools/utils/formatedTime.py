@@ -2,6 +2,7 @@
 def formatedTime(ms):
 	'''
 	convert milliseconds in a human readable time
+	
 	>>> formatedTime(60e3)
 	'1m'
 	>>> formatedTime(1000e3)

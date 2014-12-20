@@ -1,45 +1,68 @@
-'''
-Created on 3 Jul 2014
-
-@author: elkb4
-'''
 import importlib
 import inspect
 
-import fancytools
 from fancytools.fcollections.NestedOrderedDict import NestedOrderedDict
+
 
 class GetCallablesInPackage(NestedOrderedDict):
     '''
-    *exclude 'private' modules beginning with '_'
+    Return a NestedOrderedDict of all functions and classes within a given package.
+    excluding 'private' modules beginning with '_'
+
+    =========  ======================================
+    Arguments  Description
+    =========  ======================================
+    package    package or string of path to package
+               to get all callables from
+    =========  ======================================
+
+
+    =====================  =======  ===============================
+    Optional               Default  Description
+    =====================  =======  ===============================
+    modules_in_structure   False    include the modules of the 
+                                    callables in the output
+    include_classes        True     include classes in the output
+    include_functions      True     include functions in the output
+    min_level              0        minimum depth level in the 
+                                    package structure
+    max_level              None     maximum depth level in the 
+                                    package structure
+    exclude_empty_pck      True     exclude sub-packages without 
+                                    any callables from the output
+    =====================  =======  ===============================
+
+
     '''
     def __init__(self, package, modules_in_structure=False, 
                  include_classes=True, include_functions=False, 
-                 min_level=0, max_level=None, del_empty_pck=True):
+                 min_level=0, max_level=None, exclude_empty_pck=True):
         '''
-        @param package: package or string of path to package
         '''
 
         NestedOrderedDict.__init__(self)
-        self._include_classes = include_classes
-        self._include_functions = include_functions
+
         if isinstance(package, basestring):
             package = importlib.import_module(package)
+            
         self._package = package
+        self._include_classes = include_classes
+        self._include_functions = include_functions           
         self._modules_in_structure = modules_in_structure
         self._min_level = min_level
         self._max_level = max_level
+        
         self._objects = [package]
         
         self._buildRecursive(package, self, 0)
         
-        if del_empty_pck:
+        if exclude_empty_pck:
             self._cleanRecursive(self)
       
             
     def _cleanRecursive(self, subSelf):
         '''
-        delete all NestedOrderedDict that haven't any entries
+        Delete all NestedOrderedDict that haven't any entries.
         '''
         for key, item in subSelf.iteritems():
             if self.isNestedDict(item):
@@ -66,8 +89,7 @@ class GetCallablesInPackage(NestedOrderedDict):
                 if obj.__name__.startswith(self._package.__name__):
                     #either use module for submenus or check whether module is actually a package:
                     if self._modules_in_structure or obj.__file__.endswith('__init__.pyc'):
-                      #  is_pck = True
-                      #  #limit max recursion level
+                        #limit max recursion level
                         if not self._max_level or level <= self._max_level:
                         #if self._max_level:
                             l = subSelf[name] = NestedOrderedDict()
@@ -91,11 +113,18 @@ class GetCallablesInPackage(NestedOrderedDict):
                         except AttributeError:
                             pass # obj has no __module__ is e.g. a string
 
+
     @staticmethod
     def belongsToModule(obj, module):
+        '''Returns True is an object belongs to a module.'''
         return obj.__module__ == module.__name__ or obj.__module__.startswith(module.__name__)
     
+
     def buildHirarchy(self, horizontal_operation=None, vertical_operation=None):
+        '''Walk through the nested dict structure and executes 
+        horizontal_operation(name, callable) resp. 
+        vertical_operation(name, callable) if defined.
+        '''
         def buildRecursive(pkey, pval):
             if self.isNestedDict(pval):
                 if vertical_operation:
@@ -106,18 +135,26 @@ class GetCallablesInPackage(NestedOrderedDict):
             else:
                 if horizontal_operation:
                     horizontal_operation(pkey, pval) 
-    
         buildRecursive(self._package.__name__, self)       
+
 
     @staticmethod
     def isNestedDict(instance):
+        '''convenience function for 
+        
+        >>> isinstance(instance, NestedOrderedDict)'''
         return isinstance(instance, NestedOrderedDict)
 
 
-if __name__ == '__main__':
 
-    g = GetCallablesInPackage(fancytools, include_functions=True)
+
+
+if __name__ == '__main__':
+    import sys
+    import numpy
+    g = GetCallablesInPackage(numpy, include_functions=True)
     print g
+
     
     class printClassStructure(object):
         def __init__(self): 

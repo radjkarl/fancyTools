@@ -4,29 +4,39 @@ import shutil
 import sys
 
 class PathStr(str):
-#     def __init__(self, *args):
-#         print os,998
-#         str.__init__(self, *args)
-#         print os,666
-          #print os,555
-#         for a in args:
-#             self = self.join(a)
+    '''
+    easy path-string handling and manipulation using o.spath and shutil
+    
+    >>> p = PathStr.home()
+    >>> print p.isdir()
+    True
+    >>> print p.exists()
+    True
+    >>> d_list = [p.join(x) for x in p.listdir()]
+    '''
+
+    def __new__(cls,value):
+        '''transform / to \ depending on the os'''
+        obj = str.__new__(cls, os.path.normpath(str(value)))
+        return obj
+
 
     @staticmethod
     def home():
+        '''return the hode/user directory'''
         return PathStr(os.path.expanduser("~"))
     
-    
-#     @staticmethod    
-#     def curdir():
-#         return PathStr( os.path.abspath(os.curdir) )
 
     @staticmethod
     def getcwd(moduleName=None):
         '''
-        get current path either from the temp folder used by pyinstaller
-        apps 'sys._MEIPASS' if packed with --onefile option
-        or os.getcwd()
+        get current path either from the temp folder used by pyinstaller:
+        
+            * apps 'sys._MEIPASS' if packed with --onefile option
+        
+        or
+        
+            * os.getcwd()
         '''
         try:
             p = PathStr(sys._MEIPASS)
@@ -41,44 +51,53 @@ class PathStr(str):
             return PathStr(os.getcwd())
 
     def join(self, *args):
+        '''add a file/name to this PathStr instance'''
         return PathStr(os.path.join(self,*args))
 
 
     def exists(self):
+        '''return whether PathStr instance exists as a file/folder'''
         return os.path.exists(self)
 
 
     def abspath(self):
         return PathStr.join(PathStr.getcwd(), self)
-        #return PathStr(os.path.abspath(self))
 
 
     def load(self, size):
-        if os.path.exists(self):
+        '''open and read the file is existent'''
+        if self.exists() and self.isfile():
             return eval( open(self).read(size) )
 
+
     def dirname(self):
-    #    if os.path.isdir(self):
-    #        return self
         return PathStr(os.path.dirname(self))
-
-
-
 
 
     def basename(self):
         return PathStr(os.path.basename(self))
 
+
     def move(self, dst):
+        '''move this file/folder the [dst]'''
         shutil.move(self, dst)
         self = PathStr(dst).join(self.basename())
         return self
 
-    def mkdir(self, dname):
-        n = self.join(dname)
+    def mkdir(self, dname=None):
+        if dname == None:
+            n = self
+        else:
+            n = self.join(dname)
         if not n.exists():
             os.mkdir(n)
         return n
+
+
+    def rename(self, newname):
+        newname = self.dirname().join(newname)
+        os.rename(self, newname)
+        self = PathStr(newname)
 
     def remove(self, name=None):
         f = self
@@ -87,13 +106,21 @@ class PathStr(str):
         try:
             os.remove(f)
         except OSError:
-            os.rmdir(f)
+            shutil.rmtree(f)
 
 
     def filetype(self):
         if '.' in self:
             return self.split('.')[-1]
         return ''
+
+
+    def setFiletype(self, ftype):
+        if '.' in self:
+            s = self[:self.index('.')]
+        else:
+            s = self
+        return s + '.' + ftype
 
 
     def isfile(self):
@@ -121,7 +148,6 @@ class PathStr(str):
 
 
 
-# if __name__ == '__main__':
-#     print os, PathStr('.').dirname()
-
-        #
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

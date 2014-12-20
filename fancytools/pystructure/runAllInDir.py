@@ -4,17 +4,27 @@ import os
 import pkgutil
 import runpy
 
-def runAllInDir(dir_path):
-	#pkgpath = os.path.abspath(os.curdir)
-	pkgname = os.path.split(dir_path)[-1]
-	thismodname = '%s.%s' %(pkgname, os.path.split(__file__)[-1][:-3])
 
+thismodname = __name__.split('.')[-2:]
+thismodname = '.'.join(thismodname)
+
+
+# Note there is a bug in pkgutil.walk_packages
+# excluding all modules that have the same name as modules in 
+# the standard library, see
+# http://bugs.python.org/issue14787
+# that's why 'os' and 'math' are not tested at the moment
+
+def runAllInDir(dir_path, exclude=[]):
+	'''
+	execute all modules as __main__ within a given package path 
+	'''
 	print 'testing all modules of %s' %dir_path
-	for importer, modname, ispkg in pkgutil.walk_packages(
+	for _, modname, ispkg in pkgutil.walk_packages(
 			[dir_path],
-			onerror=lambda x: None):
-		if not ispkg and modname != thismodname:#dont test this module
+			#onerror=lambda x: None
+			):
+		if not ispkg and modname != thismodname and not modname in exclude: # don't test this module
 			print '... %s' %modname
-			#module = importer.find_module(modname).load_module(modname)
 			runpy.run_module(modname, init_globals=None, run_name='__main__', alter_sys=False)
 

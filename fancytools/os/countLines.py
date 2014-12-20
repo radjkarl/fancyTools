@@ -20,3 +20,8 @@ def countLines(filename):
 	finally:
 		f.close()
 
+
+if __name__ == '__main__':
+	import __main__
+	f = __main__.__file__
+	print("file %s has %s lines" %(f, countLines(f)) )

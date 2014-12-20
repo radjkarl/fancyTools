@@ -13,3 +13,7 @@ def userName():
 	else:
 		return getpass.getuser()
 
+
+
+if __name__ == '__main__':
+	print("your user name is '%s'" %userName() )

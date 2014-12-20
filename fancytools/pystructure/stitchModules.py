@@ -5,7 +5,7 @@ def stitchModules(module, fallbackModule):
 		complete missing attributes with those in fallbackModule
 		
 		imagine you have 2 modules: a and b
-		a is somekind of an individualized module of b - but will maybe
+		a is some kind of an individualised module of b - but will maybe
 		not contain all attributes of b.
 		in this case a should use the attributes from b
 		

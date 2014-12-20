@@ -1,6 +1,6 @@
-======================================================
+====================================================
 fancyTools - various fancy tools for every day usage
-======================================================
+====================================================
 
 - Browse the `API Documentation <http://radjkarl.github.io/fancyTools>`_
 - Fork the code on `github <https://github.com/radjkarl/fancytools>`_
@@ -14,7 +14,7 @@ Installation
     pip install fancytools
 
 Tests
-^^^^^^
+^^^^^
 **fancyTools** uses mostly the 'one class/function per file' rule. Running each module as program, like::
 
     python -m fancytools.pystructure.stichmodules
@@ -25,11 +25,4 @@ To run all tests type::
 
     python -m fancytools.tests
 
-
-Import Classes/Functions
-^^^^^^^^^^^^^^^^^^^^^^^^
- 
-**fancytools** uses `autoXinit <https://github.com/radjkarl/autoXinit>`_ to automatically import all classes and modules in a package. Therefore you can import the function *stitchModules* via::
-
-    from fancytools.pystructure import stitchModules
 

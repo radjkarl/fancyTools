@@ -5,13 +5,12 @@ import sys
 
 class FallBack(object):
 	'''
-	a class allowing to automatially using another module as fallback
+	a class allowing to automatically using another module as fall back
 	if the given module doesn't have a needed attribute
 	
-	to create the fallback compatibitily just ad the folowing line to your module:
+	to create the fall back compatibility just ad the following line to your module:
 	
-	FallBack(__name__, MyFallBackModule, print_warning=True)
-	
+	>>> FallBack(__name__, MyFallBackModule, print_warning=True)
 	'''
 
 	def __init__(self, ownModuleName, fallbackModule, print_warning=True):

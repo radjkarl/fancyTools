@@ -2,9 +2,12 @@
 import ctypes, os
 
 def isAdmin():
+	'''return True is current os user is administrator'''
 	try:
-		is_admin = os.getuid() == 0
+		return os.getuid() == 0
 	except AttributeError:
-		is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
-	
-	return is_admin
+		return ctypes.windll.shell32.IsUserAnAdmin() != 0
+
+
+if __name__ == '__main__':
+	print("your user is admin: %s" %isAdmin())

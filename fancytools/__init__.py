@@ -1,23 +1,17 @@
-#__all__ = ['fcollections', 'math', 'os', 'pystructure', 'tests', 'utils']
-# Don't modify the line above, or this line!
-# try:
-# 	import autoxinit
-# 	autoxinit.autoxinit(__name__, __file__, globals())
-# 	del autoxinit
-# 	# Anything else you want can go after here, it won't get modified.
-# except ImportError:
-# 	pass
+'''
+a collection of useful non-GUI tools
+'''
 
-__version__ = '0.1.0'
+
+__version__ = '0.2.0'
 __author__ = 'Karl Bedrich'
 __email__ = 'karl@bedrich.de'
-__url__ = 'http://pypi.python.org/pypi/AppBase/'
+__url__ = 'http://radjkarl.github.io/fancyTools'
 __license__ = 'GPLv3'
-__description__ = '...'#TODO
+__description__ = __doc__
 __depencies__= [
 		"ordereddict >= 1.1",
 		"numpy >= 1.7.1",
-		"autoxinit >= 0.1.0"
 	]
 __classifiers__ = [
 		'Intended Audience :: Developers',

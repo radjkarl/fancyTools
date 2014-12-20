@@ -17,11 +17,15 @@ class Logger:
 	hello world
 
 	to prove this we read the log file
-	>>> logcontent = open('my_logfile.log', 'r').read()
+	>>> logger.close()
+	>>> log_file = open('my_logfile.log', 'r')
+	
+	>>> logcontent = log_file.read()
 	>>> 'hello world' in logcontent
 	True
 	>>> os.remove('my_logfile.log')
 	'''
+
 	def __init__(self, stdout, logfile):
 		self.stdout = stdout
 		self.logfile = logfile
