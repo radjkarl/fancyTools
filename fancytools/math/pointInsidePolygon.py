@@ -1,16 +1,11 @@
-'''
-code taken from:
-http://www.ariel.com.au/a/python-point-int-poly.html
-
-decide whether a point is inside a polygon of various shape
-'''
-
 
 
 def pointInsidePolygon(x,y,poly):
     '''determine if a point is inside a given polygon or not
     Polygon is a list of (x,y) pairs.
     
+    [code taken from: http://www.ariel.com.au/a/python-point-int-poly.html]
+
     let's make an easy square:
     
     >>> poly = [ (0,0),\

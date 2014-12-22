@@ -1,11 +1,11 @@
 import re
 
-def atoi(text):
+def _atoi(text):
     '''transform [text] into an integer if it is a number'''
     return int(text) if text.isdigit() else text
 
-def naturalKeys(text):
-    return [ atoi(c) for c in re.split('(\d+)', text) ]
+def _naturalKeys(text):
+    return [ _atoi(c) for c in re.split('(\d+)', text) ]
 
 
 def naturalSorting(l):
@@ -25,7 +25,7 @@ def naturalSorting(l):
     >>> print naturalSorting(alist)
     ['something1', 'something2', 'something12', 'something17', 'something25', 'something29']
     '''
-    l.sort(key=naturalKeys)
+    l.sort(key=_naturalKeys)
     return l
 
 
