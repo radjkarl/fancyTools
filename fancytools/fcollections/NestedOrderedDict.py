@@ -19,17 +19,20 @@ class NestedOrderedDict(OrderedDict):
     >>> ch2_1_1 = NestedOrderedDict([['hello','world']])
 
     set items:
+    
     >>> parent['2'] = ch1
     >>> parent['3'] = ch2
     >>> ch2['4'] = ch2_1
     >>> ch2_1['5'] = ch2_1_1
 
     get the path from the most nested item:
+    
     >>> p = ch2_1_1.path
     >>> print p
     3, 4, 5
     
     access this item from the parent dict:
+    
     >>> print parent[p]
     NestedOrderedDict({hello: world})
     '''
