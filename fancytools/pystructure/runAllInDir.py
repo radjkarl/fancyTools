@@ -27,4 +27,3 @@ def runAllInDir(dir_path, exclude=[]):
 		if not ispkg and modname != thismodname and not modname in exclude: # don't test this module
 			print '... %s' %modname
 			runpy.run_module(modname, init_globals=None, run_name='__main__', alter_sys=False)
-
