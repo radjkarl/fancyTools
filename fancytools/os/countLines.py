@@ -1,5 +1,5 @@
 
-def countLines(filename):
+def countLines(filename, buf_size=1048576):
 	'''
 	fast counting to the lines of a given filename
 	through only reading out a limited buffer
@@ -7,7 +7,6 @@ def countLines(filename):
 	f = open(filename)
 	try:
 		lines = 1
-		buf_size = 1024 * 1024
 		read_f = f.read # loop optimization
 		buf = read_f(buf_size)
 		# Empty file

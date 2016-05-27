@@ -49,13 +49,16 @@ class NearestPosition2(object):
         while True:
             self.lastPos += p
             if self.lastPos < 0:
+                self.lastPos = 0
                 return 0
             try:
                 d2 = abs(value - self.array[self.lastPos])
                 if d2 > d1:
-                    return self.lastPos - p
+                    self.lastPos-=p
+                    return self.lastPos #- p
             except IndexError:# hit the border
-                return self.lastPos - p
+                self.lastPos = len(self.array)-1
+                return self.lastPos#self.lastPos - p
             d1 = d2
 
 

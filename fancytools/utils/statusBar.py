@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from sys import stdout
 
+
+
 def statusBar(step, total, bar_len=20, onlyReturn=False):
 	'''
 	print a ASCI-art statusbar of variable length e.g.showing 25%:

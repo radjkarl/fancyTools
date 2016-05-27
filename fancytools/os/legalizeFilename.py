@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import string#, unicodedata
 
+
 def legalizeFilename(filename):
 	validFilenameChars = "/-_.%s%s" % (string.ascii_letters, string.digits)
 	replaceDict = {
@@ -12,8 +13,8 @@ def legalizeFilename(filename):
 		'µ':'mue'}
 	for key in replaceDict:
 		filename = filename.replace(key, replaceDict[key])
-	#cleanedFilename = unicodedata.normalize('NFKD', filename).encode('ASCII', 'ignore')
 	return ''.join(c for c in filename if c in validFilenameChars)[:255]
+
 
 
 if __name__ == '__main__':

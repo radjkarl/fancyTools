@@ -14,7 +14,8 @@ class MultiList(object):
     >>> print l[1]
     [2, 4]
     '''
-#TODO: better as named numpy.array
+    
+    #TODO: better as named numpy.array
     def __init__(self, *names):
         self._lists = []
         for name in names:
@@ -69,6 +70,7 @@ class MultiList(object):
         if self._n > self._l:
             raise StopIteration()
         return (x[self._n] for x in self._lists)
+
 
 
 if __name__ == "__main__":

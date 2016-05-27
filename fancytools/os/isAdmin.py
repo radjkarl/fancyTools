@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import ctypes, os
 
+
+
 def isAdmin():
 	'''return True is current os user is administrator'''
 	try:

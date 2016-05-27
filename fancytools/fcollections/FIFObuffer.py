@@ -5,7 +5,7 @@ import numpy as np
 class FIFObuffer(object):
     """
     A circular FIFO buffer implemented on top of numpy.
-    
+
     >>> a = FIFObuffer(shape=3)
     >>> a.add(2)
     >>> a.add(33)
@@ -72,9 +72,11 @@ class FIFObuffer(object):
     def __len__(self):
         return min(int(self._ind), self.shape)
 
+
     @property
     def position(self):
         return self.__len__()-1
+
 
     def splitPos(self):
         '''return the position of where to split the array 
@@ -93,6 +95,7 @@ class FIFObuffer(object):
 
     def __getitem__(self, key):
         return self.array()[key]
+
 
 
 if __name__ == "__main__":

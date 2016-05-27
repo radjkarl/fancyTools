@@ -1,7 +1,8 @@
 
 
 def pointInsidePolygon(x,y,poly):
-    '''determine if a point is inside a given polygon or not
+    '''
+    Determine if a point is inside a given polygon or not
     Polygon is a list of (x,y) pairs.
     
     [code taken from: http://www.ariel.com.au/a/python-point-int-poly.html]

@@ -1,17 +1,17 @@
 '''
-a collection of useful non-GUI tools
+a collection of more or less useful non-GUI tools
 '''
 
 
 __version__ = '0.2.0'
 __author__ = 'Karl Bedrich'
 __email__ = 'karl@bedrich.de'
-__url__ = 'http://radjkarl.github.io/fancyTools'
+__url__ = 'http://radjkarl.github.imgIO/fancyTools'
 __license__ = 'GPLv3'
 __description__ = __doc__
 __depencies__= [
-		"ordereddict >= 1.1",
-		"numpy >= 1.7.1",
+		"ordereddict >= 1.1",#??still??
+		"numpy >= 1.9",
 	]
 __classifiers__ = [
 		'Intended Audience :: Developers',

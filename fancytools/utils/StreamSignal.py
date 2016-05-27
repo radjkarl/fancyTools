@@ -2,6 +2,8 @@
 from PyQt4 import QtCore
 import sys
 
+
+
 class StreamSignal(QtCore.QObject):
     '''
     create a connectable stdout instance
@@ -32,9 +34,6 @@ class StreamSignal(QtCore.QObject):
     >>> 'hello world' in l.read()
     True
     >>> l.close()
-    
-    
-    
     '''
     #message = QtCore.Signal(str)# works under pyside
     message = QtCore.pyqtSignal(str)
@@ -42,6 +41,7 @@ class StreamSignal(QtCore.QObject):
     def __init__(self, stdout='out', parent=None):
         super(StreamSignal, self).__init__(parent)
         #self.stdout = stdout
+#         print 1111, stdout
         if stdout == 'out':
             # save the std output funcs:
             self.stdW = sys.stdout.write
@@ -68,7 +68,7 @@ class StreamSignal(QtCore.QObject):
         if writeToShell and not self._connected:
             self.message.connect(self.stdW) 
             self._connected = True
-        elif self._connected:
+        elif not writeToShell and self._connected:
             try:
                 self.message.disconnect(self.stdW) 
             except TypeError:

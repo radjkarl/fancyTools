@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from ordereddict import OrderedDict
+from collections import OrderedDict
+
 
 
 class NestedOrderedDict(OrderedDict):
