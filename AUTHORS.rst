@@ -1,2 +1,2 @@
-Karl Bedrich 2013 - 2015
+Karl Bedrich 2013 - 2016
 

@@ -26,7 +26,7 @@ cd doc/_build
 
 git clone https://github.com/radjkarl/fancyTools.git gh-pages
 
-rm -r -f html
+rm -r -Force html
 mv gh-pages html
 cd html
 

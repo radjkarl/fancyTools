@@ -17,7 +17,7 @@ Tests
 ^^^^^
 **fancyTools** uses mostly the 'one class/function per file' rule. Running each module as program, like::
 
-    python -m fancytools.pystructure.stichmodules
+    python -m fancytools.render.GridRender
 
 will execute the test procedure of this module.
 
