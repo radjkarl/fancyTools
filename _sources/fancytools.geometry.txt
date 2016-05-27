@@ -1,0 +1,28 @@
+fancytools.geometry package
+===========================
+
+.. automodule:: fancytools.geometry
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.geometry.gridLinesFromVertices module
+------------------------------------------------
+
+.. automodule:: fancytools.geometry.gridLinesFromVertices
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.geometry.polylines module
+------------------------------------
+
+.. automodule:: fancytools.geometry.polylines
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

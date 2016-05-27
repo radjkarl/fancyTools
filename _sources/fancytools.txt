@@ -1,0 +1,38 @@
+fancytools package
+==================
+
+.. automodule:: fancytools
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    fancytools.fcollections
+    fancytools.filter
+    fancytools.fit
+    fancytools.geometry
+    fancytools.math
+    fancytools.os
+    fancytools.pystructure
+    fancytools.render
+    fancytools.similarity
+    fancytools.spatial
+    fancytools.stats
+    fancytools.utils
+
+Submodules
+----------
+
+fancytools.tests module
+-----------------------
+
+.. automodule:: fancytools.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

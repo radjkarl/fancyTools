@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.fcollections.ProxyList &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fancytools.html">fancytools package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fancytools.fcollections.ProxyList</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for fancytools.fcollections.ProxyList</h1><div class="highlight"><pre>
+
+
+<div class="viewcode-block" id="ProxyList"><a class="viewcode-back" href="../../../fancytools.fcollections.html#fancytools.fcollections.ProxyList.ProxyList">[docs]</a><span class="k">class</span> <span class="nc">ProxyList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    forwards an attribute/method given to this instance</span>
+<span class="sd">    to its list-entries</span>
+<span class="sd">    </span>
+<span class="sd">    STRING LIST</span>
+<span class="sd">    ===========</span>
+<span class="sd">    create a list</span>
+<span class="sd">    &gt;&gt;&gt; a = ProxyList((&#39;aa&#39;,11,&#39;cc&#39;))</span>
+<span class="sd">    </span>
+<span class="sd">    find &#39;a&#39; in the list</span>
+<span class="sd">    because &#39;find&#39; is not a method of this instance</span>
+<span class="sd">    all list-entries will be given this method</span>
+<span class="sd">    </span>
+
+<span class="sd">    &gt;&gt;&gt; print a.find(&#39;a&#39;)</span>
+<span class="sd">    [0, None, -1]</span>
+<span class="sd">    </span>
+<span class="sd">    ... this returns a list saying that...</span>
+<span class="sd">    [0,...    --&gt; &#39;a&#39; is in the first position of the first entry</span>
+<span class="sd">    ..., None --&gt; there is no fitting method for the second entry</span>
+<span class="sd">    ... ,-1 ] --&gt; &#39;a&#39; is not found in the last entry</span>
+<span class="sd">    </span>
+<span class="sd">    FIND MEMBERS</span>
+<span class="sd">    ============</span>
+<span class="sd">    show indices of list entries that are of type string</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; print a.where(&#39;__class__&#39;,str)</span>
+<span class="sd">    [0, 2]</span>
+<span class="sd">    </span>
+
+<span class="sd">    ACCESS MEMBER FUNCTIONS</span>
+<span class="sd">    =======================</span>
+<span class="sd">    ...using _TestObject which has one one extra method &#39;foo&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; p = ProxyList([_TestObject(),_TestObject(),_TestObject()])</span>
+<span class="sd">    &gt;&gt;&gt; print p.foo[0].__name__</span>
+<span class="sd">    foo</span>
+<span class="sd">    </span>
+<span class="sd">    each time &#39;foo&#39; is called it returns (&#39;bar&#39;, 99)</span>
+<span class="sd">    therefore for each member of the ProxyList the output would be:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; print p.foo(&#39;bar&#39;)</span>
+<span class="sd">    [(&#39;bar&#39;, 99), (&#39;bar&#39;, 99), (&#39;bar&#39;, 99)]</span>
+<span class="sd">    </span>
+<span class="sd">    Also this method sets an attribute &#39;a&#39; to &#39;bar&#39;-&gt;</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; print p.a</span>
+<span class="sd">    [&#39;bar&#39;, &#39;bar&#39;, &#39;bar&#39;]</span>
+<span class="sd">    </span>
+<span class="sd">    MATHEMATICAL OPERATIONS</span>
+<span class="sd">    =======================</span>
+<span class="sd">    + - * / etc can also be forwarded to the members of a list:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; p = ProxyList([ 1, -20, 3 ])</span>
+<span class="sd">    &gt;&gt;&gt; p += 10</span>
+<span class="sd">    &gt;&gt;&gt; print p</span>
+<span class="sd">    [11, -10, 13]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; print p.__abs__()</span>
+<span class="sd">    [11, 10, 13]</span>
+
+
+<span class="sd">    MUTABLE MEMBERS</span>
+<span class="sd">    ===============</span>
+<span class="sd">    If the members are mutable their id remains the same:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; p = ProxyList([ [1], [2], [3] ])</span>
+<span class="sd">    &gt;&gt;&gt; oldID = id(p[0])</span>
+<span class="sd">    &gt;&gt;&gt; p *= 4</span>
+<span class="sd">    &gt;&gt;&gt; newID = id(p[0])</span>
+<span class="sd">    &gt;&gt;&gt; print oldID == newID</span>
+<span class="sd">    True</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    TWO PROXYLISTS</span>
+<span class="sd">    ==============</span>
+<span class="sd">    A ProxyList can be used for a mathematical operation with another ProxyList:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; p1 = ProxyList([ 1, 2, 3 ])</span>
+<span class="sd">    &gt;&gt;&gt; p2 = ProxyList([ 1, 2, 3 ])</span>
+<span class="sd">    &gt;&gt;&gt; p1-p2</span>
+<span class="sd">    [0, 0, 0]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c">#GET</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_CallList</span><span class="p">(</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">AttributeNotFound</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span> <span class="p">)</span>
+
+    
+    <span class="c">#SET</span>
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">setattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">)]</span>
+        <span class="c">#print attr, value</span>
+
+
+    <span class="c">#FIND IN MEMBERS </span>
+<div class="viewcode-block" id="ProxyList.where"><a class="viewcode-back" href="../../../fancytools.fcollections.html#fancytools.fcollections.ProxyList.ProxyList.where">[docs]</a>    <span class="k">def</span> <span class="nf">where</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">AttributeNotFound</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span><span class="p">]</span></div>
+        <span class="c">#return next((n for n,x in enumerate(self) if getattr(x, attr, _pass) == value), None)</span>
+
+
+    <span class="c">#ADDITION</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__iadd__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># mutable types</span>
+            <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__iadd__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c"># immutable types or not ixxx available</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">ch</span> <span class="o">!=</span> <span class="n">AttributeNotFound</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+    <span class="c">#SUBTRACTION</span>
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__sub__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__sub__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+    
+    
+    <span class="k">def</span> <span class="nf">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__isub__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># mutable types</span>
+            <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__isub__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c"># immutable types or not ixxx available</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">__sub__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+    <span class="c">#MULTIPLICATION</span>
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__imul__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># mutable types</span>
+            <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__imul__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c"># immutable types or not ixxx available</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">__mul__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+    <span class="c">#DIVISION</span>
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__truediv__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__truediv__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">__idiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">ProxyList</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__itruediv__</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># mutable types</span>
+            <span class="p">[</span><span class="n">ch</span><span class="o">.</span><span class="n">__itruediv__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c"># immutable types</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="n">__truediv__</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>       </div>
+       
+
+
+
+<span class="k">class</span> <span class="nc">_TestObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;this is just a test class for the doctest of ProxyList&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="mi">99</span>
+
+
+<span class="k">class</span> <span class="nc">_CallList</span><span class="p">(</span><span class="n">ProxyList</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">(</span><span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="AttributeNotFound"><a class="viewcode-back" href="../../../fancytools.fcollections.html#fancytools.fcollections.ProxyList.AttributeNotFound">[docs]</a><span class="k">def</span> <span class="nf">AttributeNotFound</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

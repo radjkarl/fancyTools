@@ -1,0 +1,20 @@
+fancytools.filter package
+=========================
+
+.. automodule:: fancytools.filter
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.filter.movingAverage module
+--------------------------------------
+
+.. automodule:: fancytools.filter.movingAverage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

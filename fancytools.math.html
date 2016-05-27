@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.math package &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="index.html"/>
+        <link rel="up" title="fancytools package" href="fancytools.html"/>
+        <link rel="next" title="fancytools.os package" href="fancytools.os.html"/>
+        <link rel="prev" title="fancytools.geometry package" href="fancytools.geometry.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="fancytools.html">fancytools package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fancytools.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fcollections.html">fancytools.fcollections package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.filter.html">fancytools.filter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fit.html">fancytools.fit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.geometry.html">fancytools.geometry package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">fancytools.math package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.MaskedMovingAverage">fancytools.math.MaskedMovingAverage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.MovingAverage">fancytools.math.MovingAverage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.Point3D">fancytools.math.Point3D module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.angleDiff">fancytools.math.angleDiff module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.blockshaped">fancytools.math.blockshaped module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.boundingBox">fancytools.math.boundingBox module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.execOnSubArrays">fancytools.math.execOnSubArrays module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.findXAt">fancytools.math.findXAt module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.gridPointsFromEdges">fancytools.math.gridPointsFromEdges module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.linRegressUsingMasked2dArrays">fancytools.math.linRegressUsingMasked2dArrays module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.line">fancytools.math.line module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.linspace2">fancytools.math.linspace2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.nearestPosition">fancytools.math.nearestPosition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.nearestPosition2">fancytools.math.nearestPosition2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.pointInsidePolygon">fancytools.math.pointInsidePolygon module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.rotatePolygon">fancytools.math.rotatePolygon module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.rotation">fancytools.math.rotation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.math.similarity1DdiffShapedArrays">fancytools.math.similarity1DdiffShapedArrays module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.os.html">fancytools.os package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.pystructure.html">fancytools.pystructure package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.render.html">fancytools.render package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.similarity.html">fancytools.similarity package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.spatial.html">fancytools.spatial package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.stats.html">fancytools.stats package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.utils.html">fancytools.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#module-fancytools.tests">fancytools.tests module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fancytools.html">fancytools package</a> &raquo;</li>
+      
+    <li>fancytools.math package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/fancytools.math.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fancytools.math">
+<span id="fancytools-math-package"></span><h1>fancytools.math package<a class="headerlink" href="#module-fancytools.math" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fancytools.math.MaskedMovingAverage">
+<span id="fancytools-math-maskedmovingaverage-module"></span><h2>fancytools.math.MaskedMovingAverage module<a class="headerlink" href="#module-fancytools.math.MaskedMovingAverage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.math.MaskedMovingAverage.MaskedMovingAverage">
+<em class="property">class </em><code class="descclassname">fancytools.math.MaskedMovingAverage.</code><code class="descname">MaskedMovingAverage</code><span class="sig-paren">(</span><em>shape</em>, <em>calcVariance=False</em>, <em>dtype=&lt;type 'numpy.float64'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/MaskedMovingAverage.html#MaskedMovingAverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.MaskedMovingAverage.MaskedMovingAverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Calculating the moving average and variance on (optional masked) ndArray
+allowing to update different areas every time</p>
+<p>moving average and variance
+taken from <a class="reference external" href="http://stackoverflow.com/a/14638138">http://stackoverflow.com/a/14638138</a>
+referring to <a class="reference external" href="http://www.johndcook.com/blog/standard_deviation/">http://www.johndcook.com/blog/standard_deviation/</a></p>
+<dl class="method">
+<dt id="fancytools.math.MaskedMovingAverage.MaskedMovingAverage.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>arr</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/MaskedMovingAverage.html#MaskedMovingAverage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.MaskedMovingAverage.MaskedMovingAverage.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>update moving average (and variance) with new ndarray
+(of the same shape as the init array) and an optional mask</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.MovingAverage">
+<span id="fancytools-math-movingaverage-module"></span><h2>fancytools.math.MovingAverage module<a class="headerlink" href="#module-fancytools.math.MovingAverage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.math.MovingAverage.MovingAverage">
+<em class="property">class </em><code class="descclassname">fancytools.math.MovingAverage.</code><code class="descname">MovingAverage</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/MovingAverage.html#MovingAverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.MovingAverage.MovingAverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>calc. the mean of the last n values, see <a class="reference external" href="http://en.wikipedia.org/wiki/Moving_average">http://en.wikipedia.org/wiki/Moving_average</a>
+:param n: number of the last values to calc the mean from</p>
+<dl class="method">
+<dt id="fancytools.math.MovingAverage.MovingAverage.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/MovingAverage.html#MovingAverage.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.MovingAverage.MovingAverage.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.math.MovingAverage.MovingAverage.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>signal</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/MovingAverage.html#MovingAverage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.MovingAverage.MovingAverage.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.Point3D">
+<span id="fancytools-math-point3d-module"></span><h2>fancytools.math.Point3D module<a class="headerlink" href="#module-fancytools.math.Point3D" title="Permalink to this headline">¶</a></h2>
+<p>Created on 21 Aug 2015</p>
+<p>#taken from <a class="reference external" href="http://codentronix.com/2011/04/20/simulation-of-3d-point-rotation-with-python-and-pygame/">http://codentronix.com/2011/04/20/simulation-of-3d-point-rotation-with-python-and-pygame/</a></p>
+<dl class="class">
+<dt id="fancytools.math.Point3D.Point3D">
+<em class="property">class </em><code class="descclassname">fancytools.math.Point3D.</code><code class="descname">Point3D</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>z=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/Point3D.html#Point3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.Point3D.Point3D" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fancytools.math.Point3D.Point3D.project">
+<code class="descname">project</code><span class="sig-paren">(</span><em>win_width</em>, <em>win_height</em>, <em>fov</em>, <em>viewer_distance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/Point3D.html#Point3D.project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.Point3D.Point3D.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms this 3D point to 2D using a perspective projection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.math.Point3D.Point3D.rotateX">
+<code class="descname">rotateX</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/Point3D.html#Point3D.rotateX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.Point3D.Point3D.rotateX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the point around the X axis by the given angle in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.math.Point3D.Point3D.rotateY">
+<code class="descname">rotateY</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/Point3D.html#Point3D.rotateY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.Point3D.Point3D.rotateY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the point around the Y axis by the given angle in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.math.Point3D.Point3D.rotateZ">
+<code class="descname">rotateZ</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/Point3D.html#Point3D.rotateZ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.Point3D.Point3D.rotateZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the point around the Z axis by the given angle in degrees.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.angleDiff">
+<span id="fancytools-math-anglediff-module"></span><h2>fancytools.math.angleDiff module<a class="headerlink" href="#module-fancytools.math.angleDiff" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.angleDiff.angleDiff">
+<code class="descclassname">fancytools.math.angleDiff.</code><code class="descname">angleDiff</code><span class="sig-paren">(</span><em>angle1</em>, <em>angle2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/angleDiff.html#angleDiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.angleDiff.angleDiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>smallest difference between 2 angles
+code from <a class="reference external" href="http://stackoverflow.com/questions/1878907/the-smallest-difference-between-2-angles">http://stackoverflow.com/questions/1878907/the-smallest-difference-between-2-angles</a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.blockshaped">
+<span id="fancytools-math-blockshaped-module"></span><h2>fancytools.math.blockshaped module<a class="headerlink" href="#module-fancytools.math.blockshaped" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.blockshaped.blockshaped">
+<code class="descclassname">fancytools.math.blockshaped.</code><code class="descname">blockshaped</code><span class="sig-paren">(</span><em>arr</em>, <em>nrows</em>, <em>ncols</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/blockshaped.html#blockshaped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.blockshaped.blockshaped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an new array of shape (n, nrows, ncols) where
+n * nrows * ncols = arr.size</p>
+<p>If arr is a 2D array, the returned array looks like n subblocks with
+each subblock preserving the &#8220;physical&#8221; layout of arr.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.blockshaped.from2dBlocks">
+<code class="descclassname">fancytools.math.blockshaped.</code><code class="descname">from2dBlocks</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/blockshaped.html#from2dBlocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.blockshaped.from2dBlocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>input needs to be 4d array (2d array of 2d arrays)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.blockshaped.into2dBlocks">
+<code class="descclassname">fancytools.math.blockshaped.</code><code class="descname">into2dBlocks</code><span class="sig-paren">(</span><em>arr</em>, <em>n0</em>, <em>n1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/blockshaped.html#into2dBlocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.blockshaped.into2dBlocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>similar to blockshaped
+but splits an array into n0*n1 blocks</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.blockshaped.unblockshaped">
+<code class="descclassname">fancytools.math.blockshaped.</code><code class="descname">unblockshaped</code><span class="sig-paren">(</span><em>arr</em>, <em>h</em>, <em>w</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/blockshaped.html#unblockshaped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.blockshaped.unblockshaped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an new array of shape (h, w) where
+h * w = arr.size</p>
+<p>If arr is of shape (n, nrows, ncols), n sublocks of shape (nrows, ncols),
+then the returned array preserves the &#8220;physical&#8221; layout of the sublocks.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.boundingBox">
+<span id="fancytools-math-boundingbox-module"></span><h2>fancytools.math.boundingBox module<a class="headerlink" href="#module-fancytools.math.boundingBox" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.boundingBox.boundingBox">
+<code class="descclassname">fancytools.math.boundingBox.</code><code class="descname">boundingBox</code><span class="sig-paren">(</span><em>booleanArray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/boundingBox.html#boundingBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.boundingBox.boundingBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>return indices of the smallest bounding box enclosing all
+non-zero values within an array</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">boundingBox</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">(slice(1, 3, None), slice(0, 3, None))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.execOnSubArrays">
+<span id="fancytools-math-execonsubarrays-module"></span><h2>fancytools.math.execOnSubArrays module<a class="headerlink" href="#module-fancytools.math.execOnSubArrays" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.execOnSubArrays.execOnSubArrays">
+<code class="descclassname">fancytools.math.execOnSubArrays.</code><code class="descname">execOnSubArrays</code><span class="sig-paren">(</span><em>arrs</em>, <em>fn</em>, <em>splitX</em>, <em>splitY</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/execOnSubArrays.html#execOnSubArrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.execOnSubArrays.execOnSubArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute a function(on or multiple arrays)
+only on sub sections
+works only on 2d arrays at the moment</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">execOnSubArrays</span><span class="p">((</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">sa1</span><span class="p">,</span><span class="n">sa2</span><span class="p">:</span> <span class="n">sa1</span><span class="o">+</span><span class="n">as2</span><span class="p">,</span> <span class="n">splitX</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">splitY</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.findXAt">
+<span id="fancytools-math-findxat-module"></span><h2>fancytools.math.findXAt module<a class="headerlink" href="#module-fancytools.math.findXAt" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.findXAt.findXAt">
+<code class="descclassname">fancytools.math.findXAt.</code><code class="descname">findXAt</code><span class="sig-paren">(</span><em>xArr</em>, <em>yArr</em>, <em>yVal</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/findXAt.html#findXAt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.findXAt.findXAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>return all x values where y would be equal to given yVal
+if arrays are spline interpolated</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.gridPointsFromEdges">
+<span id="fancytools-math-gridpointsfromedges-module"></span><h2>fancytools.math.gridPointsFromEdges module<a class="headerlink" href="#module-fancytools.math.gridPointsFromEdges" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.gridPointsFromEdges.gridPointsFromEdges">
+<code class="descclassname">fancytools.math.gridPointsFromEdges.</code><code class="descname">gridPointsFromEdges</code><span class="sig-paren">(</span><em>edges</em>, <em>nCells</em>, <em>dtype=&lt;type 'float'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/gridPointsFromEdges.html#gridPointsFromEdges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.gridPointsFromEdges.gridPointsFromEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a regular 2d grid from given edge points (4*(x0,y0))
+and number of cells in x and y</p>
+<p>returns horizontal and vertical lines as (x0,y0,x1,y1)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.linRegressUsingMasked2dArrays">
+<span id="fancytools-math-linregressusingmasked2darrays-module"></span><h2>fancytools.math.linRegressUsingMasked2dArrays module<a class="headerlink" href="#module-fancytools.math.linRegressUsingMasked2dArrays" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.linRegressUsingMasked2dArrays.linRegressUsingMasked2dArrays">
+<code class="descclassname">fancytools.math.linRegressUsingMasked2dArrays.</code><code class="descname">linRegressUsingMasked2dArrays</code><span class="sig-paren">(</span><em>xVals</em>, <em>arrays</em>, <em>badMask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/linRegressUsingMasked2dArrays.html#linRegressUsingMasked2dArrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.linRegressUsingMasked2dArrays.linRegressUsingMasked2dArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>if you have multiple 2d arrays each with position given by
+xVals[array-index]
+and you want to do a linear regression on all cells
+but you also might mask different areas in each 2darray</p>
+<p>returns ascent, offset, RMS-error</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.line">
+<span id="fancytools-math-line-module"></span><h2>fancytools.math.line module<a class="headerlink" href="#module-fancytools.math.line" title="Permalink to this headline">¶</a></h2>
+<p>Collection of line-based functions
+line given as:</p>
+<blockquote>
+<div>x0,y0,x1,y1 = line</div></blockquote>
+<dl class="function">
+<dt id="fancytools.math.line.angle">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">angle</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.angle2">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">angle2</code><a class="reference internal" href="_modules/fancytools/math/line.html#angle2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.angle2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.ascent">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">ascent</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#ascent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.ascent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.distance">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">distance</code><span class="sig-paren">(</span><em>line</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>infinite line to point or line to line distance
+is point is given as line - use middle point of that liune</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.distancePoint">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">distancePoint</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#distancePoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.distancePoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.distanceVector">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">distanceVector</code><a class="reference internal" href="_modules/fancytools/math/line.html#distanceVector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.distanceVector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.dxdy">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">dxdy</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#dxdy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.dxdy" title="Permalink to this definition">¶</a></dt>
+<dd><p>return normalised ascent vector</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.fromAttr">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">fromAttr</code><span class="sig-paren">(</span><em>mid</em>, <em>ang</em>, <em>dist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#fromAttr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.fromAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>create from middle, angle and distance</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.fromAttr2">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">fromAttr2</code><span class="sig-paren">(</span><em>start</em>, <em>ang</em>, <em>dist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#fromAttr2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.fromAttr2" title="Permalink to this definition">¶</a></dt>
+<dd><p>create from start, angle and distance</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.fromFn">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">fromFn</code><span class="sig-paren">(</span><em>ascent</em>, <em>offs</em>, <em>length=1</em>, <em>px=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#fromFn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.fromFn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.intersection">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">intersection</code><a class="reference internal" href="_modules/fancytools/math/line.html#intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the coordinates of a point of intersection given two lines.
+Return None if the lines are parallel, but non-colli_near.
+Return an arbitrary point of intersection if the lines are colli_near.</p>
+<p>Parameters:
+line1 and line2: lines given by 4 points (x0,y0,x1,y1).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.isEven">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">isEven</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#isEven"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.isEven" title="Permalink to this definition">¶</a></dt>
+<dd><p>return whether lines is either horizontal or vertical</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.length">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">length</code><a class="reference internal" href="_modules/fancytools/math/line.html#length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.merge">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>l1</em>, <em>l2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>merge 2 lines together</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.middle">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">middle</code><a class="reference internal" href="_modules/fancytools/math/line.html#middle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.middle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.pointIsBetween">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">pointIsBetween</code><span class="sig-paren">(</span><em>startP</em>, <em>endP</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#pointIsBetween"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.pointIsBetween" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.resize">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">resize</code><span class="sig-paren">(</span><em>line</em>, <em>factor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.resize" title="Permalink to this definition">¶</a></dt>
+<dd><p>factor: relative length (1-&gt;no change, 2-&gt; double, 0.5:half)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.rotate">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">rotate</code><span class="sig-paren">(</span><em>line</em>, <em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.rotate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.segmentDistance">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">segmentDistance</code><span class="sig-paren">(</span><em>line</em>, <em>point</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#segmentDistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.segmentDistance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.segmentIntersection">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">segmentIntersection</code><span class="sig-paren">(</span><em>line1</em>, <em>line2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#segmentIntersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.segmentIntersection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.math.line.sort">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">sort</code><a class="reference internal" href="_modules/fancytools/math/line.html#sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>change point position  if x1,y0 &lt; x0,y0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.split">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">split</code><span class="sig-paren">(</span><em>line</em>, <em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>split &lt;line&gt; into multiple sublines
+using intersection with &lt;lines&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.splitN">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">splitN</code><span class="sig-paren">(</span><em>line</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#splitN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.splitN" title="Permalink to this definition">¶</a></dt>
+<dd><p>split a line n times
+returns n sublines</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.toFn">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">toFn</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#toFn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.toFn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.translate">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">translate</code><span class="sig-paren">(</span><em>line</em>, <em>ascent</em>, <em>offs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>offs -&gt; shifts parallel to line
+ascent -&gt; rotate line</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.line.translate2P">
+<code class="descclassname">fancytools.math.line.</code><code class="descname">translate2P</code><span class="sig-paren">(</span><em>line</em>, <em>t0</em>, <em>t1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/line.html#translate2P"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.line.translate2P" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.linspace2">
+<span id="fancytools-math-linspace2-module"></span><h2>fancytools.math.linspace2 module<a class="headerlink" href="#module-fancytools.math.linspace2" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.linspace2.linspace2">
+<code class="descclassname">fancytools.math.linspace2.</code><code class="descname">linspace2</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/linspace2.html#linspace2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.linspace2.linspace2" title="Permalink to this definition">¶</a></dt>
+<dd><p>similar to numpy.linspace but excluding the boundaries</p>
+<p>this is the normal numpy.linspace:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">[ 0.    0.25  0.5   0.75  1.  ]</span>
+</pre></div>
+</div>
+<p>and this gives excludes the boundaries:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">linspace2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">[ 0.1  0.3  0.5  0.7  0.9]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.nearestPosition">
+<span id="fancytools-math-nearestposition-module"></span><h2>fancytools.math.nearestPosition module<a class="headerlink" href="#module-fancytools.math.nearestPosition" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.nearestPosition.nearestPosition">
+<code class="descclassname">fancytools.math.nearestPosition.</code><code class="descname">nearestPosition</code><span class="sig-paren">(</span><em>array</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/nearestPosition.html#nearestPosition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.nearestPosition.nearestPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the index of that value that is most similar in the array
+needs a numpy.1darray</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">647</span><span class="p">,</span><span class="mi">223</span><span class="p">,</span><span class="mi">777</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nearestPosition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nearestPosition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="go">6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.nearestPosition2">
+<span id="fancytools-math-nearestposition2-module"></span><h2>fancytools.math.nearestPosition2 module<a class="headerlink" href="#module-fancytools.math.nearestPosition2" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.math.nearestPosition2.NearestPosition2">
+<em class="property">class </em><code class="descclassname">fancytools.math.nearestPosition2.</code><code class="descname">NearestPosition2</code><span class="sig-paren">(</span><em>array</em>, <em>lastPos=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/nearestPosition2.html#NearestPosition2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.nearestPosition2.NearestPosition2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>return the index of that value that is most similar in the array
+starting from the last known position, checking the right direction</p>
+<ul class="simple">
+<li>assumes that new values to sort are close the the old ones</li>
+<li>for this case and in case the array is sorted this approach is much faster
+than the normal nearestPosition</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">33</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">NearestPosition2</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.pointInsidePolygon">
+<span id="fancytools-math-pointinsidepolygon-module"></span><h2>fancytools.math.pointInsidePolygon module<a class="headerlink" href="#module-fancytools.math.pointInsidePolygon" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.pointInsidePolygon.pointInsidePolygon">
+<code class="descclassname">fancytools.math.pointInsidePolygon.</code><code class="descname">pointInsidePolygon</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>poly</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/pointInsidePolygon.html#pointInsidePolygon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.pointInsidePolygon.pointInsidePolygon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a point is inside a given polygon or not
+Polygon is a list of (x,y) pairs.</p>
+<p>[code taken from: <a class="reference external" href="http://www.ariel.com.au/a/python-point-int-poly.html">http://www.ariel.com.au/a/python-point-int-poly.html</a>]</p>
+<p>let&#8217;s make an easy square:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>                 <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>                 <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>                 <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pointInsidePolygon</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pointInsidePolygon</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.rotatePolygon">
+<span id="fancytools-math-rotatepolygon-module"></span><h2>fancytools.math.rotatePolygon module<a class="headerlink" href="#module-fancytools.math.rotatePolygon" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.rotatePolygon.rotatePolygon">
+<code class="descclassname">fancytools.math.rotatePolygon.</code><code class="descname">rotatePolygon</code><span class="sig-paren">(</span><em>polygon</em>, <em>theta</em>, <em>origin=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/rotatePolygon.html#rotatePolygon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.rotatePolygon.rotatePolygon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the given polygon around the origin or if not given it&#8217;s center of mass</p>
+<p>polygon: np.array( (x1,y1), (...))
+theta: rotation clockwise in RADIAN
+origin = [x,y] - if not given set to center of gravity</p>
+<p>returns: None</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.rotation">
+<span id="fancytools-math-rotation-module"></span><h2>fancytools.math.rotation module<a class="headerlink" href="#module-fancytools.math.rotation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.rotation.axisAndAngle2RotMatrix">
+<code class="descclassname">fancytools.math.rotation.</code><code class="descname">axisAndAngle2RotMatrix</code><span class="sig-paren">(</span><em>axis</em>, <em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/rotation.html#axisAndAngle2RotMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.rotation.axisAndAngle2RotMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://stackoverflow.com/questions/6802577/python-rotation-of-3d-vector">http://stackoverflow.com/questions/6802577/python-rotation-of-3d-vector</a></p>
+<p>Return the rotation matrix associated with counterclockwise rotation about
+the given axis by angle radians.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.rotation.rotMatrix2AxisAndAngle">
+<code class="descclassname">fancytools.math.rotation.</code><code class="descname">rotMatrix2AxisAndAngle</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/rotation.html#rotMatrix2AxisAndAngle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.rotation.rotMatrix2AxisAndAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://stackoverflow.com/questions/12463487/obtain-rotation-axis-from-rotation-matrix-and-translation-vector-in-opencv">http://stackoverflow.com/questions/12463487/obtain-rotation-axis-from-rotation-matrix-and-translation-vector-in-opencv</a></p>
+<p>R : 3x3 rotation matrix
+returns axis, angle</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.math.rotation.rotVector2Matrix">
+<code class="descclassname">fancytools.math.rotation.</code><code class="descname">rotVector2Matrix</code><span class="sig-paren">(</span><em>vec</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/rotation.html#rotVector2Matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.rotation.rotVector2Matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>better use cv2.Rodrigues(rvec)[0] for that job...</p>
+<p>the angle is given as the magnitude of the rot vector,
+see <a class="reference external" href="https://www.safaribooksonline.com/library/view/learning-opencv/9780596516130/ch11s05.html">https://www.safaribooksonline.com/library/view/learning-opencv/9780596516130/ch11s05.html</a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.math.similarity1DdiffShapedArrays">
+<span id="fancytools-math-similarity1ddiffshapedarrays-module"></span><h2>fancytools.math.similarity1DdiffShapedArrays module<a class="headerlink" href="#module-fancytools.math.similarity1DdiffShapedArrays" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.math.similarity1DdiffShapedArrays.similarity1DdiffShapedArrays">
+<code class="descclassname">fancytools.math.similarity1DdiffShapedArrays.</code><code class="descname">similarity1DdiffShapedArrays</code><span class="sig-paren">(</span><em>arr1</em>, <em>arr2</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/math/similarity1DdiffShapedArrays.html#similarity1DdiffShapedArrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.math.similarity1DdiffShapedArrays.similarity1DdiffShapedArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>compare two strictly monotonous increasing 1d arrays
+of same or different size
+return a similarity index-&gt; 0=identical</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fancytools.os.html" class="btn btn-neutral float-right" title="fancytools.os package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fancytools.geometry.html" class="btn btn-neutral" title="fancytools.geometry package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

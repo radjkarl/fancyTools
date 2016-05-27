@@ -1,0 +1,156 @@
+fancytools.math package
+=======================
+
+.. automodule:: fancytools.math
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.math.MaskedMovingAverage module
+------------------------------------------
+
+.. automodule:: fancytools.math.MaskedMovingAverage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.MovingAverage module
+------------------------------------
+
+.. automodule:: fancytools.math.MovingAverage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.Point3D module
+------------------------------
+
+.. automodule:: fancytools.math.Point3D
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.angleDiff module
+--------------------------------
+
+.. automodule:: fancytools.math.angleDiff
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.blockshaped module
+----------------------------------
+
+.. automodule:: fancytools.math.blockshaped
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.boundingBox module
+----------------------------------
+
+.. automodule:: fancytools.math.boundingBox
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.execOnSubArrays module
+--------------------------------------
+
+.. automodule:: fancytools.math.execOnSubArrays
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.findXAt module
+------------------------------
+
+.. automodule:: fancytools.math.findXAt
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.gridPointsFromEdges module
+------------------------------------------
+
+.. automodule:: fancytools.math.gridPointsFromEdges
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.linRegressUsingMasked2dArrays module
+----------------------------------------------------
+
+.. automodule:: fancytools.math.linRegressUsingMasked2dArrays
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.line module
+---------------------------
+
+.. automodule:: fancytools.math.line
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.linspace2 module
+--------------------------------
+
+.. automodule:: fancytools.math.linspace2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.nearestPosition module
+--------------------------------------
+
+.. automodule:: fancytools.math.nearestPosition
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.nearestPosition2 module
+---------------------------------------
+
+.. automodule:: fancytools.math.nearestPosition2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.pointInsidePolygon module
+-----------------------------------------
+
+.. automodule:: fancytools.math.pointInsidePolygon
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.rotatePolygon module
+------------------------------------
+
+.. automodule:: fancytools.math.rotatePolygon
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.rotation module
+-------------------------------
+
+.. automodule:: fancytools.math.rotation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.math.similarity1DdiffShapedArrays module
+---------------------------------------------------
+
+.. automodule:: fancytools.math.similarity1DdiffShapedArrays
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

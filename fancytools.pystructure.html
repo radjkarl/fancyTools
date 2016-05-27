@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.pystructure package &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="index.html"/>
+        <link rel="up" title="fancytools package" href="fancytools.html"/>
+        <link rel="next" title="fancytools.pystructure.headerSetter package" href="fancytools.pystructure.headerSetter.html"/>
+        <link rel="prev" title="fancytools.os package" href="fancytools.os.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="fancytools.html">fancytools package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fancytools.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fcollections.html">fancytools.fcollections package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.filter.html">fancytools.filter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fit.html">fancytools.fit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.geometry.html">fancytools.geometry package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.math.html">fancytools.math package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.os.html">fancytools.os package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">fancytools.pystructure package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.pystructure.FallBack">fancytools.pystructure.FallBack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.pystructure.GetCallablesInPackage">fancytools.pystructure.GetCallablesInPackage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.pystructure.getMembers">fancytools.pystructure.getMembers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.pystructure.runAllInDir">fancytools.pystructure.runAllInDir module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.pystructure.stitchModules">fancytools.pystructure.stitchModules module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.render.html">fancytools.render package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.similarity.html">fancytools.similarity package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.spatial.html">fancytools.spatial package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.stats.html">fancytools.stats package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.utils.html">fancytools.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#module-fancytools.tests">fancytools.tests module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fancytools.html">fancytools package</a> &raquo;</li>
+      
+    <li>fancytools.pystructure package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/fancytools.pystructure.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fancytools.pystructure">
+<span id="fancytools-pystructure-package"></span><h1>fancytools.pystructure package<a class="headerlink" href="#module-fancytools.pystructure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fancytools.pystructure.headerSetter.html">fancytools.pystructure.headerSetter package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.pystructure.headerSetter.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.html">fancytools.pystructure.headerSetter.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.html">fancytools.pystructure.headerSetter.tests.testPackage package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.pkg1.html">fancytools.pystructure.headerSetter.tests.testPackage.pkg1 package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.pkg1.html#submodules">Submodules</a></li>
+<li class="toctree-l8"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.pkg1.html#module-fancytools.pystructure.headerSetter.tests.testPackage.pkg1.mod3">fancytools.pystructure.headerSetter.tests.testPackage.pkg1.mod3 module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.pkg1.html#module-fancytools.pystructure.headerSetter.tests.testPackage.pkg1.mod4">fancytools.pystructure.headerSetter.tests.testPackage.pkg1.mod4 module</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.pkg2.html">fancytools.pystructure.headerSetter.tests.testPackage.pkg2 package</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.html#module-fancytools.pystructure.headerSetter.tests.testPackage.mod1">fancytools.pystructure.headerSetter.tests.testPackage.mod1 module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.testPackage.html#module-fancytools.pystructure.headerSetter.tests.testPackage.mod2">fancytools.pystructure.headerSetter.tests.testPackage.mod2 module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.html#module-fancytools.pystructure.headerSetter.tests.addOrModifyHeader">fancytools.pystructure.headerSetter.tests.addOrModifyHeader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fancytools.pystructure.headerSetter.tests.html#module-fancytools.pystructure.headerSetter.tests.removeHeader">fancytools.pystructure.headerSetter.tests.removeHeader module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.pystructure.headerSetter.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.pystructure.headerSetter.html#module-fancytools.pystructure.headerSetter.headerSetter">fancytools.pystructure.headerSetter.headerSetter module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fancytools.pystructure.FallBack">
+<span id="fancytools-pystructure-fallback-module"></span><h2>fancytools.pystructure.FallBack module<a class="headerlink" href="#module-fancytools.pystructure.FallBack" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.pystructure.FallBack.FallBack">
+<em class="property">class </em><code class="descclassname">fancytools.pystructure.FallBack.</code><code class="descname">FallBack</code><span class="sig-paren">(</span><em>ownModuleName</em>, <em>fallbackModule</em>, <em>print_warning=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/FallBack.html#FallBack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.FallBack.FallBack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>a class allowing to automatically using another module as fall back
+if the given module doesn&#8217;t have a needed attribute</p>
+<p>to create the fall back compatibility just ad the following line to your module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">FallBack</span><span class="p">(</span><span class="n">__name__</span><span class="p">,</span> <span class="n">MyFallBackModule</span><span class="p">,</span> <span class="n">print_warning</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.pystructure.GetCallablesInPackage">
+<span id="fancytools-pystructure-getcallablesinpackage-module"></span><h2>fancytools.pystructure.GetCallablesInPackage module<a class="headerlink" href="#module-fancytools.pystructure.GetCallablesInPackage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage">
+<em class="property">class </em><code class="descclassname">fancytools.pystructure.GetCallablesInPackage.</code><code class="descname">GetCallablesInPackage</code><span class="sig-paren">(</span><em>package</em>, <em>modules_in_structure=False</em>, <em>include_classes=True</em>, <em>include_functions=False</em>, <em>min_level=0</em>, <em>max_level=None</em>, <em>exclude_empty_pck=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/GetCallablesInPackage.html#GetCallablesInPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="fancytools.fcollections.html#fancytools.fcollections.NestedOrderedDict.NestedOrderedDict" title="fancytools.fcollections.NestedOrderedDict.NestedOrderedDict"><code class="xref py py-class docutils literal"><span class="pre">fancytools.fcollections.NestedOrderedDict.NestedOrderedDict</span></code></a></p>
+<p>Return a NestedOrderedDict of all functions and classes within a given package.
+excluding &#8216;private&#8217; modules beginning with &#8216;_&#8217;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Arguments</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>package</td>
+<td>package or string of path to package
+to get all callables from</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="12%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Optional</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>modules_in_structure</td>
+<td>False</td>
+<td>include the modules of the
+callables in the output</td>
+</tr>
+<tr class="row-odd"><td>include_classes</td>
+<td>True</td>
+<td>include classes in the output</td>
+</tr>
+<tr class="row-even"><td>include_functions</td>
+<td>True</td>
+<td>include functions in the output</td>
+</tr>
+<tr class="row-odd"><td>min_level</td>
+<td>0</td>
+<td>minimum depth level in the
+package structure</td>
+</tr>
+<tr class="row-even"><td>max_level</td>
+<td>None</td>
+<td>maximum depth level in the
+package structure</td>
+</tr>
+<tr class="row-odd"><td>exclude_empty_pck</td>
+<td>True</td>
+<td>exclude sub-packages without
+any callables from the output</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.belongsToModule">
+<em class="property">static </em><code class="descname">belongsToModule</code><span class="sig-paren">(</span><em>obj</em>, <em>module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/GetCallablesInPackage.html#GetCallablesInPackage.belongsToModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.belongsToModule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True is an object belongs to a module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.buildHirarchy">
+<code class="descname">buildHirarchy</code><span class="sig-paren">(</span><em>horizontal_operation=None</em>, <em>vertical_operation=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/GetCallablesInPackage.html#GetCallablesInPackage.buildHirarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.buildHirarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk through the nested dict structure and executes
+horizontal_operation(name, callable) resp.
+vertical_operation(name, callable) if defined.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.isNestedDict">
+<em class="property">static </em><code class="descname">isNestedDict</code><span class="sig-paren">(</span><em>instance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/GetCallablesInPackage.html#GetCallablesInPackage.isNestedDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.GetCallablesInPackage.GetCallablesInPackage.isNestedDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience function for</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">NestedOrderedDict</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.pystructure.getMembers">
+<span id="fancytools-pystructure-getmembers-module"></span><h2>fancytools.pystructure.getMembers module<a class="headerlink" href="#module-fancytools.pystructure.getMembers" title="Permalink to this headline">¶</a></h2>
+<p>Different functions to return members within a given module or package.</p>
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getAvClassNamesInModule">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getAvClassNamesInModule</code><span class="sig-paren">(</span><em>prooveModule</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getAvClassNamesInModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getAvClassNamesInModule" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the class names within a module</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getAvClassNamesInPackage">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getAvClassNamesInPackage</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getAvClassNamesInPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getAvClassNamesInPackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the class names within a package</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getAvailableClassesInModule">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getAvailableClassesInModule</code><span class="sig-paren">(</span><em>prooveModule</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getAvailableClassesInModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getAvailableClassesInModule" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of all classes in the given module
+that dont begin with &#8216;_&#8217;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getAvailableClassesInPackage">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getAvailableClassesInPackage</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getAvailableClassesInPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getAvailableClassesInPackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of all classes in the given package
+whose modules dont begin with &#8216;_&#8217;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getClassInModuleFromName">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getClassInModuleFromName</code><span class="sig-paren">(</span><em>className</em>, <em>module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getClassInModuleFromName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getClassInModuleFromName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a class from name within a module</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.pystructure.getMembers.getClassInPackageFromName">
+<code class="descclassname">fancytools.pystructure.getMembers.</code><code class="descname">getClassInPackageFromName</code><span class="sig-paren">(</span><em>className</em>, <em>pkg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/getMembers.html#getClassInPackageFromName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.getMembers.getClassInPackageFromName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a class from name within a package</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.pystructure.runAllInDir">
+<span id="fancytools-pystructure-runallindir-module"></span><h2>fancytools.pystructure.runAllInDir module<a class="headerlink" href="#module-fancytools.pystructure.runAllInDir" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.pystructure.runAllInDir.runAllInDir">
+<code class="descclassname">fancytools.pystructure.runAllInDir.</code><code class="descname">runAllInDir</code><span class="sig-paren">(</span><em>dir_path</em>, <em>exclude=[]</em>, <em>add_args=()</em>, <em>ignoreErrors=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/runAllInDir.html#runAllInDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.runAllInDir.runAllInDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute all modules as __main__ within a given package path</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.pystructure.stitchModules">
+<span id="fancytools-pystructure-stitchmodules-module"></span><h2>fancytools.pystructure.stitchModules module<a class="headerlink" href="#module-fancytools.pystructure.stitchModules" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.pystructure.stitchModules.stitchModules">
+<code class="descclassname">fancytools.pystructure.stitchModules.</code><code class="descname">stitchModules</code><span class="sig-paren">(</span><em>module</em>, <em>fallbackModule</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/pystructure/stitchModules.html#stitchModules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.pystructure.stitchModules.stitchModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>complete missing attributes with those in fallbackModule</p>
+<p>imagine you have 2 modules: a and b
+a is some kind of an individualised module of b - but will maybe
+not contain all attributes of b.
+in this case a should use the attributes from b</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">types</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;The a.py module&#39;</span><span class="p">)</span> <span class="c"># you will have of course a file for those</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;The b.py module&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">var1</span> <span class="o">=</span> <span class="s">&#39;standard 1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">var2</span> <span class="o">=</span> <span class="s">&#39;standard 2&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">var1</span> <span class="o">=</span> <span class="s">&#39;individual 1&#39;</span>
+</pre></div>
+</div>
+<p>what we now want is to all all missing attributes from b to a:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stitchModules</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">var1</span>
+<span class="go">individual 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">var2</span>
+<span class="go">standard 2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fancytools.pystructure.headerSetter.html" class="btn btn-neutral float-right" title="fancytools.pystructure.headerSetter package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fancytools.os.html" class="btn btn-neutral" title="fancytools.os package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.math.line &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fancytools.html">fancytools package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fancytools.math.line</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for fancytools.math.line</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Collection of line-based functions</span>
+<span class="sd">line given as: </span>
+<span class="sd">    x0,y0,x1,y1 = line</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">empty</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">atan2</span><span class="p">,</span> <span class="n">hypot</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">copysign</span>
+<span class="kn">from</span> <span class="nn">fancytools.math.rotatePolygon</span> <span class="kn">import</span> <span class="n">rotatePolygon</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">argmax</span>
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="sort"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.sort">[docs]</a><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    change point position  if x1,y0 &lt; x0,y0</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">turn</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x1</span> <span class="o">&lt;</span> <span class="n">x0</span><span class="p">:</span>
+            <span class="n">turn</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">elif</span> <span class="n">y1</span> <span class="o">&lt;</span> <span class="n">y0</span><span class="p">:</span>
+        <span class="n">turn</span> <span class="o">=</span> <span class="bp">True</span>
+             
+    <span class="k">if</span> <span class="n">turn</span><span class="p">:</span>
+        <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x1</span>
+        <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y1</span>
+        <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
+        <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span></div>
+  
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="length"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.length">[docs]</a><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x1</span><span class="o">-</span><span class="n">x0</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y1</span><span class="o">-</span><span class="n">y0</span>
+    <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">)</span> </div>
+
+
+<div class="viewcode-block" id="isEven"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.isEven">[docs]</a><span class="k">def</span> <span class="nf">isEven</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    return whether lines is either horizontal or vertical</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">angle</span><span class="o">&lt;</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">angle</span><span class="o">&gt;</span><span class="mf">1.4</span></div>
+
+
+<div class="viewcode-block" id="dxdy"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.dxdy">[docs]</a><span class="k">def</span> <span class="nf">dxdy</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    return normalised ascent vector</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dx</span><span class="o">/</span><span class="n">f</span><span class="p">,</span> <span class="n">dy</span><span class="o">/</span><span class="n">f</span></div>
+
+<div class="viewcode-block" id="ascent"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.ascent">[docs]</a><span class="k">def</span> <span class="nf">ascent</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">),</span><span class="mf">1e10</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1e10</span></div>
+
+
+<div class="viewcode-block" id="angle"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.angle">[docs]</a><span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">atan2</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">-</span><span class="n">y0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y1</span> <span class="o">&gt;</span> <span class="n">y0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span> <span class="n">pi</span>
+        <span class="k">return</span> <span class="n">pi</span></div>
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="angle2"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.angle2">[docs]</a><span class="k">def</span> <span class="nf">angle2</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">):</span>
+    <span class="c">#return angle between two lines</span>
+    <span class="c">#from http://stackoverflow.com/questions/13226038/calculating-angle-between-two-lines-in-python</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line1</span>
+    <span class="n">x1</span><span class="o">-=</span><span class="n">x0</span>
+    <span class="n">y1</span><span class="o">-=</span><span class="n">y0</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="o">=</span> <span class="n">line2</span>
+    <span class="n">x2</span><span class="o">-=</span><span class="n">x0</span>
+    <span class="n">y2</span><span class="o">-=</span><span class="n">y0</span>    
+    <span class="n">inner_product</span> <span class="o">=</span> <span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">y1</span><span class="o">*</span><span class="n">y2</span>
+    <span class="n">len1</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+    <span class="n">len2</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">inner_product</span><span class="o">/</span><span class="p">(</span><span class="n">len1</span><span class="o">*</span><span class="n">len2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">copysign</span><span class="p">(</span><span class="n">acos</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))),</span> <span class="n">y2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fromAttr"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.fromAttr">[docs]</a><span class="k">def</span> <span class="nf">fromAttr</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">ang</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    create from middle, angle and distance</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mx</span><span class="p">,</span><span class="n">my</span> <span class="o">=</span> <span class="n">mid</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span><span class="o">*</span><span class="n">dist</span><span class="o">*</span><span class="mf">0.5</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span><span class="o">*</span><span class="n">dist</span><span class="o">*</span><span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">mx</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">my</span><span class="o">-</span><span class="n">dy</span><span class="p">,</span><span class="n">mx</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">my</span><span class="o">+</span><span class="n">dy</span></div>
+
+
+<div class="viewcode-block" id="fromAttr2"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.fromAttr2">[docs]</a><span class="k">def</span> <span class="nf">fromAttr2</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">ang</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    create from start, angle and distance</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sx</span><span class="p">,</span><span class="n">sy</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span><span class="o">*</span><span class="n">dist</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span><span class="o">*</span><span class="n">dist</span>
+    <span class="k">return</span> <span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">sy</span><span class="o">+</span><span class="n">dy</span></div>
+    
+    
+<div class="viewcode-block" id="fromFn"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.fromFn">[docs]</a><span class="k">def</span> <span class="nf">fromFn</span><span class="p">(</span><span class="n">ascent</span><span class="p">,</span><span class="n">offs</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">px</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">py</span> <span class="o">=</span> <span class="n">px</span><span class="o">*</span><span class="n">ascent</span> <span class="o">+</span> <span class="n">offs</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">length</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">ascent</span><span class="o">*</span><span class="n">length</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c">#normalize</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="n">dx</span><span class="o">*=</span><span class="n">l</span>
+        <span class="n">dy</span><span class="o">*=</span><span class="n">l</span>
+    <span class="k">return</span> <span class="n">px</span><span class="p">,</span><span class="n">py</span><span class="p">,</span><span class="n">px</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">py</span><span class="o">+</span><span class="n">dy</span></div>
+
+
+<div class="viewcode-block" id="toFn"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.toFn">[docs]</a><span class="k">def</span> <span class="nf">toFn</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">ascent</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">offs</span> <span class="o">=</span> <span class="n">y0</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">x0</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span><span class="n">offs</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></div>
+    
+
+<div class="viewcode-block" id="merge"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.merge">[docs]</a><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    merge 2 lines together</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="o">=</span> <span class="n">l1</span>
+    <span class="n">xx1</span><span class="p">,</span><span class="n">yy1</span><span class="p">,</span><span class="n">xx2</span><span class="p">,</span><span class="n">yy2</span> <span class="o">=</span> <span class="n">l2</span>
+    
+    <span class="n">comb</span> <span class="o">=</span> <span class="p">(</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">xx1</span><span class="p">,</span><span class="n">yy1</span><span class="p">),</span>
+             <span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">xx2</span><span class="p">,</span><span class="n">yy2</span><span class="p">),</span>
+             <span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">xx1</span><span class="p">,</span><span class="n">yy1</span><span class="p">),</span>
+             <span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">xx2</span><span class="p">,</span><span class="n">yy2</span><span class="p">)</span> <span class="p">)</span>
+    
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">comb</span><span class="p">]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">argmax</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">middle</span><span class="p">(</span><span class="n">comb</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="o">+</span> <span class="n">angle</span><span class="p">(</span><span class="n">l2</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">fromAttr</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="resize"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.resize">[docs]</a><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    factor: relative length (1-&gt;no change, 2-&gt; double, 0.5:half)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">angle</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">mx</span><span class="p">,</span><span class="n">my</span> <span class="o">=</span> <span class="n">middle</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">*</span><span class="n">factor</span><span class="o">*</span><span class="mf">0.5</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">d</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">d</span>
+    <span class="k">return</span> <span class="n">mx</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">my</span><span class="o">-</span><span class="n">dy</span><span class="p">,</span><span class="n">mx</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">my</span><span class="o">+</span><span class="n">dy</span></div>
+    
+    
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="middle"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.middle">[docs]</a><span class="k">def</span> <span class="nf">middle</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>    
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">y0</span><span class="o">+</span><span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span></div>
+
+ 
+<div class="viewcode-block" id="rotate"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.rotate">[docs]</a><span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">rotatePolygon</span><span class="p">(</span><span class="n">array</span><span class="p">(((</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">),(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">))),</span><span class="n">angle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="distance"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.distance">[docs]</a><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    infinite line to point or line to line distance</span>
+<span class="sd">    is point is given as line - use middle point of that liune</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">p1</span><span class="p">,</span><span class="n">p2</span> <span class="o">=</span> <span class="n">point</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c">#line is given instead of point</span>
+        <span class="n">p1</span><span class="p">,</span><span class="n">p2</span> <span class="o">=</span> <span class="n">middle</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">ascent</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">n0</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">n1</span><span class="o">*</span><span class="n">x0</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n1</span><span class="o">*</span><span class="n">p1</span> <span class="o">+</span> <span class="n">n2</span><span class="o">*</span><span class="n">p2</span> <span class="o">+</span> <span class="n">n0</span> <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
+
+
+<div class="viewcode-block" id="segmentDistance"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.segmentDistance">[docs]</a><span class="k">def</span> <span class="nf">segmentDistance</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">point</span><span class="p">):</span>
+    <span class="n">dx</span><span class="p">,</span><span class="n">dy</span> <span class="o">=</span> <span class="n">distanceVector</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">ignoreEndpoints</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="distanceVector"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.distanceVector">[docs]</a><span class="k">def</span> <span class="nf">distanceVector</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">ignoreEndpoints</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+    <span class="n">px</span><span class="p">,</span><span class="n">py</span> <span class="o">=</span> <span class="n">point</span>
+    <span class="n">line_magnitude</span> <span class="o">=</span>  <span class="n">length</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">line_magnitude</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">px</span><span class="o">-</span><span class="n">x0</span><span class="p">,</span><span class="n">py</span><span class="o">-</span><span class="n">y0</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="p">((</span><span class="n">px</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">+</span>
+         <span class="p">(</span><span class="n">py</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y0</span><span class="p">))</span> \
+         <span class="o">/</span> <span class="p">(</span><span class="n">line_magnitude</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c"># closest point does not fall within the line segment, </span>
+    <span class="c"># take the shorter distance to an endpoint</span>
+    <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="mf">0.00001</span> <span class="ow">or</span> <span class="n">u</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ignoreEndpoints</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+        <span class="n">ix</span> <span class="o">=</span> <span class="n">length</span><span class="p">((</span><span class="n">px</span><span class="p">,</span><span class="n">py</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">))</span>
+        <span class="n">iy</span> <span class="o">=</span> <span class="n">length</span><span class="p">((</span><span class="n">px</span><span class="p">,</span><span class="n">py</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ix</span> <span class="o">&gt;</span> <span class="n">iy</span><span class="p">:</span>
+            
+            <span class="n">ix</span><span class="p">,</span> <span class="n">iy</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ix</span><span class="p">,</span><span class="n">iy</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span><span class="n">y0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ix</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span>
+        <span class="n">iy</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span>
+          
+    <span class="k">return</span> <span class="n">ix</span><span class="o">-</span><span class="n">px</span><span class="p">,</span> <span class="n">iy</span><span class="o">-</span><span class="n">py</span></div>
+
+
+<div class="viewcode-block" id="segmentIntersection"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.segmentIntersection">[docs]</a><span class="k">def</span> <span class="nf">segmentIntersection</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">intersection</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pointIsBetween</span><span class="p">(</span><span class="n">line1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span><span class="n">line1</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span><span class="n">i</span><span class="p">)</span> 
+        <span class="ow">and</span> <span class="n">pointIsBetween</span><span class="p">(</span><span class="n">line2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span><span class="n">line2</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span><span class="n">i</span><span class="p">)</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="bp">None</span></div>
+
+
+
+
+<div class="viewcode-block" id="pointIsBetween"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.pointIsBetween">[docs]</a><span class="k">def</span> <span class="nf">pointIsBetween</span><span class="p">(</span><span class="n">startP</span><span class="p">,</span><span class="n">endP</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">distancePoint</span><span class="p">(</span><span class="n">startP</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">distancePoint</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">endP</span><span class="p">)</span> <span class="o">-</span> <span class="n">distancePoint</span><span class="p">(</span><span class="n">startP</span><span class="p">,</span><span class="n">endP</span><span class="p">)</span> <span class="o">&lt;</span><span class="mf">1e-6</span></div>
+
+<div class="viewcode-block" id="distancePoint"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.distancePoint">[docs]</a><span class="k">def</span> <span class="nf">distancePoint</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>
+    
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="intersection"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.intersection">[docs]</a><span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the coordinates of a point of intersection given two lines.</span>
+<span class="sd">    Return None if the lines are parallel, but non-colli_near.</span>
+<span class="sd">    Return an arbitrary point of intersection if the lines are colli_near.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    line1 and line2: lines given by 4 points (x0,y0,x1,y1).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="o">=</span> <span class="n">line1</span>
+    <span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span><span class="n">v2</span> <span class="o">=</span> <span class="n">line2</span>
+    <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">,</span> <span class="n">u1</span><span class="o">-</span><span class="n">u2</span><span class="p">),</span> <span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">,</span> <span class="n">v1</span><span class="o">-</span><span class="n">v2</span><span class="p">)</span>
+    <span class="n">e</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">u1</span><span class="o">-</span><span class="n">x1</span><span class="p">,</span> <span class="n">v1</span><span class="o">-</span><span class="n">y1</span>
+    <span class="c"># Solve ((a,b), (c,d)) * (t,s) = (e,f)</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">d</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_near</span><span class="p">(</span><span class="n">denom</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c"># parallel</span>
+        <span class="c"># If colli_near, the equation is solvable with t = 0.</span>
+        <span class="c"># When t=0, s would have to equal e/b and f/d</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">_near</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">/</span><span class="n">b</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">):</span>
+            <span class="c"># colli_near</span>
+            <span class="n">px</span> <span class="o">=</span> <span class="n">x1</span>
+            <span class="n">py</span> <span class="o">=</span> <span class="n">y1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="n">d</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">/</span><span class="n">denom</span>
+        <span class="c"># s = (a*f - e*c)/denom</span>
+        <span class="n">px</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">py</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">px</span><span class="p">,</span> <span class="n">py</span></div>
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<span class="k">def</span> <span class="nf">_near</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">atol</span> <span class="o">+</span> <span class="n">rtol</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+
+
+
+
+
+
+
+
+<div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.translate">[docs]</a><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">ascent</span><span class="p">,</span> <span class="n">offs</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    offs -&gt; shifts parallel to line</span>
+<span class="sd">    ascent -&gt; rotate line</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c">#TODO: why do I have thuis factor here?</span>
+    <span class="n">ascent</span><span class="o">*=-</span><span class="mi">2</span>
+    <span class="n">offs</span><span class="o">*=-</span><span class="mi">2</span>
+     
+    <span class="n">l0</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="c">#change relative to line:         </span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">offs</span><span class="c">#-h+offs</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">l0</span><span class="o">*</span><span class="n">ascent</span><span class="o">+</span><span class="n">offs</span>
+    <span class="k">return</span> <span class="n">translate2P</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="translate2P"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.translate2P">[docs]</a><span class="k">def</span> <span class="nf">translate2P</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">angle</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="c">#change in x and y:</span>
+    <span class="n">dx0</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">t0</span>
+    <span class="n">dx1</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">t1</span>
+    <span class="n">dy0</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">t0</span>
+    <span class="n">dy1</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">t1</span>
+    <span class="k">return</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">dx0</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dy0</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">dx1</span><span class="p">,</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">dy1</span></div>
+   
+
+<span class="c">#REMOVE?</span>
+<div class="viewcode-block" id="split"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.split">[docs]</a><span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    split &lt;line&gt; into multiple sublines</span>
+<span class="sd">    using intersection with &lt;lines&gt; </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">l2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">intersection</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">l2</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">p1</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">2</span><span class="p">:]</span><span class="o">=</span><span class="n">p2</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">p2</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:]</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+        
+
+<div class="viewcode-block" id="splitN"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.line.splitN">[docs]</a><span class="k">def</span> <span class="nf">splitN</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    split a line n times</span>
+<span class="sd">    returns n sublines</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">line</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">px</span><span class="p">,</span><span class="n">py</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span><span class="n">y0</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="c">#print dx,dy,777777777777777</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">px</span>
+        <span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">py</span>
+        <span class="n">px</span> <span class="o">+=</span> <span class="n">dx</span>
+        <span class="n">py</span> <span class="o">+=</span><span class="n">dy</span>
+        <span class="n">o</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">px</span>
+        <span class="n">o</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">py</span>        
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+
+<span class="c">#     l0 = [2625,  526, 2625, 1441]</span>
+<span class="c">#     l1 = [2178 , 288 ,2178 ,3021]</span>
+<span class="c">#     print middle(l1)</span>
+<span class="c">#     print 666, distanceVector(l0, middle(l1), ignoreEndpoints=False)</span>
+
+    <span class="n">l0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">]</span>
+     
+    <span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">0.</span><span class="p">]</span>
+    
+
+    
+    
+    <span class="k">print</span> <span class="n">angle2</span><span class="p">(</span><span class="n">l0</span><span class="p">,</span><span class="n">l1</span><span class="p">),</span><span class="mi">888</span>
+    <span class="k">print</span> <span class="n">intersection</span><span class="p">(</span><span class="n">l0</span><span class="p">,</span><span class="n">l1</span><span class="p">)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">l0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l0</span><span class="p">[</span><span class="mi">2</span><span class="p">]),(</span><span class="n">l0</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l0</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="s">&#39;r&#39;</span><span class="p">)</span>                 
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">l1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l1</span><span class="p">[</span><span class="mi">2</span><span class="p">]),(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l1</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+
+    
+    <span class="n">ll</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">0.3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">print</span> <span class="n">splitN</span><span class="p">(</span><span class="n">l0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+
+
+<span class="c">#     </span>
+    <span class="n">l0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4674</span> <span class="p">,</span> <span class="mi">233</span> <span class="p">,</span><span class="mi">4651</span><span class="p">,</span> <span class="mi">2892</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.00284855546826</span> 
+    <span class="n">o</span> <span class="o">=</span> <span class="mf">5.5832401565</span>
+<span class="c">#     </span>
+    <span class="n">l1</span><span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">l0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">l0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l0</span><span class="p">[</span><span class="mi">2</span><span class="p">]),(</span><span class="n">l0</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l0</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="s">&#39;r&#39;</span><span class="p">)</span>                 
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">l1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l1</span><span class="p">[</span><span class="mi">2</span><span class="p">]),(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l1</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+<span class="c">#(4650.9517093206787, 540593.62650955946, 4673.952276003728, 537934.62651446124) </span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]</span>
+    <span class="k">print</span> <span class="n">length</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">distanceVector</span><span class="p">(</span><span class="n">l0</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ignoreEndpoints</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

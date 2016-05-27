@@ -1,0 +1,59 @@
+fancytools.pystructure package
+==============================
+
+.. automodule:: fancytools.pystructure
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    fancytools.pystructure.headerSetter
+
+Submodules
+----------
+
+fancytools.pystructure.FallBack module
+--------------------------------------
+
+.. automodule:: fancytools.pystructure.FallBack
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.pystructure.GetCallablesInPackage module
+---------------------------------------------------
+
+.. automodule:: fancytools.pystructure.GetCallablesInPackage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.pystructure.getMembers module
+----------------------------------------
+
+.. automodule:: fancytools.pystructure.getMembers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.pystructure.runAllInDir module
+-----------------------------------------
+
+.. automodule:: fancytools.pystructure.runAllInDir
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.pystructure.stitchModules module
+-------------------------------------------
+
+.. automodule:: fancytools.pystructure.stitchModules
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

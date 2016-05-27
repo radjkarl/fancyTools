@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.utils package &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="index.html"/>
+        <link rel="up" title="fancytools package" href="fancytools.html"/>
+        <link rel="prev" title="fancytools.stats package" href="fancytools.stats.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="fancytools.html">fancytools package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fancytools.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fcollections.html">fancytools.fcollections package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.filter.html">fancytools.filter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fit.html">fancytools.fit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.geometry.html">fancytools.geometry package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.math.html">fancytools.math package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.os.html">fancytools.os package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.pystructure.html">fancytools.pystructure package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.render.html">fancytools.render package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.similarity.html">fancytools.similarity package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.spatial.html">fancytools.spatial package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.stats.html">fancytools.stats package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">fancytools.utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.Logger">fancytools.utils.Logger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.StreamSignal">fancytools.utils.StreamSignal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.countLines">fancytools.utils.countLines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.formatedTime">fancytools.utils.formatedTime module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.incrementName">fancytools.utils.incrementName module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.utils.statusBar">fancytools.utils.statusBar module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#module-fancytools.tests">fancytools.tests module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fancytools.html">fancytools package</a> &raquo;</li>
+      
+    <li>fancytools.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/fancytools.utils.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fancytools.utils">
+<span id="fancytools-utils-package"></span><h1>fancytools.utils package<a class="headerlink" href="#module-fancytools.utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fancytools.utils.Logger">
+<span id="fancytools-utils-logger-module"></span><h2>fancytools.utils.Logger module<a class="headerlink" href="#module-fancytools.utils.Logger" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.utils.Logger.Logger">
+<em class="property">class </em><code class="descclassname">fancytools.utils.Logger.</code><code class="descname">Logger</code><span class="sig-paren">(</span><em>stdout</em>, <em>logfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/Logger.html#Logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.Logger.Logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes into log-file and on screen at the same time</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_file</span> <span class="o">=</span> <span class="n">file</span><span class="p">(</span><span class="s">&#39;my_logfile.log&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">log_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">logger</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">logger</span>
+</pre></div>
+</div>
+<p>every output will also be saved in file, e.g.
+&gt;&gt;&gt; print &#8216;hello world&#8217; #every output will also be saved in file
+hello world</p>
+<p>to prove this we read the log file
+&gt;&gt;&gt; logger.close()
+&gt;&gt;&gt; log_file = open(&#8216;my_logfile.log&#8217;, &#8216;r&#8217;)</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">logcontent</span> <span class="o">=</span> <span class="n">log_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;hello world&#39;</span> <span class="ow">in</span> <span class="n">logcontent</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#39;my_logfile.log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="fancytools.utils.Logger.Logger.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/Logger.html#Logger.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.Logger.Logger.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does this work or not?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.utils.Logger.Logger.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/Logger.html#Logger.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.Logger.Logger.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.utils.StreamSignal">
+<span id="fancytools-utils-streamsignal-module"></span><h2>fancytools.utils.StreamSignal module<a class="headerlink" href="#module-fancytools.utils.StreamSignal" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.utils.StreamSignal.StreamSignal">
+<em class="property">class </em><code class="descclassname">fancytools.utils.StreamSignal.</code><code class="descname">StreamSignal</code><span class="sig-paren">(</span><em>stdout='out'</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/StreamSignal.html#StreamSignal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.StreamSignal.StreamSignal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtCore.QObject</span></code></p>
+<p>create a connectable stdout instance</p>
+<p>to write to the shell and a log file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">streamOut</span> <span class="o">=</span> <span class="n">StreamSignal</span><span class="p">(</span><span class="s">&#39;out&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamErr</span> <span class="o">=</span> <span class="n">StreamSignal</span><span class="p">(</span><span class="s">&#39;err&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>create a temporary file</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">file_id</span><span class="p">,</span> <span class="n">log_file</span><span class="p">)</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>connect the stream output to the files-write method</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">streamOut</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">write</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s">&#39;hello world&#39;</span>
+<span class="go">hello world</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>check whether the printed message is in the file</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;hello world&#39;</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="fancytools.utils.StreamSignal.StreamSignal.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/StreamSignal.html#StreamSignal.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.StreamSignal.StreamSignal.flush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fancytools.utils.StreamSignal.StreamSignal.message">
+<code class="descname">message</code><a class="headerlink" href="#fancytools.utils.StreamSignal.StreamSignal.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.utils.StreamSignal.StreamSignal.setWriteToShell">
+<code class="descname">setWriteToShell</code><span class="sig-paren">(</span><em>writeToShell=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/StreamSignal.html#StreamSignal.setWriteToShell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.StreamSignal.StreamSignal.setWriteToShell" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect sysout to the qtSignal</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.utils.StreamSignal.StreamSignal.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/StreamSignal.html#StreamSignal.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.StreamSignal.StreamSignal.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.utils.countLines">
+<span id="fancytools-utils-countlines-module"></span><h2>fancytools.utils.countLines module<a class="headerlink" href="#module-fancytools.utils.countLines" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.utils.countLines.countLines">
+<code class="descclassname">fancytools.utils.countLines.</code><code class="descname">countLines</code><span class="sig-paren">(</span><em>paths</em>, <em>exclude_files_containing=[]</em>, <em>exclude_folders_containing=[]</em>, <em>exclude_blank_lines=True</em>, <em>exclude_commented_lines=True</em>, <em>count_only_py_files=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/countLines.html#countLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.countLines.countLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>count and return lines  of all <a href="#id1"><span class="problematic" id="id2">*</span></a>.py files in the given directory/-ies</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.utils.formatedTime">
+<span id="fancytools-utils-formatedtime-module"></span><h2>fancytools.utils.formatedTime module<a class="headerlink" href="#module-fancytools.utils.formatedTime" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.utils.formatedTime.formatedTime">
+<code class="descclassname">fancytools.utils.formatedTime.</code><code class="descname">formatedTime</code><span class="sig-paren">(</span><em>ms</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/formatedTime.html#formatedTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.formatedTime.formatedTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert milliseconds in a human readable time</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">formatedTime</span><span class="p">(</span><span class="mi">60</span><span class="n">e3</span><span class="p">)</span>
+<span class="go">&#39;1m&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formatedTime</span><span class="p">(</span><span class="mi">1000</span><span class="n">e3</span><span class="p">)</span>
+<span class="go">&#39;16m 40s&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formatedTime</span><span class="p">(</span><span class="mi">200000123</span><span class="p">)</span>
+<span class="go">&#39;2d 7h 33m 20.123s&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.utils.incrementName">
+<span id="fancytools-utils-incrementname-module"></span><h2>fancytools.utils.incrementName module<a class="headerlink" href="#module-fancytools.utils.incrementName" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.utils.incrementName.incrementName">
+<code class="descclassname">fancytools.utils.incrementName.</code><code class="descname">incrementName</code><span class="sig-paren">(</span><em>nameList</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/incrementName.html#incrementName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.incrementName.incrementName" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a name that is unique in a given nameList through
+attaching a number to it</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>now we will add 3xfoo 2xbar and one klaus to our list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;bar&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;bar&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">incrementName</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="s">&#39;klaus&#39;</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="go">[&#39;bar&#39;, &#39;bar2&#39;, &#39;foo&#39;, &#39;foo2&#39;, &#39;foo3&#39;, &#39;klaus&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.utils.statusBar">
+<span id="fancytools-utils-statusbar-module"></span><h2>fancytools.utils.statusBar module<a class="headerlink" href="#module-fancytools.utils.statusBar" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.utils.statusBar.statusBar">
+<code class="descclassname">fancytools.utils.statusBar.</code><code class="descname">statusBar</code><span class="sig-paren">(</span><em>step</em>, <em>total</em>, <em>bar_len=20</em>, <em>onlyReturn=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/utils/statusBar.html#statusBar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.utils.statusBar.statusBar" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>print a ASCI-art statusbar of variable length e.g.showing 25%:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">step</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">total</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">statusBar</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">bar_len</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">onlyReturn</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>[=====o&#8212;&#8212;&#8212;&#8212;&#8212;]25%</p>
+<blockquote>
+<div>as default onlyReturn is set to False
+in this case the last printed line would be flushed every time when
+the statusbar is called to create a the effect of one moving bar</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="fancytools.stats.html" class="btn btn-neutral" title="fancytools.stats package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

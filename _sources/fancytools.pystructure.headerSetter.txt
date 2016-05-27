@@ -1,0 +1,27 @@
+fancytools.pystructure.headerSetter package
+===========================================
+
+.. automodule:: fancytools.pystructure.headerSetter
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    fancytools.pystructure.headerSetter.tests
+
+Submodules
+----------
+
+fancytools.pystructure.headerSetter.headerSetter module
+-------------------------------------------------------
+
+.. automodule:: fancytools.pystructure.headerSetter.headerSetter
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

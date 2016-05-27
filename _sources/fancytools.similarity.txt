@@ -1,0 +1,20 @@
+fancytools.similarity package
+=============================
+
+.. automodule:: fancytools.similarity
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.similarity.evalPatternInArray module
+-----------------------------------------------
+
+.. automodule:: fancytools.similarity.evalPatternInArray
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

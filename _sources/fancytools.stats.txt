@@ -1,0 +1,28 @@
+fancytools.stats package
+========================
+
+.. automodule:: fancytools.stats
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.stats.findBestDistribution module
+--------------------------------------------
+
+.. automodule:: fancytools.stats.findBestDistribution
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.stats.inverseHistogram module
+----------------------------------------
+
+.. automodule:: fancytools.stats.inverseHistogram
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

@@ -1,0 +1,36 @@
+fancytools.pystructure.headerSetter.tests.testPackage package
+=============================================================
+
+.. automodule:: fancytools.pystructure.headerSetter.tests.testPackage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    fancytools.pystructure.headerSetter.tests.testPackage.pkg1
+    fancytools.pystructure.headerSetter.tests.testPackage.pkg2
+
+Submodules
+----------
+
+fancytools.pystructure.headerSetter.tests.testPackage.mod1 module
+-----------------------------------------------------------------
+
+.. automodule:: fancytools.pystructure.headerSetter.tests.testPackage.mod1
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.pystructure.headerSetter.tests.testPackage.mod2 module
+-----------------------------------------------------------------
+
+.. automodule:: fancytools.pystructure.headerSetter.tests.testPackage.mod2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

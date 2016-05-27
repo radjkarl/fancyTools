@@ -1,0 +1,8 @@
+fancytools.pystructure.headerSetter.tests.testPackage.pkg2 package
+==================================================================
+
+.. automodule:: fancytools.pystructure.headerSetter.tests.testPackage.pkg2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

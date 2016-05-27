@@ -1,0 +1,60 @@
+fancytools.utils package
+========================
+
+.. automodule:: fancytools.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.utils.Logger module
+------------------------------
+
+.. automodule:: fancytools.utils.Logger
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.utils.StreamSignal module
+------------------------------------
+
+.. automodule:: fancytools.utils.StreamSignal
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.utils.countLines module
+----------------------------------
+
+.. automodule:: fancytools.utils.countLines
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.utils.formatedTime module
+------------------------------------
+
+.. automodule:: fancytools.utils.formatedTime
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.utils.incrementName module
+-------------------------------------
+
+.. automodule:: fancytools.utils.incrementName
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.utils.statusBar module
+---------------------------------
+
+.. automodule:: fancytools.utils.statusBar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

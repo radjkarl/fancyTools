@@ -1,0 +1,36 @@
+fancytools.fit package
+======================
+
+.. automodule:: fancytools.fit
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.fit.fit2dArrayToFn module
+------------------------------------
+
+.. automodule:: fancytools.fit.fit2dArrayToFn
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fit.linregressIgnoringOutliers module
+------------------------------------------------
+
+.. automodule:: fancytools.fit.linregressIgnoringOutliers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fit.polyFitIgnoringOutliers module
+---------------------------------------------
+
+.. automodule:: fancytools.fit.polyFitIgnoringOutliers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

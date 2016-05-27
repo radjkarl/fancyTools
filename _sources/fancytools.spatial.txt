@@ -1,0 +1,20 @@
+fancytools.spatial package
+==========================
+
+.. automodule:: fancytools.spatial
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.spatial.closestNonZeroIndex module
+---------------------------------------------
+
+.. automodule:: fancytools.spatial.closestNonZeroIndex
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

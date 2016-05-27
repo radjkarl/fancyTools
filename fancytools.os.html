@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.os package &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="index.html"/>
+        <link rel="up" title="fancytools package" href="fancytools.html"/>
+        <link rel="next" title="fancytools.pystructure package" href="fancytools.pystructure.html"/>
+        <link rel="prev" title="fancytools.math package" href="fancytools.math.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="fancytools.html">fancytools package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fancytools.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fcollections.html">fancytools.fcollections package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.filter.html">fancytools.filter package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.fit.html">fancytools.fit package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.geometry.html">fancytools.geometry package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.math.html">fancytools.math package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">fancytools.os package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.PathStr">fancytools.os.PathStr module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.StartMenuEntry">fancytools.os.StartMenuEntry module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.assignFtypeToPyFile">fancytools.os.assignFtypeToPyFile module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.copyTree">fancytools.os.copyTree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.countLines">fancytools.os.countLines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.isAdmin">fancytools.os.isAdmin module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.legalizeFilename">fancytools.os.legalizeFilename module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.runAsAdmin">fancytools.os.runAsAdmin module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.setup">fancytools.os.setup module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-fancytools.os.userName">fancytools.os.userName module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.pystructure.html">fancytools.pystructure package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.render.html">fancytools.render package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.similarity.html">fancytools.similarity package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.spatial.html">fancytools.spatial package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.stats.html">fancytools.stats package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fancytools.utils.html">fancytools.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fancytools.html#module-fancytools.tests">fancytools.tests module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="fancytools.html">fancytools package</a> &raquo;</li>
+      
+    <li>fancytools.os package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/fancytools.os.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fancytools.os">
+<span id="fancytools-os-package"></span><h1>fancytools.os package<a class="headerlink" href="#module-fancytools.os" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fancytools.os.PathStr">
+<span id="fancytools-os-pathstr-module"></span><h2>fancytools.os.PathStr module<a class="headerlink" href="#module-fancytools.os.PathStr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.os.PathStr.PathStr">
+<em class="property">class </em><code class="descclassname">fancytools.os.PathStr.</code><code class="descname">PathStr</code><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">str</span></code></p>
+<p>easy path-string handling and manipulation using os.path and shutil</p>
+<p>Windows only: there is no need of transforming
+to - it will be done automatically when a PathStr instance is created</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">PathStr</span><span class="o">.</span><span class="n">home</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">p</span><span class="o">.</span><span class="n">isdir</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">listdir</span><span class="p">()]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.abspath">
+<code class="descname">abspath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.abspath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.abspath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.all">
+<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all files within this folder</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.basename">
+<code class="descname">basename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.basename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><em>dst</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.dirname">
+<code class="descname">dirname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.dirname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.dirname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.exists">
+<code class="descname">exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>return whether PathStr instance exists as a file/folder</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.files">
+<code class="descname">files</code><span class="sig-paren">(</span><em>ftype=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.files" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a first of path to all files within that folder</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.filetype">
+<code class="descname">filetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.filetype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.filetype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="fancytools.os.PathStr.PathStr.getcwd">
+<em class="property">static </em><code class="descname">getcwd</code><span class="sig-paren">(</span><em>moduleName=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.getcwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.getcwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>get current path either from the temp folder used by pyinstaller:</p>
+<blockquote>
+<div><ul class="simple">
+<li>apps &#8216;sys._MEIPASS&#8217; if packed with &#8211;onefile option</li>
+</ul>
+</div></blockquote>
+<p>or</p>
+<blockquote>
+<div><ul class="simple">
+<li>os.getcwd()</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="fancytools.os.PathStr.PathStr.home">
+<em class="property">static </em><code class="descname">home</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.home"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the home/user directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.isdir">
+<code class="descname">isdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.isdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.isdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.isfile">
+<code class="descname">isfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.isfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.isfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.join">
+<code class="descname">join</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a file/name to this PathStr instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.listdir">
+<code class="descname">listdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.listdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.listdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>open and read the file is existent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.mkdir">
+<code class="descname">mkdir</code><span class="sig-paren">(</span><em>dname=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.mkdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.move">
+<code class="descname">move</code><span class="sig-paren">(</span><em>dst</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>move this file/folder the [dst]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.remove" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.rename">
+<code class="descname">rename</code><span class="sig-paren">(</span><em>new_file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.rename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fancytools.os.PathStr.PathStr.setFiletype">
+<code class="descname">setFiletype</code><span class="sig-paren">(</span><em>ftype</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#PathStr.setFiletype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.PathStr.setFiletype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="fancytools.os.PathStr.raw">
+<code class="descclassname">fancytools.os.PathStr.</code><code class="descname">raw</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/PathStr.html#raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.PathStr.raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a raw string representation of text</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.StartMenuEntry">
+<span id="fancytools-os-startmenuentry-module"></span><h2>fancytools.os.StartMenuEntry module<a class="headerlink" href="#module-fancytools.os.StartMenuEntry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fancytools.os.StartMenuEntry.StartMenuEntry">
+<em class="property">class </em><code class="descclassname">fancytools.os.StartMenuEntry.</code><code class="descname">StartMenuEntry</code><span class="sig-paren">(</span><em>name</em>, <em>target</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/StartMenuEntry.html#StartMenuEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.StartMenuEntry.StartMenuEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>this class creates a shortcut for a given target in the start menu of the
+used os depending either system wide or user specific</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">kwargs</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>icon</td>
+<td>[path of the program icon]</td>
+</tr>
+<tr class="row-odd"><td>directory</td>
+<td>[start dir of the program],</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>[version number]</td>
+</tr>
+<tr class="row-odd"><td>description</td>
+<td>[of the program]</td>
+</tr>
+<tr class="row-even"><td>console</td>
+<td>False -&gt; hide console (only GUI applications)</td>
+</tr>
+<tr class="row-odd"><td>categories</td>
+<td>e.g. &#8220;Application;Science;Graphics;Office;&#8221; # Linux only</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span> <span class="o">=</span> <span class="n">StartMenuEntry</span><span class="p">(</span><span class="s">&#39;myLittleTest&#39;</span><span class="p">,</span> <span class="s">&#39;www.python.org&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now look for the entry in your start menu</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">entry</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.assignFtypeToPyFile">
+<span id="fancytools-os-assignftypetopyfile-module"></span><h2>fancytools.os.assignFtypeToPyFile module<a class="headerlink" href="#module-fancytools.os.assignFtypeToPyFile" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.assignFtypeToPyFile.assignFtypeToPyFile">
+<code class="descclassname">fancytools.os.assignFtypeToPyFile.</code><code class="descname">assignFtypeToPyFile</code><span class="sig-paren">(</span><em>extension</em>, <em>args=()</em>, <em>mimetype=None</em>, <em>showTerminal=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/assignFtypeToPyFile.html#assignFtypeToPyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.assignFtypeToPyFile.assignFtypeToPyFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect a file extension to a python script</p>
+<p>Example:
+We created a python file that can open &#8216;.da&#8217; files
+The command we need to execute to open that is is:
+&#8216;python MY_PYTH_FILE.py -o MY_DA_FILE.da&#8217;</p>
+<p>To be able to open these files with a simple double click run:</p>
+<p>openExtensionWith(extension=&#8217;da&#8217;, args=(&#8216;MY_PYTH_FILE.py&#8217;, &#8216;-o&#8217;))</p>
+<p>OPTIONAL ARGUMENTS:
+args -&gt; (...) additional arguments to be added after the pyFile</p>
+<dl class="docutils">
+<dt>mimetype (str) -&gt; assign a MIMETYPE name to your file extension</dt>
+<dd>e.g. &#8216;daFile&#8217;</dd>
+</dl>
+<p>showTerminal (bool) -&gt; True: open your program in a terminal</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.copyTree">
+<span id="fancytools-os-copytree-module"></span><h2>fancytools.os.copyTree module<a class="headerlink" href="#module-fancytools.os.copyTree" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.copyTree.copyTree">
+<code class="descclassname">fancytools.os.copyTree.</code><code class="descname">copyTree</code><span class="sig-paren">(</span><em>src</em>, <em>dst</em>, <em>symlinks=False</em>, <em>ignore=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/copyTree.html#copyTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.copyTree.copyTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>copy one dir-tree into another
+combine dirs of the same name
+replacing files of same name</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.countLines">
+<span id="fancytools-os-countlines-module"></span><h2>fancytools.os.countLines module<a class="headerlink" href="#module-fancytools.os.countLines" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.countLines.countLines">
+<code class="descclassname">fancytools.os.countLines.</code><code class="descname">countLines</code><span class="sig-paren">(</span><em>filename</em>, <em>buf_size=1048576</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/countLines.html#countLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.countLines.countLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>fast counting to the lines of a given filename
+through only reading out a limited buffer</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.isAdmin">
+<span id="fancytools-os-isadmin-module"></span><h2>fancytools.os.isAdmin module<a class="headerlink" href="#module-fancytools.os.isAdmin" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.isAdmin.isAdmin">
+<code class="descclassname">fancytools.os.isAdmin.</code><code class="descname">isAdmin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/isAdmin.html#isAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.isAdmin.isAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>return True is current os user is administrator</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.legalizeFilename">
+<span id="fancytools-os-legalizefilename-module"></span><h2>fancytools.os.legalizeFilename module<a class="headerlink" href="#module-fancytools.os.legalizeFilename" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.legalizeFilename.legalizeFilename">
+<code class="descclassname">fancytools.os.legalizeFilename.</code><code class="descname">legalizeFilename</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/legalizeFilename.html#legalizeFilename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.legalizeFilename.legalizeFilename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.runAsAdmin">
+<span id="fancytools-os-runasadmin-module"></span><h2>fancytools.os.runAsAdmin module<a class="headerlink" href="#module-fancytools.os.runAsAdmin" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.runAsAdmin.runAsAdmin">
+<code class="descclassname">fancytools.os.runAsAdmin.</code><code class="descname">runAsAdmin</code><span class="sig-paren">(</span><em>cmdLine=None</em>, <em>target_dir=''</em>, <em>wait=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/runAsAdmin.html#runAsAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.runAsAdmin.runAsAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>run [cmdLine] as admin
+specify the location from where the code is executed through [target_dir]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.setup">
+<span id="fancytools-os-setup-module"></span><h2>fancytools.os.setup module<a class="headerlink" href="#module-fancytools.os.setup" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.setup.setup">
+<code class="descclassname">fancytools.os.setup.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/setup.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.setup.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>a template for the  python setup.py installer routine</p>
+<ul>
+<li><dl class="first docutils">
+<dt>take setup information from the packages __init__.py file</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>this way these informations, like...</dt>
+<dd><blockquote class="first">
+<div><ul class="simple">
+<li>__email__</li>
+<li>__version__</li>
+<li>__depencies__</li>
+</ul>
+</div></blockquote>
+<p class="last">are still available after installation</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">exclude /tests*</p>
+</li>
+<li><p class="first">create scripts from all files in /bin</p>
+</li>
+<li><dl class="first docutils">
+<dt>create the long description from</dt>
+<dd><ul class="first last simple">
+<li>/README.rst</li>
+<li>/CHANGES.rst</li>
+<li>/AUTHORS.rst</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">remove /build at the end</p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fancytools.os.userName">
+<span id="fancytools-os-username-module"></span><h2>fancytools.os.userName module<a class="headerlink" href="#module-fancytools.os.userName" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="fancytools.os.userName.userName">
+<code class="descclassname">fancytools.os.userName.</code><code class="descname">userName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fancytools/os/userName.html#userName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fancytools.os.userName.userName" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the user-name of the current user</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fancytools.pystructure.html" class="btn btn-neutral float-right" title="fancytools.pystructure package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fancytools.math.html" class="btn btn-neutral" title="fancytools.math package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

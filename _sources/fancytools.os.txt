@@ -1,0 +1,92 @@
+fancytools.os package
+=====================
+
+.. automodule:: fancytools.os
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.os.PathStr module
+----------------------------
+
+.. automodule:: fancytools.os.PathStr
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.StartMenuEntry module
+-----------------------------------
+
+.. automodule:: fancytools.os.StartMenuEntry
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.assignFtypeToPyFile module
+----------------------------------------
+
+.. automodule:: fancytools.os.assignFtypeToPyFile
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.copyTree module
+-----------------------------
+
+.. automodule:: fancytools.os.copyTree
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.countLines module
+-------------------------------
+
+.. automodule:: fancytools.os.countLines
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.isAdmin module
+----------------------------
+
+.. automodule:: fancytools.os.isAdmin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.legalizeFilename module
+-------------------------------------
+
+.. automodule:: fancytools.os.legalizeFilename
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.runAsAdmin module
+-------------------------------
+
+.. automodule:: fancytools.os.runAsAdmin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.setup module
+--------------------------
+
+.. automodule:: fancytools.os.setup
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.os.userName module
+-----------------------------
+
+.. automodule:: fancytools.os.userName
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

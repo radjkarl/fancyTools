@@ -1,0 +1,76 @@
+fancytools.fcollections package
+===============================
+
+.. automodule:: fancytools.fcollections
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.fcollections.FIFObuffer module
+-----------------------------------------
+
+.. automodule:: fancytools.fcollections.FIFObuffer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.MultiList module
+----------------------------------------
+
+.. automodule:: fancytools.fcollections.MultiList
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.NestedOrderedDict module
+------------------------------------------------
+
+.. automodule:: fancytools.fcollections.NestedOrderedDict
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.ProxyList module
+----------------------------------------
+
+.. automodule:: fancytools.fcollections.ProxyList
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.TwoDArraySliceIterator module
+-----------------------------------------------------
+
+.. automodule:: fancytools.fcollections.TwoDArraySliceIterator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.WeakList module
+---------------------------------------
+
+.. automodule:: fancytools.fcollections.WeakList
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.naturalSorting module
+---------------------------------------------
+
+.. automodule:: fancytools.fcollections.naturalSorting
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+fancytools.fcollections.removeDuplicates module
+-----------------------------------------------
+
+.. automodule:: fancytools.fcollections.removeDuplicates
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

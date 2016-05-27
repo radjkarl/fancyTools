@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.similarity.evalPatternInArray &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fancytools.html">fancytools package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fancytools.similarity.evalPatternInArray</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for fancytools.similarity.evalPatternInArray</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+
+
+
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+<div class="viewcode-block" id="evalPatternInArray"><a class="viewcode-back" href="../../../fancytools.similarity.html#fancytools.similarity.evalPatternInArray.evalPatternInArray">[docs]</a><span class="k">def</span> <span class="nf">evalPatternInArray</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    returns similarity parameter of given pattern to be</span>
+<span class="sd">    repeated in given array</span>
+<span class="sd">    the index is scalled between 0-1</span>
+<span class="sd">    with 0 = identical</span>
+<span class="sd">    and val&gt;1 = different</span>
+
+
+<span class="sd">    &gt;&gt;&gt; arr = [0,0.5,1,  0, 0.5,1,   0,0.5,1]</span>
+<span class="sd">    &gt;&gt;&gt; pattern = [0,0.5,1]</span>
+<span class="sd">    &gt;&gt;&gt; evalPatternInArray(pattern, arr)</span>
+<span class="sd">    0</span>
+
+<span class="sd">    &gt;&gt;&gt; arr = [0,0.5,1,  0, 0.6,1,   0,0.5,1]</span>
+<span class="sd">    &gt;&gt;&gt; pattern = [0,0.5,1]</span>
+<span class="sd">    &gt;&gt;&gt; evalPatternInArray(pattern, arr)</span>
+<span class="sd">    0.09090909090909088</span>
+
+
+<span class="sd">    &gt;&gt;&gt; arr = [0,0.5,1,  0, 0.6,1,   0,0.5,1]</span>
+<span class="sd">    &gt;&gt;&gt; pattern = [1,0.5,-2]</span>
+<span class="sd">    &gt;&gt;&gt; evalPatternInArray(pattern, arr)</span>
+<span class="sd">    162.2057359307358</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="n">ll</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="c">#print l, ll</span>
+    <span class="n">mx_additions</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c">#relative difference:</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">v</span><span class="o">+</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">v</span><span class="o">+</span><span class="n">p</span><span class="p">)</span>
+        <span class="c">#print d</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.15</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">mx_additions</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">l</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">ll</span><span class="p">:</span>
+                <span class="c">#print sim, v, p,a</span>
+                <span class="k">return</span> <span class="n">sim</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+        <span class="k">elif</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c">#surplus line</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">l</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">sim</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#line missing</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">ll</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">sim</span>
+            <span class="n">v</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">sim</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">mx_additions</span><span class="p">:</span>
+            <span class="n">sim</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
+
+
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="c">#     import numpy as np</span>
+<span class="c">#     </span>
+<span class="c">#     p = np.array([  53.54507214,   35.17027143,  147.04964467,  147.10031907,</span>
+<span class="c">#              80.81610302])</span>
+<span class="c">#     d = np.array([  72.,  146.,  150.,   73.,   85.,  157.,  147.,   70.,   85.,</span>
+<span class="c">#             155.,  141.,   85.,   73.,  150.,  154.,   68.,   87.,  142.,</span>
+<span class="c">#             154.,   72.,   85.,  147.,  147.,   30.,   40.])</span>
+<span class="c"># </span>
+<span class="c">#     p2 = np.array([  53.54507214+35.17027143,  147.04964467,  147.10031907,</span>
+<span class="c">#              80.81610302])</span>
+<span class="c"># </span>
+<span class="c">#     print evalPatternInArray(p2, d)</span>
+
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

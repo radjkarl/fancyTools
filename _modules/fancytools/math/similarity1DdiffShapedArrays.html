@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fancytools.math.similarity1DdiffShapedArrays &mdash; fancytools 0.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="fancytools 0.3 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> fancytools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fancytools.html">fancytools package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">fancytools</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>fancytools.math.similarity1DdiffShapedArrays</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for fancytools.math.similarity1DdiffShapedArrays</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+
+
+<div class="viewcode-block" id="similarity1DdiffShapedArrays"><a class="viewcode-back" href="../../../fancytools.math.html#fancytools.math.similarity1DdiffShapedArrays.similarity1DdiffShapedArrays">[docs]</a><span class="k">def</span> <span class="nf">similarity1DdiffShapedArrays</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    compare two strictly monotonous increasing 1d arrays </span>
+<span class="sd">    of same or different size </span>
+<span class="sd">    return a similarity index-&gt; 0=identical</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c">#assign longer and shorter here, because jit cannot do it</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr2</span><span class="p">):</span>
+        <span class="n">arr1</span><span class="p">,</span><span class="n">arr2</span> <span class="o">=</span> <span class="n">arr2</span><span class="p">,</span><span class="n">arr1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr2</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">_calc</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr2</span><span class="p">):</span>
+            <span class="n">mn</span> <span class="o">=</span> <span class="n">arr1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">mx</span> <span class="o">=</span> <span class="n">arr1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mn</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">arr1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">arr2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>        
+            <span class="n">mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">arr1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">arr2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">mx</span><span class="o">-</span><span class="n">mn</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">out</span></div>
+   
+    
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_calc</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+    <span class="c">#l...longer array, s... shorter array</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">#index of l</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">#index of s</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ls</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">ll</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="c">#ll = len(l)-1</span>
+    <span class="c">#walk through both arrays adding the minimum difference to &#39;sim&#39;</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">d0</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">sim</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d0</span><span class="p">,</span><span class="n">d1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d1</span><span class="o">&lt;</span><span class="n">d0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">ll</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">ls</span><span class="p">:</span>
+                <span class="k">break</span>            
+            <span class="n">v</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sim</span>
+
+
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+    <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.06257158</span><span class="p">,</span>   <span class="mf">2.03065364</span><span class="p">,</span>   <span class="mf">3.00055033</span><span class="p">,</span>   <span class="mf">4.02509933</span><span class="p">,</span>
+         <span class="mf">5.04263119</span><span class="p">,</span>   <span class="mf">6.02609311</span><span class="p">,</span>   <span class="mf">7.0613511</span> <span class="p">,</span>   <span class="mf">8.01943069</span><span class="p">,</span>
+         <span class="mf">9.0996045</span> <span class="p">,</span>  <span class="mf">10.07413368</span> <span class="p">])</span>
+    <span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>  <span class="mf">2.03140113</span><span class="p">,</span>   <span class="mf">3.0375256</span> <span class="p">,</span>   <span class="mf">4.04365008</span><span class="p">,</span>   <span class="mf">5.04977456</span><span class="p">,</span>
+         <span class="mf">6.05589903</span><span class="p">,</span>   <span class="mf">7.06202351</span><span class="p">,</span>   <span class="mf">8.06814798</span><span class="p">,</span>   <span class="mf">9.07427246</span><span class="p">,</span>
+        <span class="mf">10.08039693</span><span class="p">,</span>  <span class="mf">11.08652141</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">similarity1DdiffShapedArrays</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+    <span class="n">arr2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>  <span class="mf">1.98539463</span><span class="p">,</span>   <span class="mf">3.00056414</span><span class="p">,</span>   <span class="mf">4.01573365</span><span class="p">,</span>   <span class="mf">5.03090316</span><span class="p">,</span>
+         <span class="mf">6.04607267</span><span class="p">,</span>   <span class="mf">7.06124218</span><span class="p">,</span>   <span class="mf">8.07641169</span><span class="p">,</span>   <span class="mf">9.0915812</span> <span class="p">,</span>
+        <span class="mf">10.10675071</span><span class="p">,</span>  <span class="mf">11.12192022</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">similarity1DdiffShapedArrays</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+    <span class="k">print</span> <span class="mi">555</span>
+
+
+    <span class="n">arr1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.54661319</span><span class="p">,</span>  <span class="mf">3.83296723</span><span class="p">,</span>  <span class="mf">6.11932126</span><span class="p">,</span>  <span class="mf">8.40567529</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">similarity1DdiffShapedArrays</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">)</span>
+
+
+
+
+
+<span class="c">#     #case 1: identical arrays</span>
+<span class="c">#     arr1 = np.array([1,2,3,4,5,5.1,6,7,8,9,10])</span>
+<span class="c">#     arr2 = arr1</span>
+<span class="c">#     assert np.isclose(similarity1DdiffShapedArrays(arr1, arr2), 0)</span>
+<span class="c"># </span>
+<span class="c">#     #case 1: smaller array is just missing values: </span>
+<span class="c">#     arr1 = np.array([1,2,3,4,5,6,7,8,9,10])</span>
+<span class="c">#     arr2 = np.array([    3,4,5,6,7,8,9])</span>
+<span class="c">#     assert np.isclose(similarity1DdiffShapedArrays(arr1, arr2), 1)</span>
+<span class="c">#         </span>
+<span class="c">#     #case 2: case 1 + smaller array has one slightly diff. one: </span>
+<span class="c">#     arr1 = np.array([1,2,3,4,5,6,     7,8,9,10])</span>
+<span class="c">#     arr2 = np.array([    3,4,5,6,6.1, 7,8,9])</span>
+<span class="c">#     assert np.isclose(similarity1DdiffShapedArrays(arr1, arr2),1.1)</span>
+<span class="c"># </span>
+<span class="c">#     #case 2: case 2 + longer array has extra values in between: </span>
+<span class="c">#     arr1 = np.array([1,2,3,4,5,  5.5,  6,  7,7.7, 8,9,10])</span>
+<span class="c">#     arr2 = np.array([    3,4,5,6,      6.1,7,     8,9])</span>
+<span class="c">#     assert np.isclose(similarity1DdiffShapedArrays(arr1, arr2), 1.6)</span>
+<span class="c"># </span>
+<span class="c">#     #case 4: 2 random arrays or different size</span>
+<span class="c">#     arr1 = np.sort(np.random.rand(1000))</span>
+<span class="c">#     arr2 = np.sort(np.random.rand(800))</span>
+<span class="c">#     print similarity1DdiffShapedArrays(arr1, arr2)</span>
+<span class="c"># </span>
+<span class="c">#     #case 4: case 3 bit higher values - return similar result</span>
+<span class="c">#         #through normalize=True</span>
+<span class="c">#     arr1 = np.sort(np.random.rand(1000)*1000)</span>
+<span class="c">#     arr2 = np.sort(np.random.rand(800)*1000)</span>
+<span class="c">#     print similarity1DdiffShapedArrays(arr1, arr2, normalize=True)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Karl Bedrich.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

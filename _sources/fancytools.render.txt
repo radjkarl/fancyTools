@@ -1,0 +1,20 @@
+fancytools.render package
+=========================
+
+.. automodule:: fancytools.render
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+fancytools.render.GridRender module
+-----------------------------------
+
+.. automodule:: fancytools.render.GridRender
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
