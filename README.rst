@@ -2,6 +2,9 @@
 fancyTools - various fancy tools for every day usage
 ====================================================
 
+.. image:: https://img.shields.io/badge/License-GPLv3-red.svg
+.. image:: https://img.shields.io/badge/python-2.6%7C2.7-yellow.svg
+
 - Browse the `API Documentation <http://radjkarl.github.io/fancyTools>`_
 - Fork the code on `github <https://github.com/radjkarl/fancytools>`_
 

@@ -2,13 +2,13 @@
 a collection of more or less useful non-GUI tools
 '''
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __author__ = 'Karl Bedrich'
 __email__ = 'karl@bedrich.de'
-__url__ = 'http://radjkarl.github.imgIO/fancyTools'
+__url__ = 'https://pypi.python.org/pypi/fancytools'
 __license__ = 'GPLv3'
 __description__ = __doc__
-__depencies__= ["numpy >= 1.9",]
+__depencies__= ["numpy >= 1.9","win32com"]
 __classifiers__ = [
 		'Intended Audience :: Developers',
 		'Intended Audience :: Science/Research',
