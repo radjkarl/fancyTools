@@ -15,7 +15,7 @@ escape_dict={'\a':r'\a',
               #'\x':r'\x',#cannot do \x - otherwise exception
              '\'':r'\'',
              '\"':r'\"',
-             '\0':r'\0',
+             #'\0':r'\0', #doesnt work
              '\1':r'\1',
              '\2':r'\2',
              '\3':r'\3',
@@ -193,6 +193,11 @@ class PathStr(str):
         if ftype is not None:
             return [i for i in a if i.isfile() and i.filetype()==ftype]
         return [i for i in a if i.isfile()]
+
+
+    def folders(self):
+        a = [self.join(i) for i in self]
+        return [i for i in a if not i.isfile()]
 
 
     def __iter__(self):

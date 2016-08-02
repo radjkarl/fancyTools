@@ -109,7 +109,7 @@ def fromAttr2(start, ang, dist):
     return sx,sy,sx+dx,sy+dy
     
     
-def fromFn(ascent,offs, length=1, px=0):
+def fromFn(ascent, offs, length=1, px=0):
     py = px*ascent + offs
     dx = length
     dy = ascent*length
@@ -350,7 +350,6 @@ def splitN(line,n):
     px,py = x0,y0
     dx = (float(x1)-x0) / n
     dy = (float(y1)-y0) / n
-    #print dx,dy,777777777777777
     
     for i in xrange(n):
         o = out[i]

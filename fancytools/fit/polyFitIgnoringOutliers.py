@@ -1,16 +1,19 @@
 import numpy as np
 
 
-def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2):
+def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2, return_outliers=False):
     '''Returns:
-        (np.poly1d): callable function of polynomal fit excluding all outliers
+        (np.poly1d): callable function of polynomial fit excluding all outliers
     Args:
-        deg (int): degree of polynomal fit
+        deg (int): degree of polynomial fit
         n_iter (int): do linear regression n times
                       successive removing
-        nstd (float): exclude outlioers, if their deviation
+        nstd (float): exclude outliers, if their deviation
             is > [nstd] * standard deviation
+        return_outliers (bool): also return outlier positions as 2. arg
     '''
+    if return_outliers:
+        a = all_outliers = np.zeros_like(y,dtype=bool)
     for i in range(niter):
         poly = np.polyfit(x, y, deg)
         p = np.poly1d(poly)
@@ -20,11 +23,18 @@ def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2):
         dy = y-y_fit
         std = (dy**2).mean()**0.5
         inliers = abs(dy) < nstd*std
-        if inliers.sum() > 2:
+        if return_outliers:
+            a[~inliers] = True
+
+        if inliers.sum() > deg+1:
             x = x[inliers]
             y = y[inliers]
+            if return_outliers:
+                a = a[inliers]
         else:
             break
+    if return_outliers:
+        return p, all_outliers
     return p
 
 

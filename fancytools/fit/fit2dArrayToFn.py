@@ -4,12 +4,12 @@ import numpy as np
 
 
 
-def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=1,
+def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
                    output_shape=None, guess=None):
     '''Fit a 2d array to a 2d function
 
     *Ignore masked values
-    * [down_scale_factor] map to speed up fitting procedure
+    * [down_scale_factor] map to speed up fitting procedure, set value smaller than 1
     * [output_shape] shape of the output array
     * [guess] must be scaled using [scale_factor]
 
@@ -18,6 +18,12 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=1,
     '''
     if mask is None:
         mask = np.ones(shape=arr.shape, dtype=bool)
+
+    if down_scale_factor is None:
+        if mask.sum() > 100:
+            down_scale_factor = 0.3
+        else:
+            down_scale_factor = 1
 
     if down_scale_factor != 1:
         # SCALE TO DECREASE AMOUNT OF POINTS TO FIT:

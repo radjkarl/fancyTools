@@ -5,6 +5,11 @@ class MaskedMovingAverage(object):
     Calculating the moving average and variance on (optional masked) ndArray
     allowing to update different areas every time
     
+    has:
+    self.n -> number of averaged values
+    self.avg -> average
+    self.var -> variance (if calcVariance==True)
+    
     moving average and variance
     taken from http://stackoverflow.com/a/14638138
     referring to http://www.johndcook.com/blog/standard_deviation/
