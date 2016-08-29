@@ -2,7 +2,7 @@
 a collection of more or less useful non-GUI tools
 '''
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __author__ = 'Karl Bedrich'
 __email__ = 'karl@bedrich.de'
 __url__ = 'https://pypi.python.org/pypi/fancytools'

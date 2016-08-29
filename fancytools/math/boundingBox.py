@@ -22,7 +22,7 @@ def boundingBox(booleanArray):
             p.append(slice(i.min(),i.max()))
         else:
             p.append(slice(0,0))
-            return None
+#             return None
     return tuple(p)
     
 

@@ -33,6 +33,28 @@ def staticMovingAverage(arr, fineness=10):
     '''
     s0 = arr.shape[0]
     window_len = int(round(int(s0/fineness)))
-    s=np.r_[arr[window_len-1:0:-1],arr,arr[-1:-window_len:-1]]
+
+    start = arr[0] + arr[0] - arr[window_len-1:0:-1]
+    end = arr[-1] + arr[-1] - arr[-1:-window_len:-1]
+    s=np.r_[start,arr,end]
     w=np.ones(window_len,'d')
-    return np.convolve(w/w.sum(),s,mode='valid')[:s0]
+    w /= w.sum()
+    a0 = np.convolve(w,s,mode='valid')[:s0]
+    a1 = np.convolve(w,s[::-1],mode='valid')[:s0][::-1]
+    return 0.5* (a0+a1)
+
+
+
+
+if __name__ == '__main__':
+    import pylab as plt
+    n = 100
+    noise = 0.1
+    fineness = 10
+    a = np.sin(np.linspace(0,10,n))
+    a += np.random.rand(n)*noise
+    a2 = staticMovingAverage(a, fineness)
+    
+    plt.plot(a)
+    plt.plot(a2)
+    plt.show()

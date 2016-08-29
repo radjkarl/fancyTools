@@ -3,11 +3,12 @@ Collection of line-based functions
 line given as: 
     x0,y0,x1,y1 = line
 '''
-from numpy import pi, array, empty
+
+from numpy import pi, array, empty, argmax
 from math import sin, cos, atan2, hypot, acos, copysign
 from fancytools.math.rotatePolygon import rotatePolygon
 from numba import jit
-from numpy import argmax
+# from numpy.linalg import norm
 
 
 @jit(nopython=True)   
@@ -16,19 +17,38 @@ def sort(line):
     change point position  if x1,y0 < x0,y0
     '''
     x0,y0,x1,y1 = line
+#     if (x0**2+y0**2)**0.5 < (x1**2+y1**2)**0.5:
+#         return (x1,y1,x0,y0)
+#     return line
+#     
+#     if x1 < x0:
+#         return (x1,y1,x0,y0)
+#     return line
+
+
     turn = False
+     
     if abs(x1-x0) > abs(y1-y0):
         if x1 < x0:
             turn = True
     elif y1 < y0:
         turn = True
-             
+              
     if turn:
-        line[0] = x1
-        line[1] = y1
-        line[2] = x0
-        line[3] = y0
-  
+        return (x1,y1,x0,y0)
+    return line
+#         line[0] = x1
+#         line[1] = y1
+#         line[2] = x0
+#         line[3] = y0
+
+def normal(line):
+    '''return the unit normal vector'''
+    return dxdy(line)[::-1]
+#     n = array([-ascent(line),1])
+#     n /= norm(n)
+#     return n
+
 
 @jit(nopython=True)   
 def length(line):
@@ -312,9 +332,13 @@ def translate(line, ascent, offs=0):
 def translate2P(line,t0,t1):
     a = angle(line)
 
+#     if 0.25*pi > abs(a) or abs(a) > 0.75*pi:#isHorizontal
+#         t0*=-1
+#         t1*=-1
+        
     #change in x and y:
-    dx0 = sin(a)*t0
-    dx1 = sin(a)*t1
+    dx0 = -sin(a)*t0
+    dx1 = -sin(a)*t1
     dy0 = cos(a)*t0
     dy1 = cos(a)*t1
     return line[0]+dx0, line[1]+dy0, line[2]+dx1, line[3]+dy1
@@ -362,9 +386,62 @@ def splitN(line,n):
     return out
 
 
+def isHoriz(line):
+    a = abs(angle(line))
+    return 0.25*pi > a or a > 0.75*pi
+
+
+
 if __name__ == '__main__':
     import pylab as plt
+    import numpy as np
 
+
+#     l0 = (0,0,10,0.5)
+#     l1 = (0,0,10,-0.5)
+#     print normal(l0), normal(l1)
+#     print ascent(l0), ascent(l1)
+# 
+# 
+#     l0 = (1822, 1140, 1805, 1262)
+#     print angle(l0), isHoriz(l0)
+#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
+#     plt.scatter(l0[0],l0[1])               
+    l0 = (1843, 1046, 1867, 907)
+#     print angle(l0), isHoriz(l0)
+# 
+#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
+#     plt.scatter(l0[0],l0[1])
+# 
+#     l1 = (1624, 1372, 1730, 1380)
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+#     plt.scatter(l1[0],l1[1])
+#     print angle(l1), isHoriz(l1)
+# 
+#     l1 =(1879, 551, 1784, 535)
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+#     plt.scatter(l1[0],l1[1])
+#     print angle(l1), isHoriz(l1)
+
+
+#     l1 = translate2P(l0,-0.186749451731, -9.05925804855)
+#     
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+
+#     l1 = translate2P(l0,1,0)
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+    
+    plt.show()
+
+    for n in np.linspace(0,np.pi,10):
+        if n:
+            l0 = translate2P(l0,n,-n)
+            print length(l0)
+            print l0
+            plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'g')
+#             if n :
+#                 break
+    plt.show()
 
 #     l0 = [2625,  526, 2625, 1441]
 #     l1 = [2178 , 288 ,2178 ,3021]

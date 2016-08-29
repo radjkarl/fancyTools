@@ -13,7 +13,6 @@ def radialAverage(arr, center=None):
     y, x = np.indices((s0,s1))
     r = np.sqrt((x - center[0])**2 + (y - center[1])**2)
     r = r.astype(np.int)
-
     tbin = np.bincount(r.ravel(), arr.ravel())
     nr = np.bincount(r.ravel())
     radialprofile = tbin / nr
