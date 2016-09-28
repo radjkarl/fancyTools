@@ -8,8 +8,38 @@ from numpy import pi, array, empty, argmax
 from math import sin, cos, atan2, hypot, acos, copysign
 from fancytools.math.rotatePolygon import rotatePolygon
 from numba import jit
+from fancytools.math.pointInsidePolygon import pointInsidePolygon
 # from numpy.linalg import norm
 
+
+
+
+def cutToFitIntoPolygon(line, polygon):
+    '''
+    cut line so it fits into polygon
+    polygon = (( x0,y0), (x1,y1) ,...) 
+    '''
+    p0_inside =  pointInsidePolygon(line[0],line[1],polygon)
+    p1_inside =  pointInsidePolygon(line[2],line[3],polygon)
+    
+    if not p0_inside or not p1_inside:
+        for (i0,j0),(i1,j1) in zip( polygon[:-1], polygon[1:] ):
+            
+            isec = segmentIntersection(line, (i0,j0,i1,j1) )
+            
+            if isec is not None:
+                if not p0_inside:
+                    line = (isec[0], isec[1], line[2],line[3])
+                    p0_inside = True
+                elif not p1_inside:
+                    line = (line[0],line[1], isec[0], isec[1])
+                    p1_inside = True
+            
+            if p0_inside and p1_inside:
+                break
+    return line
+
+    
 
 @jit(nopython=True)   
 def sort(line):
@@ -44,10 +74,10 @@ def sort(line):
 
 def normal(line):
     '''return the unit normal vector'''
-    return dxdy(line)[::-1]
-#     n = array([-ascent(line),1])
-#     n /= norm(n)
-#     return n
+    dx,dy = dxdy(line)
+    return -dy,dx #other normal v would be dy,-dx
+    #return dxdy(line)[::-1]
+
 
 
 @jit(nopython=True)   
@@ -142,7 +172,7 @@ def fromFn(ascent, offs, length=1, px=0):
 
 
 def toFn(line):
-    x0,y0,x1,y1 = line
+    x0,y0 = line[:2]
     m = ascent(line)
     offs = y0-m*x0
     return m,offs, length(line)
@@ -241,7 +271,6 @@ def distanceVector(line, point, ignoreEndpoints=True):
     else:
         ix = x0 + u * (x1 - x0)
         iy = y0 + u * (y1 - y0)
-          
     return ix-px, iy-py
 
 
@@ -249,17 +278,22 @@ def segmentIntersection(line1, line2):
     i = intersection(line1, line2)
     if i is None:
         return None
-
+    #line1 and line2 are finite:
+    #check whether intersection is on both lines:
     if (pointIsBetween(line1[0:2],line1[2:],i) 
         and pointIsBetween(line2[0:2],line2[2:],i) ):
         return i
     return None
 
 
-
-
 def pointIsBetween(startP,endP,p):
-    return distancePoint(startP,p) + distancePoint(p,endP) - distancePoint(startP,endP) <1e-6
+    '''
+    whether point is (+-1e-6) on a straight 
+    line in-between two other points 
+    '''
+    return ( distancePoint(startP,p) + distancePoint(p,endP) 
+            - distancePoint(startP,endP) <1e-6 )
+
 
 def distancePoint(p1,p2):
     return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**0.5
@@ -299,6 +333,7 @@ def intersection(line1, line2):
         px = x1 + t*(x2-x1)
         py = y1 + t*(y2-y1)
     return px, py
+
 
 @jit(nopython=True)   
 def _near(a, b, rtol=1e-5, atol=1e-8):

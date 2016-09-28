@@ -1,13 +1,11 @@
-'''
-Created on 8 Aug 2016
-
-@author: elkb4
-'''
 import numpy as np
 from numba import jit
 
 
 def findMax(arr):
+    '''
+    in comparison to argrelmax() more simple and  reliable peak finder
+    '''
     out = np.zeros(shape=arr.shape, dtype=bool)
     _calcMax(arr, out)
     return out
@@ -31,6 +29,9 @@ def _calcMax(arr, out):
          
 
 def findMin(arr):
+    '''
+    in comparison to argrelmax() more simple and  reliable peak finder
+    '''
     out = np.zeros(shape=arr.shape, dtype=bool)
     _calcMin(arr, out)
     return out
@@ -54,37 +55,9 @@ def _calcMin(arr, out):
 
 
 if __name__ == '__main__':
-#     import sys
-#     import pylab as plt
 
-    
     a = np.array([0,0,1,2,2,3,2,4,3,2,2,3,3,3,1])
-    print a[findMax(a)]
-    print a[findMin(a)]
-    
-#     
-# #     import doctest
-# #     doctest.testmod()
-# 
-#     from fancytools.os.PathStr import PathStr
-#     import imgProcessor
-#     from imgProcessor.imgIO import imread
-#     from scipy.ndimage.filters import maximum_filter
-# 
-#     p = PathStr(imgProcessor.__file__).dirname().join(
-#                 'media', 'electroluminescence')
-# 
-# 
-#     img = imread(p.join('EL_cell_cracked.png'), 'gray')
-#     
-#     bn = maximum_filter(#<-- make lines bold
-#             localizedMaximum(-img, thresh=30, min_increase=10, max_length=10)
-#             ,3)
-# 
-#     if 'no_window' not in sys.argv:
-#         plt.figure('image')
-#         plt.imshow(img)
-#         plt.colorbar()
-#         plt.figure('binarized')
-#         plt.imshow(bn)        
-#         plt.show()
+    #peaks values...
+    assert np.allclose( a[findMax(a)], [3,4,3] )
+    assert np.allclose( a[findMin(a)], [2,2]   )
+ 
