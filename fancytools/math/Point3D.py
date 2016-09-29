@@ -5,8 +5,6 @@ Created on 21 Aug 2015
 '''
 from __future__ import division
 from __future__ import print_function
-from builtins import object
-from past.utils import old_div
 
 
 from math import pi, cos, sin
@@ -45,9 +43,9 @@ class Point3D(object):
  
     def project(self, win_width, win_height, fov, viewer_distance):
         """ Transforms this 3D point to 2D using a perspective projection. """
-        factor = old_div(fov, (viewer_distance + self.z))
-        x = self.x * factor + old_div(win_width, 2)
-        y = -self.y * factor + old_div(win_height, 2)
+        factor = fov/ (viewer_distance + self.z)
+        x = self.x * factor + win_width// 2
+        y = -self.y * factor + win_height// 2
         return Point3D(x, y, 1)
 
 

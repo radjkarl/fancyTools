@@ -1,7 +1,6 @@
 from __future__ import division
 from __future__ import print_function
-from builtins import object
-from past.utils import old_div
+
 import numpy as np
 
 class MaskedMovingAverage(object):
@@ -56,7 +55,7 @@ class MaskedMovingAverage(object):
         x0 = self.avg[i]
         n = self.n[i]
         #calculate the new average:
-        new_Avg = self.avg[i] + old_div((xn-x0),n)
+        new_Avg = self.avg[i] + ((xn-x0) / n)
 
         if self.var is not None:
             t = (xn-new_Avg + x0-self.avg[i])*(xn - x0)/(n-1)
