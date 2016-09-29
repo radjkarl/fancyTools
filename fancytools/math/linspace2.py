@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
+from past.utils import old_div
 from numpy import linspace
 
 def linspace2(a, b, n, dtype=None):
@@ -16,7 +18,7 @@ def linspace2(a, b, n, dtype=None):
 	'''
 	a = linspace(a, b, n+1, dtype=dtype)[:-1]
 	if len(a) > 1:
-		diff01 = (a[1]-a[0])/2
+		diff01 = old_div((a[1]-a[0]),2)
 		a += diff01
 	return a
 

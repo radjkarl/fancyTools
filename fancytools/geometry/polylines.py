@@ -5,7 +5,6 @@ general functions for polylines =
       ...
     ]
 '''
-
 import numpy as np
 from numpy.linalg import norm
 
@@ -35,7 +34,7 @@ def _sort(c, firstI, lastI):
     indices[-1] = lastI
 
     nextI = firstI
-    for m in xrange(1, l-1):
+    for m in range(1, l-1):
         p = c[nextI]
         min_dist = 1e6
         for j, other in enumerate(c):
@@ -84,7 +83,7 @@ def filter(polylines, min_len=20):
     filter polylines shorter than given min length
     '''
     filtered = []
-    for n in xrange(len(polylines)-1,-1,-1): 
+    for n in range(len(polylines)-1,-1,-1): 
         if lengths(polylines[n]).sum() < min_len:
             filtered.append(polylines.pop(n))
     return filtered
@@ -96,12 +95,12 @@ def separate(polylines, f_mx_dist=2, mn_group_len=4):
     '''
     s = []
 
-    for n in xrange(len(polylines)-1, -1, -1):
+    for n in range(len(polylines)-1, -1, -1):
         c = polylines[n]
         separated = False
         start = 0
 
-        for m in xrange(mn_group_len, len(c)-1):
+        for m in range(mn_group_len, len(c)-1):
             if m-start < mn_group_len:
                 continue
             m+=1
@@ -139,7 +138,7 @@ def merge(polylines, mx_dist=4):
     '''
     l = len(polylines)
     to_remove = set()
-    for n in xrange(l-1, -1, -1):
+    for n in range(l-1, -1, -1):
         if n not in to_remove:
             c = polylines[n]
             for p0, p1 in zip(c[:-1], c[1:]):
@@ -147,7 +146,7 @@ def merge(polylines, mx_dist=4):
                 l0 = p0[0], p0[1], p1[0], p1[1]
 
                 #for every other polyline:
-                for m in xrange(l-1, -1, -1):
+                for m in range(l-1, -1, -1):
                     if m not in to_remove:
                         if n == m:
                             continue
@@ -156,7 +155,7 @@ def merge(polylines, mx_dist=4):
                         ind = np.zeros(shape=cc.shape[0], dtype=bool)
 
                         #for every point p in this polyline:
-                        for o in xrange(len(cc)-1, -1, -1):
+                        for o in range(len(cc)-1, -1, -1):
                             p = cc[o]
 
                             if line.segmentDistance(l0, p) < mx_dist:
@@ -236,11 +235,11 @@ def connect(polylines, max_dist=10):
     '''
     ll = len(polylines)
     remove = []
-    for n in xrange(ll-1,-1,-1):
+    for n in range(ll-1,-1,-1):
         c = polylines[n]
         if len(c)>1:
             for d0,p0 in enumerate((c[0,0],c[-1,0])):            
-                for m in xrange(len(polylines)-1,-1,-1):
+                for m in range(len(polylines)-1,-1,-1):
                     #combine all x all polylines
                     if n==m:
                         continue

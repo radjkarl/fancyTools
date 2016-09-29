@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+from past.utils import old_div
 from numba import jit
 
 
@@ -22,7 +25,7 @@ def similarity1DdiffShapedArrays(arr1, arr2, normalize=False):
         else:
             mn = min(arr1[0],arr2[0])        
             mx = max(arr1[-1],arr2[-1])
-        out = float(out) / (mx-mn)
+        out = old_div(float(out), (mx-mn))
         
     return out
    
@@ -65,16 +68,16 @@ if __name__ == '__main__':
     arr2 = np.array([  2.03140113,   3.0375256 ,   4.04365008,   5.04977456,
          6.05589903,   7.06202351,   8.06814798,   9.07427246,
         10.08039693,  11.08652141])
-    print similarity1DdiffShapedArrays(arr1, arr2)
+    print(similarity1DdiffShapedArrays(arr1, arr2))
     arr2 = np.array([  1.98539463,   3.00056414,   4.01573365,   5.03090316,
          6.04607267,   7.06124218,   8.07641169,   9.0915812 ,
         10.10675071,  11.12192022])
-    print similarity1DdiffShapedArrays(arr1, arr2)
-    print 555
+    print(similarity1DdiffShapedArrays(arr1, arr2))
+    print(555)
 
 
     arr1 = np.array([ 1.54661319,  3.83296723,  6.11932126,  8.40567529])
-    print similarity1DdiffShapedArrays(arr1, arr2)
+    print(similarity1DdiffShapedArrays(arr1, arr2))
 
 
 

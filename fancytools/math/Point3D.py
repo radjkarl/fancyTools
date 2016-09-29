@@ -3,12 +3,16 @@ Created on 21 Aug 2015
 
 #taken from http://codentronix.com/2011/04/20/simulation-of-3d-point-rotation-with-python-and-pygame/
 '''
+from __future__ import division
+from __future__ import print_function
+from builtins import object
+from past.utils import old_div
 
 
 from math import pi, cos, sin
  
 
-class Point3D:
+class Point3D(object):
     def __init__(self, x = 0, y = 0, z = 0):
         self.x, self.y, self.z = float(x), float(y), float(z)
  
@@ -41,9 +45,9 @@ class Point3D:
  
     def project(self, win_width, win_height, fov, viewer_distance):
         """ Transforms this 3D point to 2D using a perspective projection. """
-        factor = fov / (viewer_distance + self.z)
-        x = self.x * factor + win_width / 2
-        y = -self.y * factor + win_height / 2
+        factor = old_div(fov, (viewer_distance + self.z))
+        x = self.x * factor + old_div(win_width, 2)
+        y = -self.y * factor + old_div(win_height, 2)
         return Point3D(x, y, 1)
 
 
@@ -59,4 +63,4 @@ if __name__ == '__main__':
     p_rot = p.rotateX(angleX).rotateY(angleY).rotateZ(angleZ)
     # Transform the point from 3D to 2D
     p_proj = p_rot.project(win_width, win_height, fov, viewer_distance)
-    print p_proj.x, p_proj.y
+    print(p_proj.x, p_proj.y)

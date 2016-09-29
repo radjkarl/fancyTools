@@ -1,3 +1,7 @@
+from __future__ import division
+from builtins import object
+
+
 
 class TwoDArraySliceIterator(object):
     '''
@@ -12,14 +16,14 @@ class TwoDArraySliceIterator(object):
     
     than iterate through your array as follows:
     
-    for  s1,s2 in i:
-        print s1,s2, arr[s1,s2]
-        ...
+    for (s1,s2) in i:
+        print(s1,s2, arr[s1,s2])
+
     '''
     def __init__(self, main_size, slice_size):
         self.main_size = main_size
-        self.fx = main_size[0] / slice_size[0]
-        self.fy = main_size[1] / slice_size[1]
+        self.fx = int(main_size[0]/ slice_size[0])
+        self.fy = int(main_size[1]/ slice_size[1])
         self.slice_size = slice_size
  
         if slice_size in ( None, (1,1) ):
@@ -41,7 +45,7 @@ class TwoDArraySliceIterator(object):
         self.j = 0
          
                  
-    def next(self): 
+    def __next__(self): 
         if self._stop_next:
             raise StopIteration()                     
         p0x = self.i*self.fx

@@ -1,9 +1,14 @@
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import zip
+from builtins import object
 import numpy as np
 from numpy import isnan
 
 # OWN
-import _sortMethods
-import _mergeMethods  # used for self.mergeMethod
+from . import _sortMethods
+from . import _mergeMethods  # used for self.mergeMethod
 
 
 
@@ -129,12 +134,12 @@ class GridRender(object):
                 old_value = self.values[position]
                 if not np.isnan(old_value):
                     anz_values = self.density[position]
-                    mean = old_value + intensity * ( (value
-                           - old_value) / (anz_values+intensity) )
+                    mean = old_value + intensity * ( ((value
+                           - old_value) / (anz_values+intensity)) )
                     self.mean[position] = mean
 
                     if self.variance is not None:
-                        self.variance[position] += abs(value - mean)/(anz_values+intensity)
+                        self.variance[position] += (abs(value - mean)/(anz_values+intensity))
 
             if self.mergeMethod(self.values, position, intensity, value):
                 for a in refs:

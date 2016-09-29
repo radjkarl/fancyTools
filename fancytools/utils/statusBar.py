@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
+
 from sys import stdout
 
 
@@ -10,7 +12,7 @@ def statusBar(step, total, bar_len=20, onlyReturn=False):
 	>>> step = 25
 	>>> total = 100
 	
-	>>> print statusBar(step, total, bar_len=20, onlyReturn=True)
+	>>> print( statusBar(step, total, bar_len=20, onlyReturn=True) )
 	\r[=====o---------------]25%
 
 	as default onlyReturn is set to False
@@ -18,11 +20,11 @@ def statusBar(step, total, bar_len=20, onlyReturn=False):
 	the statusbar is called to create a the effect of one moving bar
 	'''
 
-	norm=100.0/total
+	norm = 100.0 / total
 	step *= norm
 	step = int(step)
-	increment = 100/bar_len
-	n = (step / increment)
+	increment = 100 // bar_len
+	n = step // increment
 	m = bar_len - n
 	text = "\r[" + "="*n +"o" +  "-"*m + "]" +  str(step) + "%"
 	if onlyReturn:

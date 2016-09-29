@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 def countLines(filename, buf_size=1048576):
 	'''

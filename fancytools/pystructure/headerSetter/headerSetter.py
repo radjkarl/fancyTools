@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 
@@ -27,12 +28,12 @@ def setHeader(package_path,
         Exception("ERROR: given path '%s' not valid" %package_path)
         
     py_files = _findPyFiles(package_path, exclude_init)
-    print 'found %s py files in package %s' %(len(py_files), pkg_name)
+    print('found %s py files in package %s' %(len(py_files), pkg_name))
     for path in py_files:
-        print path
+        print(path)
         _setHeaderInPyFile(path, header_start, header_text, 
                            header_end, remove_header, exclude_empty_files)
-    print 'done.'
+    print('done.')
 
 
 def _findPyFiles(path, exclude_init):

@@ -29,12 +29,12 @@ class NestedOrderedDict(OrderedDict):
     get the path from the most nested item:
     
     >>> p = ch2_1_1.path
-    >>> print p
+    >>> print(p)
     3, 4, 5
     
     access this item from the parent dict:
     
-    >>> print parent[p]
+    >>> print(parent[p])
     NestedOrderedDict({hello: world})
     '''
 
@@ -66,7 +66,7 @@ class NestedOrderedDict(OrderedDict):
         '''limit the number of shown items to 5 and give it a more dict-like view'''
         contents = ''
         n = 0
-        for n, (key, item) in enumerate(self.iteritems()):
+        for n, (key, item) in enumerate(self.items()):
             contents += '%s: %s, ' %(key,item)
             if n == 5:
                 break

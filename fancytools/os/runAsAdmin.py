@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 #WINDOWS ONLY AT THE MOMENT
 import sys, os#, traceback, types
 
@@ -39,7 +41,7 @@ def runAsAdmin(cmdLine=None, target_dir='', wait=True):
     # the more complex ShellExecuteEx() must be used.
 
     # procHandle = win32api.ShellExecute(0, lpVerb, cmd, params, cmdDir, showCmd)
-    print target_dir, cmd, params
+    print(target_dir, cmd, params)
     procInfo = ShellExecuteEx(nShow=showCmd,
                               fMask=shellcon.SEE_MASK_NOCLOSEPROCESS,
                               lpVerb=lpVerb,
@@ -56,7 +58,7 @@ def runAsAdmin(cmdLine=None, target_dir='', wait=True):
     return rc
 
 if __name__ == '__main__':
-    import isAdmin
+    from . import isAdmin
                   
     runAsAdmin( ('python', isAdmin.__file__[:-1]) )
 

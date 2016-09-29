@@ -1,3 +1,4 @@
+from __future__ import print_function
 #taken from http://stackoverflow.com/questions/24467972/calculate-area-of-polygon-given-x-y-coordinates
 import numpy as np
 
@@ -13,4 +14,4 @@ def polygonArea(x,y):
 if __name__ == '__main__':
     x = np.arange(0,1,0.001)
     y = np.sqrt(1-x**2)
-    print polygonArea(x,y)
+    print(polygonArea(x,y))

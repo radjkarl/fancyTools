@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import zip
 import numpy as np
 import scipy.stats as st
 import warnings
@@ -63,8 +65,8 @@ def findBestDistribution(data, disttype='continuous'):
                 pars_l.append(pars)
 
     best_fit = sorted(zip(valid_dist, mles, pars_l), key=lambda d: d[1])[0]
-    print 'Best fit reached using {}, MLE value: {}'.format(best_fit[0].name, best_fit[1])
-    print pars_l
+    print('Best fit reached using {}, MLE value: {}'.format(best_fit[0].name, best_fit[1]))
+    print(pars_l)
     return best_fit[0], best_fit[2]
 
 
@@ -73,8 +75,8 @@ if __name__ == '__main__':
     import sys
     import pylab as plt
     # generate a random sample using a given distribution:
-    n = 1000
-    nn = 100
+    n = 50
+    nn = 15
     # choose a distribution:
     data = st.norm.rvs(size=n)
     # find best dist:

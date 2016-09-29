@@ -1,4 +1,3 @@
-
 from weakref import ref
 
 class WeakList(list):
@@ -6,20 +5,24 @@ class WeakList(list):
     a list that removes its entries, if they are originally removed
     
     >>> import numpy as np
+    
     >>> arr = np.ones(100)    
     >>> l = WeakList([arr,arr])
     >>> l.append(arr)
+    
     >>> assert len(l) == 3
     >>> l[0] is arr
     True
+    
     >>> arr in l
     True
+    
     >>> del arr
     >>> assert len(l) == 0
     '''
     def __init__(self, l=()):
         list.__init__(self, l)
-        for n in xrange(len(self)):
+        for n in range(len(self)):
             obj = list.__getitem__(self, n)
             list.__setitem__(self, n, ref(obj, self.remove))
 

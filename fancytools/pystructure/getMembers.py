@@ -3,6 +3,7 @@
 '''
 Different functions to return members within a given module or package.
 '''
+from __future__ import print_function
 
 import inspect
 

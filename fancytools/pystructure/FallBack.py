@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 # -*- coding: utf-8 -*-
 
 import sys
@@ -28,6 +30,6 @@ class FallBack(object):
 			return getattr(self.wrappedModule, name)
 		except AttributeError:
 			if (not self._print_waring_is_callable and self.print_warning) or self.print_warning():				
-				print 'WARING: no %s class exists for %s yet ... continue using fallback' %(
-					self.wrappedModule.__name__,name)
+				print('WARING: no %s class exists for %s yet ... continue using fallback' %(
+					self.wrappedModule.__name__,name))
 			return getattr(self.fallbackModule, name)

@@ -1,19 +1,21 @@
+from __future__ import division
+from __future__ import print_function
 
-import pylab as plt
 import numpy as np
 
 
-def errorBand(x,yAvg, yStd, yDensity, n_colors=None):
+def errorBand(x,yAvg, yStd, yDensity, plt, n_colors=None):
     '''
     plot error-band around avg
     where colour equals to point density 
     '''
+
     dmn = yDensity.min()
     dmx = yDensity.max()
     
     if n_colors is None:
         n_colors = dmx-dmn + 1 
-    print n_colors
+    print(n_colors)
     cm = plt.cm.get_cmap('Blues', lut=n_colors)
     
     
@@ -52,12 +54,15 @@ def errorBand(x,yAvg, yStd, yDensity, n_colors=None):
     sm = plt.cm.ScalarMappable(cmap=cm, norm=plt.Normalize(vmin=dmn, vmax=dmx))
         # fake up the array of the scalar mappable. Urgh...
     sm._A = []
+    
     plt.colorbar(sm)
-
     plt.legend()
-    plt.show()
+
     
 if __name__ == '__main__':
+    import pylab as plt
+    import sys
+
     x = np.arange(100)
     yAvg = np.sin(x*0.2)
     yStd = np.cos(x*0.3)*0.7
@@ -66,6 +71,8 @@ if __name__ == '__main__':
     #green plot is average
     #band is standard deviation 
     #band color=number of points in that area!
-    errorBand(x,yAvg, yStd, yDensity)
-    plt.show()
+    errorBand(x,yAvg, yStd, yDensity, plt)
+
+    if 'no_window' not in sys.argv:
+        plt.show()
  

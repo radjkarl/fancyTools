@@ -1,3 +1,5 @@
+from __future__ import division
+from past.utils import old_div
 import numpy as np
 import utils
 
@@ -13,14 +15,14 @@ def rotMatrix2AxisAndAngle(R):
     returns axis, angle
     
     '''
-    angle = np.arccos(( R[0,0] + R[1,1] + R[2,2] - 1)/2)
+    angle = np.arccos(old_div(( R[0,0] + R[1,1] + R[2,2] - 1),2))
     axis = np.array([
         #x
-        (R[2,1] - R[1,2])/utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2),
+        old_div((R[2,1] - R[1,2]),utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2)),
         #y
-        (R[0,2] - R[2,0])/utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2),
+        old_div((R[0,2] - R[2,0]),utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2)),
         #z
-        (R[1,0] - R[0,1])/utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2) ])
+        old_div((R[1,0] - R[0,1]),utils.sqrt((R[2,1] - R[1,2])**2 +(R[0,2] - R[2,0])**2 + (R[1,0] - R[0,1])**2)) ])
     return axis, angle
 
 
@@ -34,9 +36,9 @@ def axisAndAngle2RotMatrix(axis, angle):
     """
     axis = np.asarray(axis)
     angle = np.asarray(angle)
-    axis = axis/utils.sqrt(np.dot(axis, axis))
-    a = utils.cos(angle/2)
-    b, c, d = -axis*utils.sin(angle/2)
+    axis = old_div(axis,utils.sqrt(np.dot(axis, axis)))
+    a = utils.cos(old_div(angle,2))
+    b, c, d = -axis*utils.sin(old_div(angle,2))
     aa, bb, cc, dd = a*a, b*b, c*c, d*d
     bc, ad, ac, ab, bd, cd = b*c, a*d, a*c, a*b, b*d, c*d
     return np.array([[aa+bb-cc-dd, 2*(bc+ad), 2*(bd-ac)],
@@ -66,7 +68,7 @@ if __name__ == '__main__':
     axis2,angle2 = rotMatrix2AxisAndAngle(R)
     
     #the returned axis it (in opposite to the origin axis normalised, so
-    normAxis = axis / np.linalg.norm(axis)
+    normAxis = old_div(axis, np.linalg.norm(axis))
 
     #the differences after the transformation should be neglectable:
     assert (normAxis - axis2 < 1e-10).all()

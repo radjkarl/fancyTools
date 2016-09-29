@@ -16,7 +16,7 @@ def naturalSorting(l):
         "something25", \
         "something29"]
     
-    >>> print naturalSorting(alist)
+    >>> print(naturalSorting(alist))
     ['something1', 'something2', 'something12', 'something17', 'something25', 'something29']
     '''
     l.sort(key=_naturalKeys)

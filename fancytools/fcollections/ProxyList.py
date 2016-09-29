@@ -1,3 +1,5 @@
+from builtins import zip
+from builtins import object
 
 
 class ProxyList(list):
@@ -15,7 +17,7 @@ class ProxyList(list):
     all list-entries will be given this method
     
 
-    >>> print a.find('a')
+    >>> print(a.find('a'))
     [0, None, -1]
     
     ... this returns a list saying that...
@@ -27,7 +29,7 @@ class ProxyList(list):
     ============
     show indices of list entries that are of type string
     
-    >>> print a.where('__class__',str)
+    >>> print(a.where('__class__',str))
     [0, 2]
     
 
@@ -36,18 +38,18 @@ class ProxyList(list):
     ...using _TestObject which has one one extra method 'foo'
 
     >>> p = ProxyList([_TestObject(),_TestObject(),_TestObject()])
-    >>> print p.foo[0].__name__
+    >>> print(p.foo[0].__name__)
     foo
     
     each time 'foo' is called it returns ('bar', 99)
     therefore for each member of the ProxyList the output would be:
     
-    >>> print p.foo('bar')
+    >>> print(p.foo('bar'))
     [('bar', 99), ('bar', 99), ('bar', 99)]
     
     Also this method sets an attribute 'a' to 'bar'->
     
-    >>> print p.a
+    >>> print(p.a)
     ['bar', 'bar', 'bar']
     
     MATHEMATICAL OPERATIONS
@@ -56,10 +58,10 @@ class ProxyList(list):
     
     >>> p = ProxyList([ 1, -20, 3 ])
     >>> p += 10
-    >>> print p
+    >>> print(p)
     [11, -10, 13]
     
-    >>> print p.__abs__()
+    >>> print(p.__abs__())
     [11, 10, 13]
 
 
@@ -71,7 +73,7 @@ class ProxyList(list):
     >>> oldID = id(p[0])
     >>> p *= 4
     >>> newID = id(p[0])
-    >>> print oldID == newID
+    >>> print(oldID == newID)
     True
     
     

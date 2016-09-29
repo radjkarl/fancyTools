@@ -1,3 +1,4 @@
+from __future__ import division
 
 def formatedTime(ms):
 	'''
@@ -12,10 +13,10 @@ def formatedTime(ms):
 	'''
 	
 	if ms:
-		s=ms/1000.0
-		m,s=divmod(s,60)
-		h,m=divmod(m,60)
-		d,h=divmod(h,24)
+		s = ms/1000.0
+		m,s = divmod(s,60)
+		h,m = divmod(m,60)
+		d,h = divmod(h,24)
 		out=''
 		if d:
 			out+='%gd '%d

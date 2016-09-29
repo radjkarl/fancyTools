@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+from past.utils import old_div
 
 #code taken from 
 #http://stackoverflow.com/questions/16873441/form-a-big-2d-array-from-multiple-smaller-2d-arrays/16873755#16873755
@@ -41,7 +44,7 @@ def into2dBlocks(arr, n0, n1):
     but splits an array into n0*n1 blocks
     '''
     s0,s1 = arr.shape
-    b = blockshaped(arr, s0/n0, s1/n1)
+    b = blockshaped(arr, old_div(s0,n0), old_div(s1,n1))
     return b.reshape(n0,n1,*b.shape[1:] )
 
 
@@ -67,12 +70,12 @@ if __name__ == '__main__':
     print(bl.shape)
     bl[0,0]=0
     c = from2dBlocks(bl)
-    print c
+    print(c)
     # (2L, 3L, 2L, 2L)
     bl = blockshaped(c, 2, 3)
     bl[0]=0
     print (bl)
-    print 22, c
+    print(22, c)
     
     # [[[ 0  1  2]
     #   [ 6  7  8]]

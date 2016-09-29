@@ -1,8 +1,9 @@
+from builtins import object
 # -*- coding: utf-8 -*-
 from time import gmtime, strftime
 
 
-class Logger:
+class Logger(object):
 	'''
 	writes into log-file and on screen at the same time
 	

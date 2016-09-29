@@ -7,6 +7,9 @@ the standard library, see
 http://bugs.python.org/issue14787
 that's why 'os' and 'utils' are not tested at the moment
 '''
+from __future__ import absolute_import
+
+
 if __name__ == '__main__':
     from fancytools.pystructure.runAllInDir import runAllInDir
     import os

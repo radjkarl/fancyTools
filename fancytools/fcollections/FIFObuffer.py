@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
+
 import numpy as np
 
 
@@ -35,7 +37,7 @@ class FIFObuffer(object):
 
 
     def setNextLineEveryNValues(self, n):
-        self._splitValue = 1/float(n)
+        self._splitValue = 1/n
         if int(self._splitValue) == self._splitValue:
             self._splitValue = int(self._splitValue)
 

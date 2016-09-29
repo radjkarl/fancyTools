@@ -1,3 +1,6 @@
+from __future__ import print_function
+from six import string_types
+
 import os
 
 def countLines(paths, exclude_files_containing=[],
@@ -13,7 +16,7 @@ def countLines(paths, exclude_files_containing=[],
     
     loclist = []#number of lines, filepath
     
-    if isinstance(paths, basestring):
+    if isinstance(paths, string_types):
         paths = [paths]
         
     if not len(paths):
@@ -27,7 +30,7 @@ def countLines(paths, exclude_files_containing=[],
         excl.append('#')
     
     for cur_path in paths:
-        print 'Check path %s' %cur_path
+        print('Check path %s' %cur_path)
 
         for pydir, _, pyfiles in os.walk(cur_path):
             for pyfile in pyfiles:
@@ -54,9 +57,9 @@ def countLines(paths, exclude_files_containing=[],
                                        totalpath.split(cur_path)[1]) )
         
     for linenumbercount, filename in loclist: 
-        print "%05d lines in %s" % (linenumbercount, filename)
+        print("%05d lines in %s" % (linenumbercount, filename))
     
-    print "\nTotal: %s lines (%s paths)" %(sum([x[0] for x in loclist]), len(paths))
+    print("\nTotal: %s lines (%s paths)" %(sum([x[0] for x in loclist]), len(paths)))
 
 
 

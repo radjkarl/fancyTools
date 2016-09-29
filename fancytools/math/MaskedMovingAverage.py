@@ -1,3 +1,7 @@
+from __future__ import division
+from __future__ import print_function
+from builtins import object
+from past.utils import old_div
 import numpy as np
 
 class MaskedMovingAverage(object):
@@ -52,7 +56,7 @@ class MaskedMovingAverage(object):
         x0 = self.avg[i]
         n = self.n[i]
         #calculate the new average:
-        new_Avg = self.avg[i] + (xn-x0)/n
+        new_Avg = self.avg[i] + old_div((xn-x0),n)
 
         if self.var is not None:
             t = (xn-new_Avg + x0-self.avg[i])*(xn - x0)/(n-1)
@@ -77,18 +81,18 @@ if __name__ == '__main__':
     arr*=2
     
     m.update(arr, ma)
-    print m.avg
+    print(m.avg)
     ma[:15,:]=0
     ma[:,:15]=1
     arr*=2
     m.update(arr, ma)
     
     m.update(arr*2, ma)
-    print m.avg
+    print(m.avg)
     m.update(arr*3, ma)
-    print m.avg
+    print(m.avg)
     m.update(arr*3, ma)
-    print m.avg
+    print(m.avg)
 
     if 'no_window' not in sys.argv:
         plt.imshow(m.avg, interpolation='none')

@@ -1,3 +1,5 @@
+from __future__ import division
+
 from scipy.optimize.minpack import curve_fit
 from scipy.ndimage.interpolation import zoom
 import numpy as np
@@ -42,8 +44,8 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
     if output_shape is None:
         output_shape = arr.shape
 
-    fx = float(arr2.shape[0]) / output_shape[0]
-    fy = float(arr2.shape[1]) / output_shape[1]
+    fx = arr2.shape[0] / output_shape[0]
+    fy = arr2.shape[1] / output_shape[1]
 
     rebuilt = np.fromfunction(lambda x, y: fn((x*fx, y*fy),
                                               *parameters), output_shape )
@@ -61,7 +63,8 @@ if __name__ == '__main__':
     guess = (a*f, b*f)
 
 
-    def fn((x, y), a, b):
+    def fn(xxx_todo_changeme, a, b):
+        (x, y) = xxx_todo_changeme
         return np.sin(x/a)+np.cos(y/b)
 
     fn2 = lambda x,y: fn((x, y),a, b)

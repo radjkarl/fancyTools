@@ -1,3 +1,4 @@
+from builtins import range
 import numpy as np
 from numba import jit
 
@@ -17,7 +18,7 @@ def _calcMax(arr, out):
 
     up = False
     last = arr[0]
-    for i in xrange(1,g0):
+    for i in range(1,g0):
         
         px = arr[i]
         if up and px < last:
@@ -43,7 +44,7 @@ def _calcMin(arr, out):
 
     down = False
     last = arr[0]
-    for i in xrange(1,g0):
+    for i in range(1,g0):
         
         px = arr[i]
         if down and px > last:
