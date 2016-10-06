@@ -36,7 +36,7 @@ class StreamSignal(QtCore.QObject):
     >>> l.close()
     '''
     #message = QtCore.Signal(str)# works under pyside
-    message = QtCore.pyqtSignal(str)
+    message = QtCore.Signal(str)
 
     def __init__(self, stdout='out', parent=None):
         super(StreamSignal, self).__init__(parent)
