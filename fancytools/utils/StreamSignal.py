@@ -1,5 +1,5 @@
 
-from PyQt4 import QtCore
+from qtpy import QtCore
 import sys
 
 
