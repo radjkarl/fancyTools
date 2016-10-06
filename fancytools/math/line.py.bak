@@ -3,12 +3,17 @@ Collection of line-based functions
 line given as: 
     x0,y0,x1,y1 = line
 '''
+from __future__ import division
+from __future__ import print_function
+
 
 from numpy import pi, array, empty, argmax
 from math import sin, cos, atan2, hypot, acos, copysign
+
 from fancytools.math.rotatePolygon import rotatePolygon
-from numba import jit
 from fancytools.math.pointInsidePolygon import pointInsidePolygon
+
+from numba import jit
 # from numpy.linalg import norm
 
 
@@ -108,7 +113,7 @@ def dxdy(line):
 def ascent(line):
     x0,y0,x1,y1 = line
     try:
-        return min(float(y1-y0) / (x1-x0),1e10)
+        return min( ( (y1-y0) / (x1-x0) ),1e10 )
     except ZeroDivisionError:
         return 1e10
 
@@ -254,8 +259,7 @@ def distanceVector(line, point, ignoreEndpoints=True):
     if line_magnitude == 0:
         return px-x0,py-y0
     u = ((px - x0) * (x1 - x0) +
-         (py - y0) * (y1 - y0)) \
-         / (line_magnitude ** 2)
+         (py - y0) * (y1 - y0)) / (line_magnitude ** 2)
     # closest point does not fall within the line segment, 
     # take the shorter distance to an endpoint
     if u < 0.00001 or u > 1:
@@ -321,14 +325,14 @@ def intersection(line1, line2):
         # When t=0, s would have to equal e/b and f/d
         if b == 0 or d == 0:
             return None
-        if _near(float(e)/b, float(f)/d):
+        if _near(e/b, f/d):
             # colli_near
             px = x1
             py = y1
         else:
             return None
     else:
-        t = (e*d - b*f)/denom
+        t = (e*d - b*f) / denom
         # s = (a*f - e*c)/denom
         px = x1 + t*(x2-x1)
         py = y1 + t*(y2-y1)
@@ -407,10 +411,10 @@ def splitN(line,n):
 
     out = empty((n,4), dtype=type(line[0]))
     px,py = x0,y0
-    dx = (float(x1)-x0) / n
-    dy = (float(y1)-y0) / n
+    dx = (x1-x0) / n
+    dy = (y1-y0) / n
     
-    for i in xrange(n):
+    for i in range(n):
         o = out[i]
         o[0] = px
         o[1] = py
@@ -428,92 +432,96 @@ def isHoriz(line):
 
 
 if __name__ == '__main__':
-    import pylab as plt
-    import numpy as np
-
-
-#     l0 = (0,0,10,0.5)
-#     l1 = (0,0,10,-0.5)
-#     print normal(l0), normal(l1)
-#     print ascent(l0), ascent(l1)
+    pass
+    #TODO: generate tests
+    
+    
+#     import pylab as plt
+#     import numpy as np
 # 
 # 
-#     l0 = (1822, 1140, 1805, 1262)
-#     print angle(l0), isHoriz(l0)
-#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
-#     plt.scatter(l0[0],l0[1])               
-    l0 = (1843, 1046, 1867, 907)
-#     print angle(l0), isHoriz(l0)
+# #     l0 = (0,0,10,0.5)
+# #     l1 = (0,0,10,-0.5)
+# #     print normal(l0), normal(l1)
+# #     print ascent(l0), ascent(l1)
+# # 
+# # 
+# #     l0 = (1822, 1140, 1805, 1262)
+# #     print angle(l0), isHoriz(l0)
+# #     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
+# #     plt.scatter(l0[0],l0[1])               
+#     l0 = (1843, 1046, 1867, 907)
+# #     print angle(l0), isHoriz(l0)
+# # 
+# #     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
+# #     plt.scatter(l0[0],l0[1])
+# # 
+# #     l1 = (1624, 1372, 1730, 1380)
+# #     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+# #     plt.scatter(l1[0],l1[1])
+# #     print angle(l1), isHoriz(l1)
+# # 
+# #     l1 =(1879, 551, 1784, 535)
+# #     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+# #     plt.scatter(l1[0],l1[1])
+# #     print angle(l1), isHoriz(l1)
 # 
-#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')  
-#     plt.scatter(l0[0],l0[1])
 # 
-#     l1 = (1624, 1372, 1730, 1380)
-#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-#     plt.scatter(l1[0],l1[1])
-#     print angle(l1), isHoriz(l1)
+# #     l1 = translate2P(l0,-0.186749451731, -9.05925804855)
+# #     
+# #     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
 # 
-#     l1 =(1879, 551, 1784, 535)
-#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-#     plt.scatter(l1[0],l1[1])
-#     print angle(l1), isHoriz(l1)
-
-
-#     l1 = translate2P(l0,-0.186749451731, -9.05925804855)
+# #     l1 = translate2P(l0,1,0)
+# #     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
 #     
-#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-
-#     l1 = translate2P(l0,1,0)
-#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-    
-    plt.show()
-
-    for n in np.linspace(0,np.pi,10):
-        if n:
-            l0 = translate2P(l0,n,-n)
-            print length(l0)
-            print l0
-            plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'g')
-#             if n :
-#                 break
-    plt.show()
-
-#     l0 = [2625,  526, 2625, 1441]
-#     l1 = [2178 , 288 ,2178 ,3021]
-#     print middle(l1)
-#     print 666, distanceVector(l0, middle(l1), ignoreEndpoints=False)
-
-    l0 = [0.,0.5,0.,1.]
-     
-    l1 = [0.5,0.,1.5,0.]
-    
-
-    
-    
-    print angle2(l0,l1),888
-    print intersection(l0,l1)
-
-
-    plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')                 
-    plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-    plt.show() 
-
-    
-    ll = [[0.1,1,0.1,0],[0.3,1,0.3,0]]
-    print splitN(l0,3)
-
-
-
+#     plt.show()
+# 
+#     for n in np.linspace(0,np.pi,10):
+#         if n:
+#             l0 = translate2P(l0,n,-n)
+#             print(length(l0))
+#             print(l0)
+#             plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'g')
+# #             if n :
+# #                 break
+#     plt.show()
+# 
+# #     l0 = [2625,  526, 2625, 1441]
+# #     l1 = [2178 , 288 ,2178 ,3021]
+# #     print middle(l1)
+# #     print 666, distanceVector(l0, middle(l1), ignoreEndpoints=False)
+# 
+#     l0 = [0.,0.5,0.,1.]
+#      
+#     l1 = [0.5,0.,1.5,0.]
 #     
-    l0 = [4674 , 233 ,4651, 2892]
-    a = -0.00284855546826 
-    o = 5.5832401565
+# 
 #     
-    l1= translate(l0, a, o)
-    plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')                 
-    plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
-    plt.show()  
-#(4650.9517093206787, 540593.62650955946, 4673.952276003728, 537934.62651446124) 
-    p0 = [0.5,0.5]
-    print length(l0)
-    print distanceVector(l0, p0, ignoreEndpoints=True)
+#     
+#     print(angle2(l0,l1),888)
+#     print(intersection(l0,l1))
+# 
+# 
+#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')                 
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+#     plt.show() 
+# 
+#     
+#     ll = [[0.1,1,0.1,0],[0.3,1,0.3,0]]
+#     print(splitN(l0,3))
+# 
+# 
+# 
+# #     
+#     l0 = [4674 , 233 ,4651, 2892]
+#     a = -0.00284855546826 
+#     o = 5.5832401565
+# #     
+#     l1= translate(l0, a, o)
+#     plt.plot((l0[0],l0[2]),(l0[1],l0[3]),'r')                 
+#     plt.plot((l1[0],l1[2]),(l1[1],l1[3]),'g')
+#     plt.show()  
+# #(4650.9517093206787, 540593.62650955946, 4673.952276003728, 537934.62651446124) 
+#     p0 = [0.5,0.5]
+#     print(length(l0))
+#     print(distanceVector(l0, p0, ignoreEndpoints=True))

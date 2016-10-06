@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class MultiList(object):
     '''
     create a list of named lists.
@@ -7,9 +8,9 @@ class MultiList(object):
 
     >>> l = MultiList('spam','eggs')
     >>> l.extend( ([1,2],[3,4]) )
-    >>> print l.spam
+    >>> print(l.spam)
     [1, 2]
-    >>> print l.eggs
+    >>> print(l.eggs)
     [3, 4]
     >>> print l[1]
     [2, 4]
@@ -65,7 +66,7 @@ class MultiList(object):
         return self
 
 
-    def next(self):
+    def __next__(self):
         self._n+=1
         if self._n > self._l:
             raise StopIteration()

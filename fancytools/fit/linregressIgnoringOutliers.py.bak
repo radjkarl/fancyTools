@@ -1,6 +1,7 @@
 from scipy.stats import linregress
 
 
+
 def linregressIgnoringOutliers(x, y, n_iter=3, nstd=2):
     '''
     do linear regression [n_iter] times

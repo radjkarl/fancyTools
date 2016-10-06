@@ -42,7 +42,7 @@ def runAllInDir(dir_path, exclude=[], add_args=(), ignoreErrors=True):
                 if ignoreErrors:
                     print("FAILED: %s" %err)
                 else: 
-                    raise(err, None, sys.exc_info()[2])
+                    raise err
                 failed.append((modname, err))
             dt = time()-t0
             t += dt

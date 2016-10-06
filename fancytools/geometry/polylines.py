@@ -5,6 +5,7 @@ general functions for polylines =
       ...
     ]
 '''
+
 import numpy as np
 from numpy.linalg import norm
 

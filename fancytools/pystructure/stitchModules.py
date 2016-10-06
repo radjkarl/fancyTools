@@ -27,7 +27,7 @@ def stitchModules(module, fallbackModule):
 		>>> print a.var2
 		standard 2
 		'''
-		for name, attr in fallbackModule.__dict__.items():
+		for name, attr in list(fallbackModule.__dict__.items()):
 			if name not in module.__dict__:
 				module.__dict__[name] = attr
 

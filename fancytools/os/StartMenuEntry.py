@@ -38,7 +38,7 @@ class StartMenuEntry(object):
                         version='-', description='', 
                         categories='',
                         console=True)
-        kwargs.update({k:v for k,v in defaults.items() if k not in kwargs})
+        kwargs.update({k:v for k,v in list(defaults.items()) if k not in kwargs})
         
         #check the os to setup further procedures
         if os.name == 'posix': #for linux-systems

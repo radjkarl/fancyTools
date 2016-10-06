@@ -1,3 +1,4 @@
+from __future__ import division
 
 import numpy as np
 from numpy.linalg import norm
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     KERNELSIZE = 5
 
     #distance between pt and closest non-zero index must be smaller than...
-    max_distance = 2**0.5 * (KERNELSIZE/2+1)
+    max_distance = 2**0.5 * ((KERNELSIZE//2)+1)
 
     #np.random.seed(1)
  
