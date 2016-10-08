@@ -8,7 +8,7 @@ __email__ = 'karl@bedrich.de'
 __url__ = 'https://pypi.python.org/pypi/fancytools'
 __license__ = 'GPLv3'
 __description__ = __doc__
-__depencies__= ["numpy >= 1.9","win32com"]
+__depencies__= ["numpy >= 1.9","pywin32"]
 __classifiers__ = [
 		'Intended Audience :: Developers',
 		'Intended Audience :: Science/Research',
