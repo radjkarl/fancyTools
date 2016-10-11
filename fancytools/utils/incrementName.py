@@ -1,9 +1,10 @@
+# coding=utf-8
 
 def incrementName(nameList, name):
-    '''    
-    return a name that is unique in a given nameList through 
+    """
+    return a name that is unique in a given nameList through
     attaching a number to it
-    
+
     >>> l = []
 
     now we will add 3xfoo 2xbar and one klaus to our list:
@@ -17,11 +18,11 @@ def incrementName(nameList, name):
 
     >>> print sorted(l)
     ['bar', 'bar2', 'foo', 'foo2', 'foo3', 'klaus']
-    '''
-    if not name in nameList:
+    """
+    if name not in nameList:
         return name
     newName = name + str(1)
-    for n in range(1,len(nameList)+2):
+    for n in range(1, len(nameList) + 2):
         found = False
         for b in nameList:
             newName = name + str(n)
@@ -30,7 +31,6 @@ def incrementName(nameList, name):
         if not found:
             break
     return newName
-
 
 
 if __name__ == "__main__":

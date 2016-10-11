@@ -1,22 +1,23 @@
+# coding=utf-8
+from __future__ import division
+
 import numpy as np
 
 
-
 def inverseHistogram(hist, bin_range):
-    '''sample data from given histogram and min, max values within range
+    """sample data from given histogram and min, max values within range
 
     Returns:
         np.array: data that would create the same histogram as given
-    '''
+    """
     data = hist.astype(float) / np.min(hist[np.nonzero(hist)])
-    new_data = np.empty(shape=np.sum(data))
+    new_data = np.empty(shape=np.sum(data, dtype=int))
     i = 0
-    xvals = np.linspace(bin_range[0], bin_range[1],len(data))
+    xvals = np.linspace(bin_range[0], bin_range[1], len(data))
     for d, x in zip(data, xvals):
-        new_data[i:i+d] = x
-        i += d
+        new_data[i:i + d] = x
+        i += int(d)
     return new_data
-
 
 
 if __name__ == '__main__':
@@ -40,4 +41,4 @@ if __name__ == '__main__':
         plt.figure(2)
         plt.plot(data)
         plt.plot(data2)
-    plt.show()
+        plt.show()

@@ -1,8 +1,10 @@
+# coding=utf-8
 import numpy as np
 
 
-def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2, return_outliers=False):
-    '''Returns:
+def polyFitIgnoringOutliers(
+        x, y, deg=2, niter=3, nstd=2, return_outliers=False):
+    """Returns:
         (np.poly1d): callable function of polynomial fit excluding all outliers
     Args:
         deg (int): degree of polynomial fit
@@ -11,22 +13,22 @@ def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2, return_outliers=False)
         nstd (float): exclude outliers, if their deviation
             is > [nstd] * standard deviation
         return_outliers (bool): also return outlier positions as 2. arg
-    '''
+    """
     if return_outliers:
-        a = all_outliers = np.zeros_like(y,dtype=bool)
+        a = all_outliers = np.zeros_like(y, dtype=bool)
     for i in range(niter):
         poly = np.polyfit(x, y, deg)
         p = np.poly1d(poly)
         if i == niter - 1:
             break
         y_fit = p(x)
-        dy = y-y_fit
+        dy = y - y_fit
         std = (dy**2).mean()**0.5
-        inliers = abs(dy) < nstd*std
+        inliers = abs(dy) < nstd * std
         if return_outliers:
             a[~inliers] = True
 
-        if inliers.sum() > deg+1:
+        if inliers.sum() > deg + 1:
             x = x[inliers]
             y = y[inliers]
             if return_outliers:
@@ -36,7 +38,6 @@ def polyFitIgnoringOutliers(x, y, deg=2, niter=3, nstd=2, return_outliers=False)
     if return_outliers:
         return p, all_outliers
     return p
-
 
 
 if __name__ == '__main__':
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 
     # add some outliers:
     pos = np.random.randint(0, 10, 100) > 4
-    vals = np.random.rand(pos.sum())*2000
+    vals = np.random.rand(pos.sum()) * 2000
     y[pos] = vals
 
     x2 = x[::3]
