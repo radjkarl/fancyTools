@@ -7,7 +7,7 @@ from __future__ import division
 from __future__ import print_function
 
 
-from numpy import pi, array, empty, argmax
+from numpy import pi, array, empty, argmax, ndarray
 from math import sin, cos, atan2, hypot, acos, copysign
 
 from fancytools.math.rotatePolygon import rotatePolygon
@@ -67,6 +67,7 @@ def sort(line):
 
     if turn:
         return (x1, y1, x0, y0)
+      #  return line[(2,3,0,1)]
     return line
 #         line[0] = x1
 #         line[1] = y1

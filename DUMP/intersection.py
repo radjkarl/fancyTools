@@ -1,7 +1,8 @@
+from __future__ import division
+from builtins import zip
+from past.utils import old_div
 # DEPRECIATED
 # USE line.intersect
-
-
 def lineIntersection(line1, line2):
     """
     Return the coordinates of a point of intersection given two lines.
@@ -21,14 +22,14 @@ def lineIntersection(line1, line2):
         # parallel
         # If colli_near, the equation is solvable with t = 0.
         # When t=0, s would have to equal e/b and f/d
-        if _near(float(e) / b, float(f) / d):
+        if _near(old_div(float(e),b), old_div(float(f),d)):
             # colli_near
             px = x1
             py = y1
         else:
             return None
     else:
-        t = (e * d - b * f) / denom
+        t = old_div((e*d - b*f),denom)
         # s = (a*f - e*c)/denom
         px = x1 + t * (x2 - x1)
         py = y1 + t * (y2 - y1)
@@ -49,8 +50,8 @@ def lineSeqmentsDoIntersect(line1, line2):
         # parallel
         return False
     else:
-        t = (e * d - b * f) / denom
-        s = (a * f - e * c) / denom
+        t = old_div((e*d - b*f),denom)
+        s = old_div((a*f - e*c),denom)
         # When 0<=t<=1 and 0<=s<=1 the point of intersection occurs within the
         # line segments
         return 0 <= t <= 1 and 0 <= s <= 1

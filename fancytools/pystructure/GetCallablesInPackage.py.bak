@@ -1,3 +1,6 @@
+from __future__ import print_function
+
+from six import string_types
 import importlib
 import inspect
 
@@ -42,7 +45,7 @@ class GetCallablesInPackage(NestedOrderedDict):
 
         NestedOrderedDict.__init__(self)
 
-        if isinstance(package, basestring):
+        if isinstance(package, string_types):
             package = importlib.import_module(package)
             
         self._package = package
@@ -64,7 +67,7 @@ class GetCallablesInPackage(NestedOrderedDict):
         '''
         Delete all NestedOrderedDict that haven't any entries.
         '''
-        for key, item in subSelf.iteritems():
+        for key, item in subSelf.items():
             if self.isNestedDict(item):
                 if not item:
                     subSelf.pop(key)
@@ -129,7 +132,7 @@ class GetCallablesInPackage(NestedOrderedDict):
             if self.isNestedDict(pval):
                 if vertical_operation:
                     vertical_operation(pkey, pval) 
-                for key, val in pval.iteritems():
+                for key, val in pval.items():
                     #if not isinstance(val, NestedOrderedDict):
                     buildRecursive(key, val)
             else:
@@ -153,7 +156,7 @@ if __name__ == '__main__':
     import sys
     import numpy
     g = GetCallablesInPackage(numpy, include_functions=True)
-    print g
+    print(g)
 
     
     class printClassStructure(object):
@@ -168,8 +171,8 @@ if __name__ == '__main__':
 
         def vert(self, key, item):
             if self._hor_as_last_called:
-                print ''
-            print "%s-> %s" %(self.indent,key)
+                print('')
+            print("%s-> %s" %(self.indent,key))
             self.indent += '\t'
             self._hor_as_last_called = False
             

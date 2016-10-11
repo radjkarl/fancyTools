@@ -1,6 +1,5 @@
 from __future__ import division
-from builtins import range
-from past.utils import old_div
+
 import numpy as np
 
 
@@ -18,8 +17,8 @@ def execOnSubArrays(arrs, fn, splitX, splitY):
     if type(arrs) not in (tuple, list):
         arrs = (arrs,)
     s0, s1 = arrs[0].shape
-    ss0 = old_div(s0, splitX)
-    ss1 = old_div(s1, splitY)
+    ss0 = s0 // splitX
+    ss1 = s1 // splitY
     px, py = 0, 0
     out = None
     for ix in range(splitX):

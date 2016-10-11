@@ -10,9 +10,20 @@ def stitchModules(module, fallbackModule):
     not contain all attributes of b.
     in this case a should use the attributes from b
 
-    >>> import types
-    >>> a = types.ModuleType('a', 'The a.py module') # you will have of course a file for those
-    >>> b = types.ModuleType('b', 'The b.py module')
+		>>> a.var1 = 'individual 1'
+		
+		what we now want is to all all missing attributes from b to a:
+		
+		>>> stitchModules(a,b)
+		
+		>>> print a.var1
+		individual 1
+		>>> print a.var2
+		standard 2
+		'''
+		for name, attr in list(fallbackModule.__dict__.items()):
+			if name not in module.__dict__:
+				module.__dict__[name] = attr
 
     >>> b.var1 = 'standard 1'
     >>> b.var2 = 'standard 2'

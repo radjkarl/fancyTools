@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import sys
 import pkgutil
 import runpy
@@ -20,7 +21,7 @@ def runAllInDir(dir_path, exclude=[], add_args=(), ignoreErrors=True):
     '''
     execute all modules as __main__ within a given package path 
     '''
-    print 'testing all modules of %s' %dir_path
+    print('testing all modules of %s' %dir_path)
     
     if type(add_args) in (tuple, list):
         sys.argv.extend(add_args)
@@ -33,24 +34,24 @@ def runAllInDir(dir_path, exclude=[], add_args=(), ignoreErrors=True):
             #onerror=lambda x: None
             ):
         if not ispkg and modname != thismodname and not modname in exclude: # don't test this module
-            print '... %s' %modname
+            print('... %s' %modname)
             t0 = time()
             try:
                 runpy.run_module(modname, init_globals=None, run_name='__main__', alter_sys=False)
-            except Exception,err:
+            except Exception as err:
                 if ignoreErrors:
-                    print "FAILED: %s" %err
+                    print("FAILED: %s" %err)
                 else: 
-                    raise(err), None, sys.exc_info()[2]
+                    raise(err, None, sys.exc_info()[2])
                 failed.append((modname, err))
             dt = time()-t0
             t += dt
-            print 'execution time=%s' %dt
-    print '----------------'
-    print 'time needed=%s' %t
+            print('execution time=%s' %dt)
+    print('----------------')
+    print('time needed=%s' %t)
     if failed:
-        print '======================='
-        print 'failed for %s modules' %len(failed)
-        print '-----------------------'
+        print('=======================')
+        print('failed for %s modules' %len(failed))
+        print('-----------------------')
         for mod, err in failed:
-            print mod, err
+            print(mod, err)

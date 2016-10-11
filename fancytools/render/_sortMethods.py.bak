@@ -1,21 +1,23 @@
 # -*- coding: utf-8 *-*
+from __future__ import division
+
 from copy import deepcopy
 
 from fancytools.math.nearestPosition2 import NearestPosition2
 
 
 
-class _UniformNearestPosition():
+class _UniformNearestPosition(object):
     def __init__(self, grid):
         self.start = grid[0]
         self.step = grid[1]-grid[0]
 
     def __call__(self, value):
-        return round((value - self.start) / self.step)
+        return round((value - self.start)/ self.step)
 
 
 
-class _SortBase:
+class _SortBase(object):
 
     def __init__(self, grid, resolution, isuniform):
         self.resolution = resolution
@@ -107,7 +109,7 @@ class AntiAliased(_SortBase):
         self.anzAffectedCells = 2**ndim
         self.affectedCellCounter =  []
         for i in range(1,ndim+1,1):
-            self.affectedCellCounter.append((2**i/2) -1)
+            self.affectedCellCounter.append(((2**i//2)) -1)
         
         for i in range(ndim):
             self.positionsIntensities[0][0].append(0)
@@ -146,8 +148,8 @@ class AntiAliased(_SortBase):
                     #sec_nearest_diff = nextDiff 
             sec_nearest_diff = abs(g[sec_nearest_point] -p)
             #sec_nearest_point get some of the intensity of the nearest point
-            transfered_intensity = (sec_nearest_diff-
-                nearest_diff) / sec_nearest_diff
+            transfered_intensity = ((sec_nearest_diff-
+                nearest_diff)/ sec_nearest_diff)
             n = 0
             write_point = nearest_point
             nearest_intensity = 1 - transfered_intensity

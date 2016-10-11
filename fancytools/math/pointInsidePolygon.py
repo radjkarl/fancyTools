@@ -1,5 +1,3 @@
-from builtins import range
-
 
 def pointInsidePolygon(x, y, poly):
     '''

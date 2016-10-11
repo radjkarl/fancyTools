@@ -67,7 +67,7 @@ class GetCallablesInPackage(NestedOrderedDict):
         '''
         Delete all NestedOrderedDict that haven't any entries.
         '''
-        for key, item in subSelf.items():
+        for key, item in list(subSelf.items()):
             if self.isNestedDict(item):
                 if not item:
                     subSelf.pop(key)
@@ -136,7 +136,7 @@ class GetCallablesInPackage(NestedOrderedDict):
             if self.isNestedDict(pval):
                 if vertical_operation:
                     vertical_operation(pkey, pval)
-                for key, val in pval.items():
+                for key, val in list(pval.items()):
                     # if not isinstance(val, NestedOrderedDict):
                     buildRecursive(key, val)
             else:

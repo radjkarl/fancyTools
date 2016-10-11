@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 import os
 import stat
 
-from isAdmin import isAdmin
+from .isAdmin import isAdmin
 
 
 
@@ -36,7 +38,7 @@ class StartMenuEntry(object):
                         version='-', description='', 
                         categories='',
                         console=True)
-        kwargs.update({k:v for k,v in defaults.iteritems() if k not in kwargs})
+        kwargs.update({k:v for k,v in defaults.items() if k not in kwargs})
         
         #check the os to setup further procedures
         if os.name == 'posix': #for linux-systems

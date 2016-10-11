@@ -1,5 +1,5 @@
 from __future__ import division
-from past.utils import old_div
+
 import numpy as np
 
 
@@ -35,9 +35,9 @@ def bringPlotOverSameX(data, nsample=None):
     xmax = max(np.max(x0), np.max(x1))
 
     if nsample is None:
-        # calc from mean point density:
-        pn_per_dist = np.mean([old_div(len(x), float(abs(x[0] - x[-1])))
-                               for x, _ in data])
+        #calc from mean point density:
+        pn_per_dist = np.mean([len(x)/(abs(x[0]-x[-1]))
+                               for x,_ in data ])
         #...and max distance:
         nsample = round(pn_per_dist * abs(xmax - xmin))
 
