@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 
 import numpy as np
@@ -5,13 +6,13 @@ import numpy as np
 
 def avgMultiplePlots(data, calc_mean=True, calc_std=False,
                      calc_density=False, nsample=None):
-    '''
+    """
     return the average (x,y) for a set of multiple x,y arrays
     which can have a different length and resolution
 
     data = ((xvals,yvals),(),,,)
     assumes that x values are sorted
-    '''
+    """
     xArr, yArr = bringPlotOverSameX(data, nsample)
     out = [xArr]
     if calc_mean:
@@ -24,10 +25,10 @@ def avgMultiplePlots(data, calc_mean=True, calc_std=False,
 
 
 def bringPlotOverSameX(data, nsample=None):
-    '''
+    """
     bring all plots (x,y)
     to same x value base
-    '''
+    """
     x0 = [x[0] for x, _ in data]
     x1 = [x[-1] for x, _ in data]
 
@@ -35,9 +36,9 @@ def bringPlotOverSameX(data, nsample=None):
     xmax = max(np.max(x0), np.max(x1))
 
     if nsample is None:
-        #calc from mean point density:
-        pn_per_dist = np.mean([len(x)/(abs(x[0]-x[-1]))
-                               for x,_ in data ])
+        # calc from mean point density:
+        pn_per_dist = np.mean([len(x) / (abs(x[0] - x[-1]))
+                               for x, _ in data])
         #...and max distance:
         nsample = round(pn_per_dist * abs(xmax - xmin))
 

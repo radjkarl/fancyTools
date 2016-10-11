@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 import os
 
@@ -9,7 +10,7 @@ except ImportError:
 
 
 def userName():
-    '''return the user-name of the current user'''
+    """return the user-name of the current user"""
     if pwd:
         return pwd.getpwuid(os.geteuid()).pw_name
     else:

@@ -33,7 +33,7 @@ class _SortBase(object):
 
 
 class Aliased(_SortBase):
-    '''
+    """
     Takes one or more source-instances as list or tuple. Create like this::
 
         myMatrix = nIOp.target.CoarseMatrix( (mySource1,...mySourceN) )
@@ -46,7 +46,7 @@ class Aliased(_SortBase):
        #:scale: 60 %
     .. image:: _static/coarseMatrix_2D.png
        #:scale: 60 %
-    '''
+    """
 
     def reset(self):
         self.positionsIntensities = [[[], 1]]
@@ -62,7 +62,7 @@ class Aliased(_SortBase):
 
 
 class AntiAliased(_SortBase):
-    '''
+    """
     Takes one or more source-instances as list.
     Create like this::
 
@@ -96,7 +96,7 @@ class AntiAliased(_SortBase):
 
     .. image:: _static/fineMatrix_2D.png
        :scale: 60 %
-    '''
+    """
 
     def reset(self):
         ndim = len(self.grid)

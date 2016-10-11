@@ -1,11 +1,12 @@
+# coding=utf-8
 import numpy as np
 from numba import jit
 
 
 def findMax(arr):
-    '''
+    """
     in comparison to argrelmax() more simple and  reliable peak finder
-    '''
+    """
     out = np.zeros(shape=arr.shape, dtype=bool)
     _calcMax(arr, out)
     return out
@@ -29,9 +30,9 @@ def _calcMax(arr, out):
 
 
 def findMin(arr):
-    '''
+    """
     in comparison to argrelmax() more simple and  reliable peak finder
-    '''
+    """
     out = np.zeros(shape=arr.shape, dtype=bool)
     _calcMin(arr, out)
     return out

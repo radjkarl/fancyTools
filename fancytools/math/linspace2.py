@@ -5,7 +5,7 @@ from numpy import linspace
 
 
 def linspace2(a, b, n, dtype=None):
-    '''similar to numpy.linspace but excluding the boundaries
+    """similar to numpy.linspace but excluding the boundaries
 
     this is the normal numpy.linspace:
 
@@ -16,7 +16,7 @@ def linspace2(a, b, n, dtype=None):
 
     >>> print linspace2(0,1,5)
     [ 0.1  0.3  0.5  0.7  0.9]
-    '''
+    """
     a = linspace(a, b, n + 1, dtype=dtype)[:-1]
     if len(a) > 1:
         diff01 = ((a[1] - a[0]) / 2).astype(a.dtype)

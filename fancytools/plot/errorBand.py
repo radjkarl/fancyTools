@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 from __future__ import print_function
 
@@ -5,10 +6,10 @@ import numpy as np
 
 
 def errorBand(x, yAvg, yStd, yDensity, plt, n_colors=None):
-    '''
+    """
     plot error-band around avg
     where colour equals to point density
-    '''
+    """
 
     dmn = yDensity.min()
     dmx = yDensity.max()

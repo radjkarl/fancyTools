@@ -3,7 +3,7 @@ from time import gmtime, strftime
 
 
 class Logger(object):
-    '''
+    """
     writes into log-file and on screen at the same time
 
     >>> import sys
@@ -25,7 +25,7 @@ class Logger(object):
     >>> 'hello world' in logcontent
     True
     >>> os.remove('my_logfile.log')
-    '''
+    """
 
     def __init__(self, stdout, logfile):
         self.stdout = stdout
@@ -36,7 +36,7 @@ class Logger(object):
 New run at %s
 ####################################
 
-''' % strftime( "%d.%m.%Y|%H:%M:%S", gmtime() ) )
+''' % strftime("%d.%m.%Y|%H:%M:%S", gmtime()))
 
     def write(self, text):
         self.stdout.write(text)

@@ -1,10 +1,10 @@
-
+# coding=utf-8
 from qtpy import QtCore
 import sys
 
 
 class StreamSignal(QtCore.QObject):
-    '''
+    """
     create a connectable stdout instance
 
     to write to the shell and a log file:
@@ -33,7 +33,7 @@ class StreamSignal(QtCore.QObject):
     >>> 'hello world' in l.read()
     True
     >>> l.close()
-    '''
+    """
     # message = QtCore.Signal(str)# works under pyside
     message = QtCore.Signal(str)
 
@@ -60,7 +60,7 @@ class StreamSignal(QtCore.QObject):
         pass  # to prevent errors for sys.stdout.flush()
 
     def setWriteToShell(self, writeToShell=True):
-        '''connect sysout to the qtSignal'''
+        """connect sysout to the qtSignal"""
         if writeToShell and not self._connected:
             self.message.connect(self.stdW)
             self._connected = True

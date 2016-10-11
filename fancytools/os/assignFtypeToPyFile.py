@@ -7,7 +7,7 @@ from .isAdmin import isAdmin
 
 
 def assignFtypeToPyFile(extension, args=(), mimetype=None, showTerminal=True):
-    '''
+    """
     Connect a file extension to a python script
 
     Example:
@@ -27,7 +27,7 @@ def assignFtypeToPyFile(extension, args=(), mimetype=None, showTerminal=True):
 
 
     showTerminal (bool) -> True: open your program in a terminal
-    '''
+    """
     # WINDOWS
     if os.name == 'nt':
         if not isAdmin():

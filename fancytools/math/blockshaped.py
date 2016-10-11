@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 from __future__ import print_function
 from past.utils import old_div
@@ -39,19 +40,19 @@ def unblockshaped(arr, h, w):
 # TODO: better reimplement both methods above
 # to avoid all these reshaping
 def into2dBlocks(arr, n0, n1):
-    '''
+    """
     similar to blockshaped
     but splits an array into n0*n1 blocks
-    '''
+    """
     s0, s1 = arr.shape
     b = blockshaped(arr, old_div(s0, n0), old_div(s1, n1))
     return b.reshape(n0, n1, *b.shape[1:])
 
 
 def from2dBlocks(arr):
-    '''
+    """
     input needs to be 4d array (2d array of 2d arrays)
-    '''
+    """
     s = arr.shape
     s0, s1 = s[0] * s[2], s[1] * s[3]
     return unblockshaped(arr.reshape(s[0] * s[1], s[2], s[3]), s0, s1)

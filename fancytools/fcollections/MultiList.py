@@ -2,7 +2,7 @@
 
 
 class MultiList(object):
-    '''
+    """
     create a list of named lists.
     can be used as like a normal list but allows to get entries from direct from sublists
 
@@ -14,7 +14,7 @@ class MultiList(object):
     [3, 4]
     >>> print l[1]
     [2, 4]
-    '''
+    """
 
     # TODO: better as named numpy.array
     def __init__(self, *names):

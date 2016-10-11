@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 
 from scipy.optimize.minpack import curve_fit
@@ -7,7 +8,7 @@ import numpy as np
 
 def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
                    output_shape=None, guess=None):
-    '''Fit a 2d array to a 2d function
+    """Fit a 2d array to a 2d function
 
     *Ignore masked values
     * [down_scale_factor] map to speed up fitting procedure, set value smaller than 1
@@ -16,7 +17,7 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
 
     Returns:
         Fitted map, fitting params (scaled), error
-    '''
+    """
     if mask is None:
         mask = np.ones(shape=arr.shape, dtype=bool)
 

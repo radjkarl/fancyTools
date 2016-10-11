@@ -1,12 +1,13 @@
+# coding=utf-8
 from scipy.stats import linregress
 
 
 def linregressIgnoringOutliers(x, y, n_iter=3, nstd=2):
-    '''
+    """
     do linear regression [n_iter] times
     successive removing [outliers]
     return result of normal linregress
-    '''
+    """
     for _ in range(n_iter):
         m, n = linregress(x, y)[:2]
         y_fit = x * m + n

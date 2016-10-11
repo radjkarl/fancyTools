@@ -2,7 +2,7 @@
 
 
 def nearestPosition(array, value):
-    '''
+    """
     return the index of that value that is most similar in the array
     needs a numpy.1darray
 
@@ -12,7 +12,7 @@ def nearestPosition(array, value):
     3
     >>> nearestPosition(a, 300)
     6
-    '''
+    """
     difference_list = abs(array - value)
     return difference_list.argmin()
 

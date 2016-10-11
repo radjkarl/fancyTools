@@ -1,8 +1,7 @@
-
-
+# coding=utf-8
 
 def incrementName(nameList, name):
-    '''
+    """
     return a name that is unique in a given nameList through
     attaching a number to it
 
@@ -19,8 +18,8 @@ def incrementName(nameList, name):
 
     >>> print sorted(l)
     ['bar', 'bar2', 'foo', 'foo2', 'foo3', 'klaus']
-    '''
-    if not name in nameList:
+    """
+    if name not in nameList:
         return name
     newName = name + str(1)
     for n in range(1, len(nameList) + 2):

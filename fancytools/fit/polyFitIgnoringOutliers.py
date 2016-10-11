@@ -1,9 +1,10 @@
+# coding=utf-8
 import numpy as np
 
 
 def polyFitIgnoringOutliers(
         x, y, deg=2, niter=3, nstd=2, return_outliers=False):
-    '''Returns:
+    """Returns:
         (np.poly1d): callable function of polynomial fit excluding all outliers
     Args:
         deg (int): degree of polynomial fit
@@ -12,7 +13,7 @@ def polyFitIgnoringOutliers(
         nstd (float): exclude outliers, if their deviation
             is > [nstd] * standard deviation
         return_outliers (bool): also return outlier positions as 2. arg
-    '''
+    """
     if return_outliers:
         a = all_outliers = np.zeros_like(y, dtype=bool)
     for i in range(niter):

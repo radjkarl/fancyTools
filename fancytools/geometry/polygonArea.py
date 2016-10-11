@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 # taken from
 # http://stackoverflow.com/questions/24467972/calculate-area-of-polygon-given-x-y-coordinates
@@ -5,10 +6,10 @@ import numpy as np
 
 
 def polygonArea(x, y):
-    '''
+    """
     Calculate the area of a polygon given as x(...),y(...)
     Implementation of Shoelace formula
-    '''
+    """
     return 0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1)))
 
 

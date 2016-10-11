@@ -1,8 +1,9 @@
+# coding=utf-8
 from __future__ import division
 
 
 class TwoDArraySliceIterator(object):
-    '''
+    """
     a simple iterator that build small slices from a big array
 
 
@@ -17,7 +18,7 @@ class TwoDArraySliceIterator(object):
     for (s1,s2) in i:
         print(s1,s2, arr[s1,s2])
 
-    '''
+    """
 
     def __init__(self, main_size, slice_size):
         self.main_size = main_size

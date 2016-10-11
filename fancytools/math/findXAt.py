@@ -1,20 +1,21 @@
+# coding=utf-8
 import numpy as np
 from scipy import interpolate
 
 
 def findXAt(xArr, yArr, yVal, index=0, s=0.0):
-    '''
+    """
     index: position of root (return index=0 by default)
 
     return all x values where y would be equal to given yVal
     if arrays are spline interpolated
-    '''
-    if xArr[1]<xArr[0]:
-        #numbers must be in ascending order, otherwise method crashes...
+    """
+    if xArr[1] < xArr[0]:
+        # numbers must be in ascending order, otherwise method crashes...
         xArr = xArr[::-1]
         yArr = yArr[::-1]
-        
-    yArr = yArr-yVal
+
+    yArr = yArr - yVal
     if len(yArr) < 5:
         xn = np.linspace(xArr[0], xArr[-1], 5)
         yArr = np.interp(xn, xArr, yArr)

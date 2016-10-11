@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 
 import numpy as np
@@ -5,10 +6,10 @@ from numpy.linalg import norm
 
 
 def closestNonZeroIndex(pt, arr, kSize=21):
-    '''
+    """
     return the index closest to point [pt] in an array [arr]
     within a given kernel size [kSize] that is not zero
-    '''
+    """
     assert kSize % 2 == 1, 'need odd kernel size'
 
     hk = int(kSize / 2)

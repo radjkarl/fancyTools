@@ -1,14 +1,14 @@
-
+# coding=utf-8
 import numpy as np
 
 
 def gridPointsFromEdges(edges, nCells, dtype=float):
-    '''
+    """
     creates a regular 2d grid from given edge points (4*(x0,y0))
     and number of cells in x and y
 
     returns horizontal and vertical lines as (x0,y0,x1,y1)
-    '''
+    """
     e = edges
     sx, sy = nCells[0] + 1, nCells[1] + 1
     # horizontal lines

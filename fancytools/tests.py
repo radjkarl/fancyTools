@@ -1,4 +1,5 @@
-'''
+# coding=utf-8
+"""
 Run all submodules as __main__ and execute their test procedure
 
 Note there is a bug in pkgutil.walk_packages
@@ -6,7 +7,7 @@ excluding all modules that have the same name as modules in
 the standard library, see
 http://bugs.python.org/issue14787
 that's why 'os' and 'utils' are not tested at the moment
-'''
+"""
 from __future__ import absolute_import
 
 

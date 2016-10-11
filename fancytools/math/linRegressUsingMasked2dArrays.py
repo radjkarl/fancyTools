@@ -1,16 +1,17 @@
+# coding=utf-8
 import numpy as np
 from scipy.stats import linregress
 
 
 def linRegressUsingMasked2dArrays(xVals, arrays, badMask):
-    '''
+    """
     if you have multiple 2d arrays each with position given by
     xVals[array-index]
     and you want to do a linear regression on all cells
     but you also might mask different areas in each 2darray
 
     returns ascent, offset, RMS-error
-    '''
+    """
 
     assert arrays.ndim == 3, 'need multiple 2d arrays'
     assert arrays.shape == badMask.shape, 'mask needs to have same shape'

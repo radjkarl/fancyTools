@@ -1,8 +1,9 @@
+# coding=utf-8
 from weakref import ref
 
 
 class WeakList(list):
-    '''
+    """
     a list that removes its entries, if they are originally removed
 
     >>> import numpy as np
@@ -20,7 +21,7 @@ class WeakList(list):
 
     >>> del arr
     >>> assert len(l) == 0
-    '''
+    """
 
     def __init__(self, l=()):
         list.__init__(self, l)

@@ -1,6 +1,6 @@
-
+# coding=utf-8
 def pointInsidePolygon(x, y, poly):
-    '''
+    """
     Determine if a point is inside a given polygon or not
     Polygon is a list of (x,y) pairs.
 
@@ -16,7 +16,7 @@ def pointInsidePolygon(x, y, poly):
     True
     >>> pointInsidePolygon(1.5,1.5, poly)
     False
-    '''
+    """
     n = len(poly)
     inside = False
     p1x, p1y = poly[0]

@@ -1,16 +1,17 @@
+# coding=utf-8
 from __future__ import division
 
 import numpy as np
 
 
 class DynamicMovingAverage(object):
-    '''
+    """
     calc. the mean of the last n values, see http://en.wikipedia.org/wiki/Moving_average
 
     Update one value at a time.
 
     :param n: number of the last values to calc the mean from
-    '''
+    """
 
     def __init__(self, n):
         self.maxQuantity = n  # middle until this quantity is reached
@@ -30,9 +31,9 @@ class DynamicMovingAverage(object):
 
 
 def staticMovingAverage(arr, fineness=10):
-    '''
+    """
     smooth [arr] using moving average
-    '''
+    """
     s0 = arr.shape[0]
     window_len = int(round(s0 / fineness))
 
@@ -48,11 +49,11 @@ def staticMovingAverage(arr, fineness=10):
 
 # TODO: REMOVE - DOEST LOOK AS GOOD AS ABOVE
 def staticMovingAverage2(x, N=3, mode='reflect'):
-    '''
+    """
     moving average filter for 1d arrays
     supported modes for boundary handling: 'reflect' , 'constant'
 
-    '''
+    """
     assert N > 1
     x2 = np.empty(shape=x.shape[0] + N, dtype=x.dtype)
 
@@ -78,6 +79,7 @@ def staticMovingAverage2(x, N=3, mode='reflect'):
     a2 = (a2[N:] - a2[:-N]) / N
 
     return 0.5 * (a1 + a2[::-1])
+    # TODO: unreachable code
     cumsum = np.cumsum(x2)
     return (cumsum[N:] - cumsum[:-N]) / N
 

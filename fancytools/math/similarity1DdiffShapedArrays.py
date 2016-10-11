@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 from __future__ import print_function
 from past.utils import old_div
@@ -5,11 +6,11 @@ from numba import jit
 
 
 def similarity1DdiffShapedArrays(arr1, arr2, normalize=False):
-    '''
+    """
     compare two strictly monotonous increasing 1d arrays
     of same or different size
     return a similarity index-> 0=identical
-    '''
+    """
     # assign longer and shorter here, because jit cannot do it
     if len(arr1) < len(arr2):
         arr1, arr2 = arr2, arr1

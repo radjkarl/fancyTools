@@ -1,11 +1,12 @@
+# coding=utf-8
 from __future__ import print_function
 
 
 def countLines(filename, buf_size=1048576):
-    '''
+    """
     fast counting to the lines of a given filename
     through only reading out a limited buffer
-    '''
+    """
     f = open(filename)
     try:
         lines = 1

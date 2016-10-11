@@ -1,10 +1,11 @@
+# coding=utf-8
 from __future__ import division
 
 import numpy as np
 
 
 def execOnSubArrays(arrs, fn, splitX, splitY):
-    '''
+    """
     execute a function(on or multiple arrays)
     only on sub sections
     works only on 2d arrays at the moment
@@ -13,7 +14,7 @@ def execOnSubArrays(arrs, fn, splitX, splitY):
     >>> a2 = np.ones((1000,1000))
     >>> out = execOnSubArrays((a1,a2), lambda sa1,sa2: sa1+as2, splitX=10, splitY=10)
 
-    '''
+    """
     if type(arrs) not in (tuple, list):
         arrs = (arrs,)
     s0, s1 = arrs[0].shape

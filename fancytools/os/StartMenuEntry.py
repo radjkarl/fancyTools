@@ -8,7 +8,7 @@ from .isAdmin import isAdmin
 
 
 class StartMenuEntry(object):
-    '''
+    """
     this class creates a shortcut for a given target in the start menu of the
     used os depending either system wide or user specific
 
@@ -30,7 +30,7 @@ class StartMenuEntry(object):
     Now look for the entry in your start menu
 
     >>> entry.remove()
-    '''
+    """
 
     def __init__(self, name, target, **kwargs):
         # update kwargs with defaults if not already defined
@@ -39,7 +39,8 @@ class StartMenuEntry(object):
                         categories='',
                         console=True)
         kwargs.update({k: v for k, v in defaults.items() if k not in kwargs})
-        kwargs.update({k:v for k,v in list(defaults.items()) if k not in kwargs})
+        kwargs.update({k: v for k, v in list(
+            defaults.items()) if k not in kwargs})
 
         # check the os to setup further procedures
         if os.name == 'posix':  # for linux-systems

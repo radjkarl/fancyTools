@@ -1,28 +1,28 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
 Different functions to return members within a given module or package.
-'''
+"""
 from __future__ import print_function
 
 import inspect
 
 
 def getAvailableClassesInModule(prooveModule):
-    '''
+    """
     return a list of all classes in the given module
     that dont begin with '_'
-    '''
+    """
     l = tuple(x[1] for x in inspect.getmembers(prooveModule, inspect.isclass))
     l = [x for x in l if x.__name__[0] != "_"]
     return l
 
 
 def getAvailableClassesInPackage(package):
-    '''
+    """
     return a list of all classes in the given package
     whose modules dont begin with '_'
-    '''
+    """
     l = list(x[1] for x in inspect.getmembers(package, inspect.isclass))
 
     modules = list(x[1] for x in inspect.getmembers(package, inspect.ismodule))
@@ -40,21 +40,21 @@ def getAvailableClassesInPackage(package):
 
 
 def getAvClassNamesInPackage(package):
-    '''get the class names within a package'''
+    """get the class names within a package"""
     l = getAvailableClassesInPackage(package)
     return [x.__name__ for x in l]
 
 
 def getAvClassNamesInModule(prooveModule):
-    '''get the class names within a module'''
+    """get the class names within a module"""
     l = getAvailableClassesInModule(prooveModule)
     return [x.__name__ for x in l]
 
 
 def getClassInPackageFromName(className, pkg):
-    '''
+    """
     get a class from name within a package
-    '''
+    """
     # TODO: more efficiency!
     n = getAvClassNamesInPackage(pkg)
     i = n.index(className)
@@ -63,9 +63,9 @@ def getClassInPackageFromName(className, pkg):
 
 
 def getClassInModuleFromName(className, module):
-    '''
+    """
     get a class from name within a module
-    '''
+    """
     n = getAvClassNamesInModule(module)
     i = n.index(className)
     c = getAvailableClassesInModule(module)

@@ -7,7 +7,7 @@ from setuptools import setup as setuptoolsSetup
 
 
 def setup(package):
-    '''a template for the  python setup.py installer routine
+    """a template for the  python setup.py installer routine
 
     * take setup information from the packages __init__.py file
             * this way these informations, like...
@@ -24,7 +24,7 @@ def setup(package):
         - /AUTHORS.rst
 
     * remove /build at the end
-    '''
+    """
 
     def read(*paths):
         """Build a file path from *paths* and return the contents."""

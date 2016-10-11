@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 
 from six import string_types
@@ -8,7 +9,7 @@ from fancytools.fcollections.NestedOrderedDict import NestedOrderedDict
 
 
 class GetCallablesInPackage(NestedOrderedDict):
-    '''
+    """
     Return a NestedOrderedDict of all functions and classes within a given package.
     excluding 'private' modules beginning with '_'
 
@@ -36,13 +37,13 @@ class GetCallablesInPackage(NestedOrderedDict):
     =====================  =======  ===============================
 
 
-    '''
+    """
 
     def __init__(self, package, modules_in_structure=False,
                  include_classes=True, include_functions=False,
                  min_level=0, max_level=None, exclude_empty_pck=True):
-        '''
-        '''
+        """
+        """
 
         NestedOrderedDict.__init__(self)
 
@@ -64,9 +65,9 @@ class GetCallablesInPackage(NestedOrderedDict):
             self._cleanRecursive(self)
 
     def _cleanRecursive(self, subSelf):
-        '''
+        """
         Delete all NestedOrderedDict that haven't any entries.
-        '''
+        """
         for key, item in list(subSelf.items()):
             if self.isNestedDict(item):
                 if not item:
@@ -122,16 +123,16 @@ class GetCallablesInPackage(NestedOrderedDict):
 
     @staticmethod
     def belongsToModule(obj, module):
-        '''Returns True is an object belongs to a module.'''
+        """Returns True is an object belongs to a module."""
         return obj.__module__ == module.__name__ or obj.__module__.startswith(
             module.__name__)
 
     def buildHirarchy(self, horizontal_operation=None,
                       vertical_operation=None):
-        '''Walk through the nested dict structure and executes
+        """Walk through the nested dict structure and executes
         horizontal_operation(name, callable) resp.
         vertical_operation(name, callable) if defined.
-        '''
+        """
         def buildRecursive(pkey, pval):
             if self.isNestedDict(pval):
                 if vertical_operation:
@@ -146,9 +147,9 @@ class GetCallablesInPackage(NestedOrderedDict):
 
     @staticmethod
     def isNestedDict(instance):
-        '''convenience function for
+        """convenience function for
 
-        >>> isinstance(instance, NestedOrderedDict)'''
+        >>> isinstance(instance, NestedOrderedDict)"""
         return isinstance(instance, NestedOrderedDict)
 
 

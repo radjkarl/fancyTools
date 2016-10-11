@@ -1,13 +1,14 @@
+# coding=utf-8
 from __future__ import division
 from past.utils import old_div
 import numpy as np
 
 
 def radialAverage(arr, center=None):
-    '''
+    """
     radial average a 2darray around a center
     if no center is given, take middle
-    '''
+    """
     # taken from
     # http://stackoverflow.com/questions/21242011/most-efficient-way-to-calculate-radial-profile
     s0, s1 = arr.shape[:2]

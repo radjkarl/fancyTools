@@ -1,4 +1,4 @@
-
+# coding=utf-8
 # This is the winner of a comparison of multiple
 # methods for removing duplicates from a list, shamelessly taken from
 #
@@ -11,7 +11,7 @@
 
 
 def removeDuplicates(seq, idfun=None):
-    '''
+    """
     removal all duplicates from a list, preserving the order:
 
     >>> a=list('ABeeECcc')
@@ -20,7 +20,7 @@ def removeDuplicates(seq, idfun=None):
 
     >>> removeDuplicates(a, lambda x: x.lower())
     ['A', 'B', 'e', 'C']
-    '''
+    """
 
     # order preserving
     if idfun is None:

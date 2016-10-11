@@ -38,7 +38,7 @@ def raw(text):
 
 
 class PathStr(str):
-    '''
+    """
     easy path-string handling and manipulation using os.path and shutil
 
     Windows only: there is no need of transforming
@@ -50,21 +50,21 @@ class PathStr(str):
     >>> print p.exists()
     True
     >>> d_list = [p.join(x) for x in p.listdir()]
-    '''
+    """
 
     def __new__(cls, value):
-        '''transform raw-string and / to \ depending on the os'''
+        """transform raw-string and / to \ depending on the os"""
         obj = str.__new__(cls, os.path.normpath(raw(str(value))))
         return obj
 
     @staticmethod
     def home():
-        '''return the home/user directory'''
+        """return the home/user directory"""
         return PathStr(os.path.expanduser("~"))
 
     @staticmethod
     def getcwd(moduleName=None):
-        '''
+        """
         get current path either from the temp folder used by pyinstaller:
 
             * apps 'sys._MEIPASS' if packed with --onefile option
@@ -72,7 +72,7 @@ class PathStr(str):
         or
 
             * os.getcwd()
-        '''
+        """
         try:
             p = PathStr(sys._MEIPASS)
             if moduleName is not None:
@@ -86,18 +86,18 @@ class PathStr(str):
             return PathStr(os.getcwd())
 
     def join(self, *args):
-        '''add a file/name to this PathStr instance'''
+        """add a file/name to this PathStr instance"""
         return PathStr(os.path.join(self, *args))
 
     def exists(self):
-        '''return whether PathStr instance exists as a file/folder'''
+        """return whether PathStr instance exists as a file/folder"""
         return os.path.exists(self)
 
     def abspath(self):
         return PathStr.join(PathStr.getcwd(), self)
 
     def load(self, size):
-        '''open and read the file is existent'''
+        """open and read the file is existent"""
         if self.exists() and self.isfile():
             return eval(open(self).read(size))
 
@@ -108,7 +108,7 @@ class PathStr(str):
         return PathStr(os.path.basename(self))
 
     def move(self, dst):
-        '''move this file/folder the [dst]'''
+        """move this file/folder the [dst]"""
         shutil.move(self, dst)
         self = PathStr(dst).join(self.basename())
         return self
@@ -166,9 +166,9 @@ class PathStr(str):
         return os.listdir(d)
 
     def files(self, ftype=None):
-        '''
+        """
         return a first of path to all files within that folder
-        '''
+        """
         a = [self.join(i) for i in self]
         if ftype is not None:
             return [i for i in a if i.isfile() and i.filetype() == ftype]
@@ -185,9 +185,9 @@ class PathStr(str):
         return iter([])
 
     def all(self):
-        '''
+        """
         Return a list of all files within this folder
-        '''
+        """
         return [self.join(i) for i in self]
 
 

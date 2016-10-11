@@ -1,11 +1,11 @@
-'''
+# coding=utf-8
+"""
 Collection of line-based functions
 line given as:
     x0,y0,x1,y1 = line
-'''
+"""
 from __future__ import division
 from __future__ import print_function
-
 
 from numpy import pi, array, empty, argmax, ndarray
 from math import sin, cos, atan2, hypot, acos, copysign
@@ -14,14 +14,16 @@ from fancytools.math.rotatePolygon import rotatePolygon
 from fancytools.math.pointInsidePolygon import pointInsidePolygon
 
 from numba import jit
+
+
 # from numpy.linalg import norm
 
 
 def cutToFitIntoPolygon(line, polygon):
-    '''
+    """
     cut line so it fits into polygon
     polygon = (( x0,y0), (x1,y1) ,...)
-    '''
+    """
     p0_inside = pointInsidePolygon(line[0], line[1], polygon)
     p1_inside = pointInsidePolygon(line[2], line[3], polygon)
 
@@ -45,17 +47,17 @@ def cutToFitIntoPolygon(line, polygon):
 
 @jit(nopython=True)
 def sort(line):
-    '''
+    """
     change point position  if x1,y0 < x0,y0
-    '''
+    """
     x0, y0, x1, y1 = line
-#     if (x0**2+y0**2)**0.5 < (x1**2+y1**2)**0.5:
-#         return (x1,y1,x0,y0)
-#     return line
-#
-#     if x1 < x0:
-#         return (x1,y1,x0,y0)
-#     return line
+    #     if (x0**2+y0**2)**0.5 < (x1**2+y1**2)**0.5:
+    #         return (x1,y1,x0,y0)
+    #     return line
+    #
+    #     if x1 < x0:
+    #         return (x1,y1,x0,y0)
+    #     return line
 
     turn = False
 
@@ -67,8 +69,10 @@ def sort(line):
 
     if turn:
         return (x1, y1, x0, y0)
-      #  return line[(2,3,0,1)]
+        #  return line[(2,3,0,1)]
     return line
+
+
 #         line[0] = x1
 #         line[1] = y1
 #         line[2] = x0
@@ -76,7 +80,7 @@ def sort(line):
 
 
 def normal(line):
-    '''return the unit normal vector'''
+    """return the unit normal vector"""
     dx, dy = dxdy(line)
     return -dy, dx  # other normal v would be dy,-dx
     # return dxdy(line)[::-1]
@@ -91,16 +95,16 @@ def length(line):
 
 
 def isEven(angle):
-    '''
+    """
     return whether lines is either horizontal or vertical
-    '''
+    """
     return angle < 0.1 or angle > 1.4
 
 
 def dxdy(line):
-    '''
+    """
     return normalised ascent vector
-    '''
+    """
     x0, y0, x1, y1 = line
     dx = float(x1 - x0)
     dy = float(y1 - y0)
@@ -145,9 +149,9 @@ def angle2(line1, line2):
 
 
 def fromAttr(mid, ang, dist):
-    '''
+    """
     create from middle, angle and distance
-    '''
+    """
     mx, my = mid
     dx = cos(ang) * dist * 0.5
     dy = sin(ang) * dist * 0.5
@@ -155,9 +159,9 @@ def fromAttr(mid, ang, dist):
 
 
 def fromAttr2(start, ang, dist):
-    '''
+    """
     create from start, angle and distance
-    '''
+    """
     sx, sy = start
     dx = cos(ang) * dist
     dy = sin(ang) * dist
@@ -170,7 +174,7 @@ def fromFn(ascent, offs, length=1, px=0):
     dy = ascent * length
     if length != 1:
         # normalize
-        l = length / (dx**2 + dy**2)**0.5
+        l = length / (dx ** 2 + dy ** 2) ** 0.5
         dx *= l
         dy *= l
     return px, py, px + dx, py + dy
@@ -184,9 +188,9 @@ def toFn(line):
 
 
 def merge(l1, l2):
-    '''
+    """
     merge 2 lines together
-    '''
+    """
     x1, y1, x2, y2 = l1
     xx1, yy1, xx2, yy2 = l2
 
@@ -206,9 +210,9 @@ def merge(l1, l2):
 
 
 def resize(line, factor):
-    '''
+    """
     factor: relative length (1->no change, 2-> double, 0.5:half)
-    '''
+    """
     a = angle(line)
     mx, my = middle(line)
     d = length(line) * factor * 0.5
@@ -230,10 +234,10 @@ def rotate(line, angle):
 
 
 def distance(line, point):
-    '''
+    """
     infinite line to point or line to line distance
     is point is given as line - use middle point of that liune
-    '''
+    """
     x0, y0, x1, y1 = line
     try:
         p1, p2 = point
@@ -243,12 +247,12 @@ def distance(line, point):
     n1 = ascent(line)
     n2 = -1
     n0 = y0 - n1 * x0
-    return abs(n1 * p1 + n2 * p2 + n0) / (n1**2 + n2**2)**0.5
+    return abs(n1 * p1 + n2 * p2 + n0) / (n1 ** 2 + n2 ** 2) ** 0.5
 
 
 def segmentDistance(line, point):
     dx, dy = distanceVector(line, point, ignoreEndpoints=False)
-    return (dx**2 + dy**2)**0.5
+    return (dx ** 2 + dy ** 2) ** 0.5
 
 
 @jit(nopython=True)
@@ -285,22 +289,22 @@ def segmentIntersection(line1, line2):
     # line1 and line2 are finite:
     # check whether intersection is on both lines:
     if (pointIsBetween(line1[0:2], line1[2:], i)
-            and pointIsBetween(line2[0:2], line2[2:], i)):
+        and pointIsBetween(line2[0:2], line2[2:], i)):
         return i
     return None
 
 
 def pointIsBetween(startP, endP, p):
-    '''
+    """
     whether point is (+-1e-6) on a straight
     line in-between two other points
-    '''
+    """
     return (distancePoint(startP, p) + distancePoint(p, endP)
             - distancePoint(startP, endP) < 1e-6)
 
 
 def distancePoint(p1, p2):
-    return ((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)**0.5
+    return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
 
 
 @jit(nopython=True)
@@ -345,10 +349,10 @@ def _near(a, b, rtol=1e-5, atol=1e-8):
 
 
 def translate(line, ascent, offs=0):
-    '''
+    """
     offs -> shifts parallel to line
     ascent -> rotate line
-    '''
+    """
     # TODO: why do I have thuis factor here?
     ascent *= -2
     offs *= -2
@@ -364,9 +368,9 @@ def translate(line, ascent, offs=0):
 def translate2P(line, t0, t1):
     a = angle(line)
 
-#     if 0.25*pi > abs(a) or abs(a) > 0.75*pi:#isHorizontal
-#         t0*=-1
-#         t1*=-1
+    #     if 0.25*pi > abs(a) or abs(a) > 0.75*pi:#isHorizontal
+    #         t0*=-1
+    #         t1*=-1
 
     # change in x and y:
     dx0 = -sin(a) * t0
@@ -378,10 +382,10 @@ def translate2P(line, t0, t1):
 
 # REMOVE?
 def split(line, lines):
-    '''
+    """
     split <line> into multiple sublines
     using intersection with <lines>
-    '''
+    """
     out = empty((len(lines) + 1, 4))
 
     p1 = line[:2]
@@ -396,10 +400,10 @@ def split(line, lines):
 
 
 def splitN(line, n):
-    '''
+    """
     split a line n times
     returns n sublines
-    '''
+    """
     x0, y0, x1, y1 = line
 
     out = empty((n, 4), dtype=type(line[0]))

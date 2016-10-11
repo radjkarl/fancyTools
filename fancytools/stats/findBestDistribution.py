@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 
 import numpy as np
@@ -8,14 +9,14 @@ import warnings
 
 
 def findBestDistribution(data, disttype='continuous'):
-    '''
+    """
     find best statistical distribution,see:
     http://docs.scipy.org/doc/scipy-0.14.0/reference/stats.html
 
     currently only continuous distributions embedded
 
     returns scipy.stats[DIST], fitparams
-    '''
+    """
 
     if disttype != 'continuous':
         raise NotImplemented()

@@ -5,7 +5,7 @@ from sys import stdout
 
 
 def statusBar(step, total, bar_len=20, onlyReturn=False):
-    '''
+    """
     print a ASCI-art statusbar of variable length e.g.showing 25%:
 
     >>> step = 25
@@ -17,7 +17,7 @@ def statusBar(step, total, bar_len=20, onlyReturn=False):
     as default onlyReturn is set to False
     in this case the last printed line would be flushed every time when
     the statusbar is called to create a the effect of one moving bar
-    '''
+    """
 
     norm = 100.0 / total
     step *= norm

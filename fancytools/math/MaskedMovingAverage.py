@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 from __future__ import print_function
 
@@ -5,7 +6,7 @@ import numpy as np
 
 
 class MaskedMovingAverage(object):
-    '''
+    """
     Calculating the moving average and variance on (optional masked) ndArray
     allowing to update different areas every time
 
@@ -17,7 +18,7 @@ class MaskedMovingAverage(object):
     moving average and variance
     taken from http://stackoverflow.com/a/14638138
     referring to http://www.johndcook.com/blog/standard_deviation/
-    '''
+    """
 
     def __init__(self, shape, calcVariance=False, dtype=np.float64):
         # number of added array layers:
@@ -31,10 +32,10 @@ class MaskedMovingAverage(object):
             self.var = np.zeros(shape=shape, dtype=dtype)
 
     def update(self, arr, mask=None):
-        '''
+        """
         update moving average (and variance) with new ndarray
         (of the same shape as the init array) and an optional mask
-        '''
+        """
         if mask is not None:
             refI = np.logical_and(mask, self.n == 0)
         else:

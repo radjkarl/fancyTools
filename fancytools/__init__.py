@@ -1,6 +1,7 @@
-'''
+# coding=utf-8
+"""
 a collection of more or less useful non-GUI tools
-'''
+"""
 
 __version__ = '0.3.2'
 __author__ = 'Karl Bedrich'

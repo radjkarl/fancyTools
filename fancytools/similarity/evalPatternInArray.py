@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 
 from numba import jit
@@ -5,7 +6,7 @@ from numba import jit
 
 @jit(nopython=True)
 def evalPatternInArray(pattern, arr):
-    '''
+    """
     returns similarity parameter of given pattern to be
     repeated in given array
     the index is scalled between 0-1
@@ -29,7 +30,7 @@ def evalPatternInArray(pattern, arr):
     >>> evalPatternInArray(pattern, arr)
     162.2057359307358
 
-    '''
+    """
     l = len(pattern)
     ll = len(arr)
     # print l, ll

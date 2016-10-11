@@ -17,10 +17,11 @@ thismodname = '.'.join(thismodname)
 # http://bugs.python.org/issue14787
 # that's why 'os' and 'utils' are not tested at the moment
 
+# TODO: default argument is mutable
 def runAllInDir(dir_path, exclude=[], add_args=(), ignoreErrors=True):
-    '''
+    """
     execute all modules as __main__ within a given package path
-    '''
+    """
     print('testing all modules of %s' % dir_path)
 
     if type(add_args) in (tuple, list):
@@ -33,7 +34,7 @@ def runAllInDir(dir_path, exclude=[], add_args=(), ignoreErrors=True):
             [dir_path],
             #onerror=lambda x: None
     ):
-        if not ispkg and modname != thismodname and not modname in exclude:  # don't test this module
+        if not ispkg and modname != thismodname and modname not in exclude:  # don't test this module
             print('... %s' % modname)
             t0 = time()
             try:

@@ -1,8 +1,9 @@
+# coding=utf-8
 from __future__ import division
 
 
 def formatedTime(ms):
-    '''
+    """
     convert milliseconds in a human readable time
 
     >>> formatedTime(60e3)
@@ -11,7 +12,7 @@ def formatedTime(ms):
     '16m 40s'
     >>> formatedTime(200000123)
     '2d 7h 33m 20.123s'
-    '''
+    """
 
     if ms:
         s = ms / 1000.0

@@ -1,17 +1,19 @@
+# coding=utf-8
 from __future__ import print_function
 from six import string_types
 
 import os
 
 
+# TODO: default argument is mutable
 def countLines(paths, exclude_files_containing=[],
                exclude_folders_containing=[],
                exclude_blank_lines=True,
                exclude_commented_lines=True,
                count_only_py_files=True):
-    '''
+    """
     count and return lines  of all *.py files in the given directory/-ies
-    '''
+    """
     exclude_files_containing = list(exclude_files_containing)
     exclude_files_containing.append("countLines.py")
 
@@ -36,8 +38,8 @@ def countLines(paths, exclude_files_containing=[],
         for pydir, _, pyfiles in os.walk(cur_path):
             for pyfile in pyfiles:
                 if ((not count_only_py_files or pyfile.endswith(".py"))
-                        and not sum([ex in pydir for ex in exclude_folders_containing])
-                        and not sum([ex in pyfile for ex in exclude_files_containing])
+                    and not sum([ex in pydir for ex in exclude_folders_containing])
+                    and not sum([ex in pyfile for ex in exclude_files_containing])
                     ):
                     totalpath = os.path.join(pydir, pyfile)
                     lines = open(totalpath, "r").readlines()
@@ -66,4 +68,5 @@ def countLines(paths, exclude_files_containing=[],
 
 if __name__ == '__main__':
     import sys
+
     countLines(sys.argv[1:])

@@ -1,7 +1,7 @@
-
+# coding=utf-8
 
 class ProxyList(list):
-    '''
+    """
     forwards an attribute/method given to this instance
     to its list-entries
 
@@ -83,7 +83,7 @@ class ProxyList(list):
     >>> p2 = ProxyList([ 1, 2, 3 ])
     >>> p1-p2
     [0, 0, 0]
-    '''
+    """
 
     # GET
     def __getattr__(self, attr):
@@ -179,7 +179,7 @@ class ProxyList(list):
 
 
 class _TestObject(object):
-    '''this is just a test class for the doctest of ProxyList'''
+    """this is just a test class for the doctest of ProxyList"""
 
     def foo(self, x):
         self.a = x

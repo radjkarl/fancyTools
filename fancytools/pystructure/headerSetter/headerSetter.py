@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 import os
 
@@ -11,7 +12,7 @@ def setHeader(package_path,
               header_start='', header_end='', header_text='',
               remove_header=False,
               exclude_init=True, exclude_empty_files=True):
-    '''
+    """
     Adds, modifies removes a header text in all *.py files in a python package
 
     header_start -> string indicating the begin of the header e.g. '#<<<<<<<<<'
@@ -20,7 +21,7 @@ def setHeader(package_path,
 
     package_path -> relative or absolute path of the package to modify e.g. 'C:\\...\\myPackage'
     remove_header -> Set to True to remove the header in every py file in the package
-    '''
+    """
 
     pkg_name = os.path.split(package_path)[-1]
 

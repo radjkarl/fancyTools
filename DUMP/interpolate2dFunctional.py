@@ -26,11 +26,12 @@ def vignettingEq(xxx_todo_changeme, f=100, alpha=0, Xi=0, tau=0, cx=50, cy=50):
     cy - image center, y
     '''
     (x, y) = xxx_todo_changeme
-    dist = ((x-cx)**2 + (y-cy)**2)**0.5
+    dist = ((x - cx)**2 + (y - cy)**2)**0.5
 
-    A = old_div(1.0,(1+(old_div(dist,f))**2)**2)
-    G = (1-alpha*dist)
-    T = np.cos(tau) * (1+(old_div(np.tan(tau),f)) * (x*np.sin(Xi)-y*np.cos(Xi)) )**3
+    A = old_div(1.0, (1 + (old_div(dist, f))**2)**2)
+    G = (1 - alpha * dist)
+    T = np.cos(tau) * (1 + (old_div(np.tan(tau), f))
+                       * (x * np.sin(Xi) - y * np.cos(Xi)))**3
 
     return A * G * T
 
@@ -64,8 +65,8 @@ def fitVignettingEq(arr, mask, scale_factor=0.1):
     # SCALE FACTOR:
     # BUILD ARRAY FROM FUNCTION:
     # SCALE FACTOR:
-    fx = old_div(float(small.shape[0]), arr.shape[0]) 
-    fy = old_div(float(small.shape[1]), arr.shape[1]) 
+    fx = old_div(float(small.shape[0]), arr.shape[0])
+    fy = old_div(float(small.shape[1]), arr.shape[1])
     # BUILD ARRAY FROM FUNCTION:
     rebuilt = np.fromfunction(
         lambda x, y: vignettingEq(

@@ -2,7 +2,7 @@
 
 
 class NearestPosition2(object):
-    '''
+    """
     return the index of that value that is most similar in the array
     starting from the last known position, checking the right direction
 
@@ -19,7 +19,7 @@ class NearestPosition2(object):
     5
     >>> n(24)
     5
-    '''
+    """
 
     def __init__(self, array, lastPos=0):
         self.array = array

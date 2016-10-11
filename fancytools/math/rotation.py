@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import division
 from past.utils import old_div
 import numpy as np
@@ -9,13 +10,13 @@ import utils
 
 
 def rotMatrix2AxisAndAngle(R):
-    '''
-    http://stackoverflow.com/questions/12463487/obtain-rotation-axis-from-rotation-matrix-and-translation-vector-in-opencv
+    """
+    stackoverflow.com/questions/12463487/obtain-rotation-axis-from-rotation-matrix-and-translation-vector-in-opencv
 
     R : 3x3 rotation matrix
     returns axis, angle
 
-    '''
+    """
     angle = np.arccos(old_div((R[0, 0] + R[1, 1] + R[2, 2] - 1), 2))
     axis = np.array([
         # x
@@ -25,7 +26,8 @@ def rotMatrix2AxisAndAngle(R):
         old_div((R[0, 2] - R[2, 0]), utils.sqrt((R[2, 1] - R[1, 2])
                                                 ** 2 + (R[0, 2] - R[2, 0])**2 + (R[1, 0] - R[0, 1])**2)),
         # z
-        old_div((R[1, 0] - R[0, 1]), utils.sqrt((R[2, 1] - R[1, 2])**2 + (R[0, 2] - R[2, 0])**2 + (R[1, 0] - R[0, 1])**2))])
+        old_div((R[1, 0] - R[0, 1]), utils.sqrt((R[2, 1] - R[1, 2])**2 + 
+                                                (R[0, 2] - R[2, 0])**2 + (R[1, 0] - R[0, 1])**2))])
     return axis, angle
 
 
@@ -49,13 +51,13 @@ def axisAndAngle2RotMatrix(axis, angle):
 
 
 def rotVector2Matrix(vec):
-    '''
+    """
     better use cv2.Rodrigues(rvec)[0] for that job...
 
     the angle is given as the magnitude of the rot vector,
     see https://www.safaribooksonline.com/library/view/learning-opencv/9780596516130/ch11s05.html
 
-    '''
+    """
     return axisAndAngle2RotMatrix(vec, np.linalg.norm(vec))
 
 

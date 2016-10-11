@@ -1,3 +1,4 @@
+# coding=utf-8
 from __future__ import print_function
 from __future__ import absolute_import
 # WINDOWS ONLY AT THE MOMENT
@@ -6,10 +7,10 @@ import os  # , traceback, types
 
 
 def runAsAdmin(cmdLine=None, target_dir='', wait=True):
-    '''
+    """
     run [cmdLine] as admin
     specify the location from where the code is executed through [target_dir]
-    '''
+    """
     if os.name != 'nt':
         raise RuntimeError("This function is only implemented on Windows.")
     # import win32api,

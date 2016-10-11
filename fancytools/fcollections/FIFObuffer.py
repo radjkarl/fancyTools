@@ -77,8 +77,8 @@ class FIFObuffer(object):
         return self.__len__() - 1
 
     def splitPos(self):
-        '''return the position of where to split the array
-        to get the values in the right order'''
+        """return the position of where to split the array
+        to get the values in the right order"""
         if self._ind < self.shape:
             return 0
         v = int(self._splitPos)

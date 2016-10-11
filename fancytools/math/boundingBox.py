@@ -1,8 +1,9 @@
+# coding=utf-8
 import numpy as np
 
 
 def boundingBox(booleanArray):
-    '''
+    """
     return indices of the smallest bounding box enclosing all
     non-zero values within an array
 
@@ -13,7 +14,7 @@ def boundingBox(booleanArray):
     ...                [0,0,0,0] ])
     >>> print boundingBox(a)
     (slice(1, 3, None), slice(0, 3, None))
-    '''
+    """
 
     w = np.where(booleanArray)
     p = []

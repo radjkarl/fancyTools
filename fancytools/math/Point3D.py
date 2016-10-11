@@ -1,8 +1,9 @@
-'''
+# coding=utf-8
+"""
 Created on 21 Aug 2015
 
 #taken from http://codentronix.com/2011/04/20/simulation-of-3d-point-rotation-with-python-and-pygame/
-'''
+"""
 from __future__ import division
 from __future__ import print_function
 

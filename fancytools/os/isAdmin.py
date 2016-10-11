@@ -5,7 +5,7 @@ import os
 
 
 def isAdmin():
-    '''return True is current os user is administrator'''
+    """return True is current os user is administrator"""
     try:
         return os.getuid() == 0
     except AttributeError:

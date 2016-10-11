@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 
 class NestedOrderedDict(OrderedDict):
-    '''
+    """
     an OrderedDict allowing the access of nested items
     through a .path attribute
 
@@ -35,7 +35,7 @@ class NestedOrderedDict(OrderedDict):
 
     >>> print(parent[p])
     NestedOrderedDict({hello: world})
-    '''
+    """
 
     def __init__(self, *args, **kwargs):
         super(NestedOrderedDict, self).__init__(*args, **kwargs)
@@ -48,7 +48,8 @@ class NestedOrderedDict(OrderedDict):
             key = key.split(', ')
             key2 = ', '.join(key[1:])
             return self[key[0]].__getitem__(key2)
-
+    
+    # TODO: does not match signature of overriden method
     def __setitem__(self, key, value):
         super(NestedOrderedDict, self).__setitem__(key, value)
         if isinstance(value, self.__class__):
@@ -58,7 +59,7 @@ class NestedOrderedDict(OrderedDict):
                 value.path = key
 
     def __repr__(self):
-        '''limit the number of shown items to 5 and give it a more dict-like view'''
+        """limit the number of shown items to 5 and give it a more dict-like view"""
         contents = ''
         n = 0
         for n, (key, item) in enumerate(self.items()):

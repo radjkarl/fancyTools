@@ -1,14 +1,15 @@
+# coding=utf-8
 from __future__ import division
 
 import numpy as np
 
 
 def inverseHistogram(hist, bin_range):
-    '''sample data from given histogram and min, max values within range
+    """sample data from given histogram and min, max values within range
 
     Returns:
         np.array: data that would create the same histogram as given
-    '''
+    """
     data = hist.astype(float) / np.min(hist[np.nonzero(hist)])
     new_data = np.empty(shape=np.sum(data, dtype=int))
     i = 0

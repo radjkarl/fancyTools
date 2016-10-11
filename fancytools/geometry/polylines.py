@@ -1,10 +1,11 @@
-'''
+# coding=utf-8
+"""
 general functions for polylines =
     [ [ [x0,y0],[x1,y1], ... ], #first polyline
       [ [x0,y0],[x1,y1], ... ], #second
       ...
     ]
-'''
+"""
 
 import numpy as np
 from numpy.linalg import norm
@@ -17,9 +18,9 @@ from fancytools.math.angleDiff import angleDiff
 
 
 def lengths(polyline):
-    '''
+    """
     returns the length of all polylines
-    '''
+    """
     return norm(np.diff(polyline, axis=0), axis=1)
 
 
@@ -51,10 +52,10 @@ def _sort(c, firstI, lastI):
 
 
 def sort(polylines):
-    '''
+    """
     sort points within polyline
     p0-p1-p2...
-    '''
+    """
     for n, c in enumerate(polylines):
         l = len(c)
         if l > 2:
@@ -80,9 +81,9 @@ def sort(polylines):
 
 
 def filter(polylines, min_len=20):
-    '''
+    """
     filter polylines shorter than given min length
-    '''
+    """
     filtered = []
     for n in range(len(polylines) - 1, -1, -1):
         if lengths(polylines[n]).sum() < min_len:
@@ -91,9 +92,9 @@ def filter(polylines, min_len=20):
 
 
 def separate(polylines, f_mx_dist=2, mn_group_len=4):
-    '''
+    """
     split polylines wherever crinkles are found
-    '''
+    """
     s = []
 
     for n in range(len(polylines) - 1, -1, -1):
@@ -133,10 +134,10 @@ def separate(polylines, f_mx_dist=2, mn_group_len=4):
 
 
 def merge(polylines, mx_dist=4):
-    '''
+    """
     point by line segment comparison
     merge polylines if points are close
-    '''
+    """
     l = len(polylines)
     to_remove = set()
     for n in range(l - 1, -1, -1):
@@ -227,11 +228,11 @@ def _connect(c0, c1, d0, d1):
 
 
 def connect(polylines, max_dist=10):
-    '''
+    """
     connect polylines that are close and have a similar orientation
      o---o  <->  o---o  ==> o----o--o----o
     TODO: max_dist as faction of cell size
-    '''
+    """
     ll = len(polylines)
     remove = []
     for n in range(ll - 1, -1, -1):
@@ -263,9 +264,9 @@ def connect(polylines, max_dist=10):
 
 
 def smooth(polylines):
-    '''
+    """
     smooth every polyline using spline interpolation
-    '''
+    """
     for c in polylines:
         if len(c) < 9:
             # smoothing wouldn't make sense here
@@ -290,7 +291,7 @@ def plot(polylines, img=None):
         y = c[:, 1]
         plt.plot(x, y, linewidth=3)
         plt.text(x[-1], y[-1], str(n + 1))
-    if not img is None:
+    if img is not None:
         plt.imshow(img, interpolation='none')
         plt.set_cmap('gray')
     plt.show()
