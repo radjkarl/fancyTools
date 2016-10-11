@@ -12,22 +12,22 @@ def findMax(arr):
     return out
 
 
-@jit(nopython=True) 
+@jit(nopython=True)
 def _calcMax(arr, out):
     g0 = arr.shape[0]
 
     up = False
     last = arr[0]
-    for i in range(1,g0):
-        
+    for i in range(1, g0):
+
         px = arr[i]
         if up and px < last:
-            out[i-1] = True
+            out[i - 1] = True
             up = False
         elif px > last:
             up = True
         last = px
-         
+
 
 def findMin(arr):
     '''
@@ -38,17 +38,17 @@ def findMin(arr):
     return out
 
 
-@jit(nopython=True) 
+@jit(nopython=True)
 def _calcMin(arr, out):
     g0 = arr.shape[0]
 
     down = False
     last = arr[0]
-    for i in range(1,g0):
-        
+    for i in range(1, g0):
+
         px = arr[i]
         if down and px > last:
-            out[i-1] = True
+            out[i - 1] = True
             down = False
         elif px < last:
             down = True
@@ -57,8 +57,7 @@ def _calcMin(arr, out):
 
 if __name__ == '__main__':
 
-    a = np.array([0,0,1,2,2,3,2,4,3,2,2,3,3,3,1])
-    #peaks values...
-    assert np.allclose( a[findMax(a)], [3,4,3] )
-    assert np.allclose( a[findMin(a)], [2,2]   )
- 
+    a = np.array([0, 0, 1, 2, 2, 3, 2, 4, 3, 2, 2, 3, 3, 3, 1])
+    # peaks values...
+    assert np.allclose(a[findMax(a)], [3, 4, 3])
+    assert np.allclose(a[findMin(a)], [2, 2])

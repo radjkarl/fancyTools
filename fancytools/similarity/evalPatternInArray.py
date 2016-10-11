@@ -3,10 +3,7 @@ from __future__ import division
 from numba import jit
 
 
-
-
-
-@jit(nopython=True)   
+@jit(nopython=True)
 def evalPatternInArray(pattern, arr):
     '''
     returns similarity parameter of given pattern to be
@@ -31,11 +28,11 @@ def evalPatternInArray(pattern, arr):
     >>> pattern = [1,0.5,-2]
     >>> evalPatternInArray(pattern, arr)
     162.2057359307358
-    
+
     '''
     l = len(pattern)
     ll = len(arr)
-    #print l, ll
+    # print l, ll
     mx_additions = 3
     sim = 0
     i = 0
@@ -45,14 +42,14 @@ def evalPatternInArray(pattern, arr):
     v = arr[i]
 
     while True:
-        #relative difference:
+        # relative difference:
         if p == v:
             d = 0
-        elif v+p == 0:
+        elif v + p == 0:
             d = v
         else:
-            d = (p-v)/(v+p)
-        #print d
+            d = (p - v) / (v + p)
+        # print d
         if abs(d) < 0.15:
             c = mx_additions
             j += 1
@@ -60,13 +57,13 @@ def evalPatternInArray(pattern, arr):
             if j == l:
                 j = 0
             if i == ll:
-                #print sim, v, p,a
+                # print sim, v, p,a
                 return sim
             p = pattern[j]
             v = arr[i]
-            
+
         elif d < 0:
-            #surplus line
+            # surplus line
             c += 1
             j += 1
             if j == l:
@@ -74,7 +71,7 @@ def evalPatternInArray(pattern, arr):
             p += pattern[j]
             sim += abs(d)
         else:
-            #line missing
+            # line missing
             c += 1
             i += 1
             if i == ll:
@@ -85,20 +82,19 @@ def evalPatternInArray(pattern, arr):
             sim += abs(d)
 
 
-    
 if __name__ == "__main__":
-#     import numpy as np
-#     
-#     p = np.array([  53.54507214,   35.17027143,  147.04964467,  147.10031907,
-#              80.81610302])
-#     d = np.array([  72.,  146.,  150.,   73.,   85.,  157.,  147.,   70.,   85.,
-#             155.,  141.,   85.,   73.,  150.,  154.,   68.,   87.,  142.,
-#             154.,   72.,   85.,  147.,  147.,   30.,   40.])
-# 
-#     p2 = np.array([  53.54507214+35.17027143,  147.04964467,  147.10031907,
-#              80.81610302])
-# 
-#     print evalPatternInArray(p2, d)
+    #     import numpy as np
+    #
+    #     p = np.array([  53.54507214,   35.17027143,  147.04964467,  147.10031907,
+    #              80.81610302])
+    #     d = np.array([  72.,  146.,  150.,   73.,   85.,  157.,  147.,   70.,   85.,
+    #             155.,  141.,   85.,   73.,  150.,  154.,   68.,   87.,  142.,
+    #             154.,   72.,   85.,  147.,  147.,   30.,   40.])
+    #
+    #     p2 = np.array([  53.54507214+35.17027143,  147.04964467,  147.10031907,
+    #              80.81610302])
+    #
+    #     print evalPatternInArray(p2, d)
 
     import doctest
     doctest.testmod()

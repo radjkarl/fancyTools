@@ -6,15 +6,14 @@ from copy import deepcopy
 from fancytools.math.nearestPosition2 import NearestPosition2
 
 
-
 class _UniformNearestPosition(object):
+
     def __init__(self, grid):
         self.start = grid[0]
-        self.step = grid[1]-grid[0]
+        self.step = grid[1] - grid[0]
 
     def __call__(self, value):
-        return round((value - self.start)/ self.step)
-
+        return round((value - self.start) / self.step)
 
 
 class _SortBase(object):
@@ -22,7 +21,7 @@ class _SortBase(object):
     def __init__(self, grid, resolution, isuniform):
         self.resolution = resolution
         self.isuniform = isuniform
-        self.grid = grid#self.render.opts['grid']
+        self.grid = grid  # self.render.opts['grid']
 
         self.reset()
 
@@ -31,7 +30,6 @@ class _SortBase(object):
             self.nearest = [_UniformNearestPosition(g) for g in self.grid]
         else:
             self.nearest = [NearestPosition2(g) for g in self.grid]
-
 
 
 class Aliased(_SortBase):
@@ -51,19 +49,16 @@ class Aliased(_SortBase):
     '''
 
     def reset(self):
-        self.positionsIntensities = [[[ ],1]]
+        self.positionsIntensities = [[[], 1]]
         for _ in range(len(self.grid)):
             self.positionsIntensities[0][0].append(0)
         self._majorPositions = self.positionsIntensities[0][0]
         _SortBase.reset(self)
 
-
-
     def getPositionsIntensities(self, point):
-        for i, (p,n) in enumerate(zip(point, self.nearest)):
+        for i, (p, n) in enumerate(zip(point, self.nearest)):
             self._majorPositions[i] = n(p)
         return self.positionsIntensities
-
 
 
 class AntiAliased(_SortBase):
@@ -75,14 +70,14 @@ class AntiAliased(_SortBase):
 
     This class isn't as fast as :class:`.coarseMatrix` but can assign values
     in a more accurate way if the following condition is fullfilled:
-    
+
     .. note:: number of datapoints in matrix>> matrix-resolution
-    
+
     In a fineMatrix the values of the mergeDimensions were stored in the mergeMatrix
     at the nearest point (analoque to the procedure of the :class:`.coarseMatrix`)
     AND all points near this point. Depending on the number of basisDimensions the following
     number of positions were filled:
-    
+
     =======  ==========
     nBasis   nPositions
     =======  ==========
@@ -95,7 +90,7 @@ class AntiAliased(_SortBase):
     This splitted values are wheighted through
     its values in the densityMatrix - ther pointsdensity.
     The sum of this pointsdensity is allways one. The following images should illustrate this procedure:
-    
+
     .. image:: _static/fineMatrix_1D.png
        :scale: 60 %
 
@@ -105,23 +100,23 @@ class AntiAliased(_SortBase):
 
     def reset(self):
         ndim = len(self.grid)
-        self.positionsIntensities = [[[ ],1]]
+        self.positionsIntensities = [[[], 1]]
         self.anzAffectedCells = 2**ndim
-        self.affectedCellCounter =  []
-        for i in range(1,ndim+1,1):
-            self.affectedCellCounter.append(((2**i//2)) -1)
-        
+        self.affectedCellCounter = []
+        for i in range(1, ndim + 1, 1):
+            self.affectedCellCounter.append(((2**i // 2)) - 1)
+
         for i in range(ndim):
             self.positionsIntensities[0][0].append(0)
 
-        for _ in range(self.anzAffectedCells-1):
-            #1D: 2 cells
-            #2D: 4 cells
-            #3D: 8 cells
-            self.positionsIntensities.append(deepcopy(self.positionsIntensities[0]))
+        for _ in range(self.anzAffectedCells - 1):
+            # 1D: 2 cells
+            # 2D: 4 cells
+            # 3D: 8 cells
+            self.positionsIntensities.append(
+                deepcopy(self.positionsIntensities[0]))
 
         _SortBase.reset(self)
-
 
     def getPositionsIntensities(self, point):
         for i in range(self.anzAffectedCells):
@@ -130,26 +125,27 @@ class AntiAliased(_SortBase):
         for i, (p, g, n) in enumerate(zip(point, self.grid, self.nearest)):
 
             nearest_point = n(p)
-            nearest_diff = abs(g[nearest_point] -p)
+            nearest_diff = abs(g[nearest_point] - p)
             if nearest_point == 0:  # is first point of array - neared point is second point
                 sec_nearest_point = 1
-            elif nearest_point == self.resolution[i]-1:  # is last point of array
-                sec_nearest_point = nearest_point-1  # basis.getResolution()-2
+            # is last point of array
+            elif nearest_point == self.resolution[i] - 1:
+                sec_nearest_point = nearest_point - 1  # basis.getResolution()-2
             else:  # whose of the neigbours is closer
-                lastVal = g[nearest_point-1]
-                nextVal = g[nearest_point+1]
-                lastDiff = abs(lastVal-p)
-                nextDiff = abs(nextVal-p)
+                lastVal = g[nearest_point - 1]
+                nextVal = g[nearest_point + 1]
+                lastDiff = abs(lastVal - p)
+                nextDiff = abs(nextVal - p)
                 if lastDiff < nextDiff:
-                    sec_nearest_point = nearest_point-1
+                    sec_nearest_point = nearest_point - 1
                     #sec_nearest_diff = lastDiff
                 else:
-                    sec_nearest_point = nearest_point+1
-                    #sec_nearest_diff = nextDiff 
-            sec_nearest_diff = abs(g[sec_nearest_point] -p)
-            #sec_nearest_point get some of the intensity of the nearest point
-            transfered_intensity = ((sec_nearest_diff-
-                nearest_diff)/ sec_nearest_diff)
+                    sec_nearest_point = nearest_point + 1
+                    #sec_nearest_diff = nextDiff
+            sec_nearest_diff = abs(g[sec_nearest_point] - p)
+            # sec_nearest_point get some of the intensity of the nearest point
+            transfered_intensity = ((sec_nearest_diff -
+                                     nearest_diff) / sec_nearest_diff)
             n = 0
             write_point = nearest_point
             nearest_intensity = 1 - transfered_intensity

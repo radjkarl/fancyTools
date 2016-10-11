@@ -1,7 +1,8 @@
 from __future__ import print_function
 from __future__ import absolute_import
-#WINDOWS ONLY AT THE MOMENT
-import sys, os#, traceback, types
+# WINDOWS ONLY AT THE MOMENT
+import sys
+import os  # , traceback, types
 
 
 def runAsAdmin(cmdLine=None, target_dir='', wait=True):
@@ -11,8 +12,10 @@ def runAsAdmin(cmdLine=None, target_dir='', wait=True):
     '''
     if os.name != 'nt':
         raise RuntimeError("This function is only implemented on Windows.")
-    #import win32api, 
-    import win32con, win32event, win32process
+    # import win32api,
+    import win32con
+    import win32event
+    import win32process
     from win32com.shell.shell import ShellExecuteEx
 
     from win32com.shell import shellcon
@@ -21,13 +24,12 @@ def runAsAdmin(cmdLine=None, target_dir='', wait=True):
 
     if cmdLine is None:
         cmdLine = [python_exe] + sys.argv
-    elif type(cmdLine) not in (tuple,list):
+    elif type(cmdLine) not in (tuple, list):
         raise ValueError("cmdLine is not a sequence.")
 
-    
-
     cmd = '"%s"' % (cmdLine[0],)
-    # XXX TODO: isn't there a function or something we can call to message command line params?
+    # XXX TODO: isn't there a function or something we can call to message
+    # command line params?
     params = " ".join(['"%s"' % (x,) for x in cmdLine[1:]])
     #cmdDir = ''
     showCmd = win32con.SW_SHOWNORMAL
@@ -49,17 +51,15 @@ def runAsAdmin(cmdLine=None, target_dir='', wait=True):
                               lpParameters=params,
                               lpDirectory=target_dir)
     if wait:
-        procHandle = procInfo['hProcess']    
+        procHandle = procInfo['hProcess']
         obj = win32event.WaitForSingleObject(procHandle, win32event.INFINITE)
         rc = win32process.GetExitCodeProcess(procHandle)
-        #print "Process handle %s returned code %s" % (procHandle, rc)
+        # print "Process handle %s returned code %s" % (procHandle, rc)
     else:
         rc = None
     return rc
 
 if __name__ == '__main__':
     from . import isAdmin
-                  
-    runAsAdmin( ('python', isAdmin.__file__[:-1]) )
 
-    
+    runAsAdmin(('python', isAdmin.__file__[:-1]))

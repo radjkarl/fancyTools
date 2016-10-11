@@ -12,7 +12,6 @@ values were splitted.
 from numpy import isnan
 
 
-
 def last(values, position, intensity, value):
     values[position] = value * intensity
     return True

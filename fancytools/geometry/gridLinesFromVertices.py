@@ -12,7 +12,7 @@ def gridLinesFromVertices(edges, nCells, dtype=float):
         tuple(4lists): horizontal and vertical lines as (x0,y0,x1,y1)
     '''
     e = edges
-    sx, sy = nCells[0]+1, nCells[1]+1
+    sx, sy = nCells[0] + 1, nCells[1] + 1
     # horizontal lines
     x0 = np.linspace(e[0, 0], e[3, 0], sy, dtype=dtype)
     x1 = np.linspace(e[1, 0], e[2, 0], sy, dtype=dtype)
@@ -48,7 +48,9 @@ if __name__ == '__main__':
     print(h[0])
 
     if 'no_window' not in sys.argv:
-        plt.figure('create grid with %s cells within given edge points' % str(ncells))
+        plt.figure(
+            'create grid with %s cells within given edge points' %
+            str(ncells))
         for l in v:
             plt.plot((l[0], l[2]), (l[1], l[3]), 'r')
         for l in h:

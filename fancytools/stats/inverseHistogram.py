@@ -3,7 +3,6 @@ from builtins import zip
 import numpy as np
 
 
-
 def inverseHistogram(hist, bin_range):
     '''sample data from given histogram and min, max values within range
 
@@ -13,12 +12,11 @@ def inverseHistogram(hist, bin_range):
     data = hist.astype(float) / np.min(hist[np.nonzero(hist)])
     new_data = np.empty(shape=np.sum(data, dtype=int))
     i = 0
-    xvals = np.linspace(bin_range[0], bin_range[1],len(data))
+    xvals = np.linspace(bin_range[0], bin_range[1], len(data))
     for d, x in zip(data, xvals):
-        new_data[i:i+d] = x
+        new_data[i:i + d] = x
         i += int(d)
     return new_data
-
 
 
 if __name__ == '__main__':
