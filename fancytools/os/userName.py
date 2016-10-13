@@ -1,20 +1,21 @@
+# coding=utf-8
+from __future__ import print_function
 import os
 
 try:
-	import pwd
+    import pwd
 except ImportError:
-	import getpass
-	pwd = None
+    import getpass
+    pwd = None
 
 
 def userName():
-	'''return the user-name of the current user'''
-	if pwd:
-		return pwd.getpwuid(os.geteuid()).pw_name
-	else:
-		return getpass.getuser()
-
+    """return the user-name of the current user"""
+    if pwd:
+        return pwd.getpwuid(os.geteuid()).pw_name
+    else:
+        return getpass.getuser()
 
 
 if __name__ == '__main__':
-	print("your user name is '%s'" %userName() )
+    print("your user name is '%s'" % userName())

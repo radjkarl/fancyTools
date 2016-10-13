@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
+
 import numpy as np
 
 
@@ -21,8 +23,10 @@ class FIFObuffer(object):
     def __init__(self, shape, dtype=np.float32, filled=False):
         self._cache = np.zeros(shape, dtype)
         self._values = np.zeros(shape, dtype)
-        if not isinstance(shape,int):
-            raise Exception('%s can only handle 1darrays at the moment, shape has to be int' %self.__class__.__name__)
+        if not isinstance(shape, int):
+            raise Exception(
+                '%s can only handle 1darrays at the moment, shape has to be int' %
+                self.__class__.__name__)
         self.shape = shape
         self.size = shape
         self._splitPos = 0
@@ -33,12 +37,10 @@ class FIFObuffer(object):
         self._cached = False
         self._splitValue = 1
 
-
     def setNextLineEveryNValues(self, n):
-        self._splitValue = 1/float(n)
+        self._splitValue = 1 / n
         if int(self._splitValue) == self._splitValue:
             self._splitValue = int(self._splitValue)
-
 
     def add(self, value):
         """
@@ -48,12 +50,11 @@ class FIFObuffer(object):
         self._pos = self._ind % self.shape
         self._values[ind] = value
         if self._ind < self.shape:
-            self._ind += 1 #fast fill
+            self._ind += 1  # fast fill
         else:
             self._ind += self._splitValue
             self._splitPos += self._splitValue
         self._cached = False
-
 
     def array(self):
         """
@@ -68,19 +69,16 @@ class FIFObuffer(object):
             self._cached = True
         return self._cache
 
-
     def __len__(self):
         return min(int(self._ind), self.shape)
 
-
     @property
     def position(self):
-        return self.__len__()-1
-
+        return self.__len__() - 1
 
     def splitPos(self):
-        '''return the position of where to split the array 
-        to get the values in the right order'''
+        """return the position of where to split the array
+        to get the values in the right order"""
         if self._ind < self.shape:
             return 0
         v = int(self._splitPos)
@@ -88,14 +86,11 @@ class FIFObuffer(object):
             self._splitPos = 0
         return v
 
-
     def __repr__(self):
         return str(self.array())
 
-
     def __getitem__(self, key):
         return self.array()[key]
-
 
 
 if __name__ == "__main__":

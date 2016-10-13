@@ -1,12 +1,14 @@
+# coding=utf-8
+from __future__ import division
+
 from scipy.optimize.minpack import curve_fit
 from scipy.ndimage.interpolation import zoom
 import numpy as np
 
 
-
 def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
                    output_shape=None, guess=None):
-    '''Fit a 2d array to a 2d function
+    """Fit a 2d array to a 2d function
 
     *Ignore masked values
     * [down_scale_factor] map to speed up fitting procedure, set value smaller than 1
@@ -15,7 +17,7 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
 
     Returns:
         Fitted map, fitting params (scaled), error
-    '''
+    """
     if mask is None:
         mask = np.ones(shape=arr.shape, dtype=bool)
 
@@ -42,11 +44,11 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
     if output_shape is None:
         output_shape = arr.shape
 
-    fx = float(arr2.shape[0]) / output_shape[0]
-    fy = float(arr2.shape[1]) / output_shape[1]
+    fx = arr2.shape[0] / output_shape[0]
+    fy = arr2.shape[1] / output_shape[1]
 
-    rebuilt = np.fromfunction(lambda x, y: fn((x*fx, y*fy),
-                                              *parameters), output_shape )
+    rebuilt = np.fromfunction(lambda x, y: fn((x * fx, y * fy),
+                                              *parameters), output_shape)
 
     return rebuilt, parameters, perr
 
@@ -58,20 +60,21 @@ if __name__ == '__main__':
     f = 0.3  # down scale factor
 
     shape = (100, 200)
-    guess = (a*f, b*f)
+    guess = (a * f, b * f)
 
+    def fn(xxx_todo_changeme, a, b):
+        (x, y) = xxx_todo_changeme
+        return np.sin(x / a) + np.cos(y / b)
 
-    def fn((x, y), a, b):
-        return np.sin(x/a)+np.cos(y/b)
-
-    fn2 = lambda x,y: fn((x, y),a, b)
+    fn2 = lambda x, y: fn((x, y), a, b)
 
     # build noisy image:
     img = np.fromfunction(fn2, shape)
     img += np.random.rand(*shape)
 
     # fit equation using noise image:
-    fit, parameters, perr = fit2dArrayToFn(img, fn, guess=guess, down_scale_factor=f)
+    fit, parameters, perr = fit2dArrayToFn(
+        img, fn, guess=guess, down_scale_factor=f)
 
     if 'no_window' not in sys.argv:
         plt.figure('original')

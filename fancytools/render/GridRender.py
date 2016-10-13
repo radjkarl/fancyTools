@@ -1,21 +1,27 @@
+# coding=utf-8
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+
 import numpy as np
 from numpy import isnan
 
 # OWN
-import _sortMethods
-import _mergeMethods  # used for self.mergeMethod
-
+from . import _sortMethods
+from . import _mergeMethods  # used for self.mergeMethod
 
 
 class GridRender(object):
-    """Discretize multi-dimensional continous data in a np.array
+    """
+    Discretize multi-dimensional continous data in a np.array
     """
 
+    # TODO: default argument is mutable
     def __init__(self,
                  dtype=np.float64, antialiasing=False,
                  method='last', fill_value=np.nan,
                  references=[], grid=None,
-                 range=((0, 1), (0, 1)), resolution=(100, 100),
+                 girdcoordrange=((0, 1), (0, 1)), resolution=(100, 100),
                  record_mean=False, record_variance=False,
                  record_density=False):
         """Args:
@@ -25,19 +31,18 @@ class GridRender(object):
 
         TODO: continue documenting
         """
-        self.opts = {'dtype': dtype,
-                     'antialiasing': antialiasing,
-                     'references': references,
-                     'grid': grid,
-                     'method': method,
-                     'fill_value': fill_value,
-                     'range': range,
-                     'resolution': resolution,
-                     'record_mean': record_mean,
+        self.opts = {'dtype':           dtype,
+                     'antialiasing':    antialiasing,
+                     'references':      references,
+                     'grid':            grid,
+                     'method':          method,
+                     'fill_value':      fill_value,
+                     'range':           girdcoordrange,
+                     'resolution':      resolution,
+                     'record_mean':     record_mean,
                      'record_variance': record_variance,
-                     'record_density': record_density}
+                     'record_density':  record_density}
         self.reset()
-
 
     def reset(self):
         o = self.opts
@@ -86,17 +91,16 @@ class GridRender(object):
         # METHODS
         if o['antialiasing']:
             self.sortMethod = _sortMethods.AntiAliased(
-                                    self.grid, self.resolution, isuniform)
+                self.grid, self.resolution, isuniform)
         else:
             self.sortMethod = _sortMethods.Aliased(
-                                    self.grid, self.resolution, isuniform)
+                self.grid, self.resolution, isuniform)
         self.mergeMethod = eval('_mergeMethods.%s' % o['method'])
 
-
     def averageValues(self):
-        '''
+        """
         return the averaged values in the grid
-        '''
+        """
         assert self.opts['record_density'] and self.opts['method'] == 'sum'
         # dont increase value of partly filled cells (density 0..1):
         filled = self.density > 1
@@ -107,15 +111,14 @@ class GridRender(object):
         v[~filled] *= self.density[~filled]
         return v
 
-
     def add(self, point, value):
-        '''
+        """
         Assign all self.merge_values to the self._mergeMatrix
         Get the position/intensity of a value
-        '''
+        """
         # check range
-        for p,r in zip(point,self.range):
-            if p < r[0] or p > r[1] :
+        for p, r in zip(point, self.range):
+            if p < r[0] or p > r[1]:
                 return
         # check nan
         if isnan(value):
@@ -123,25 +126,26 @@ class GridRender(object):
 
         refs = self.opts['references']
         # for all neighbour points (1, if antialiasting=False):
-        for position, intensity in self.sortMethod.getPositionsIntensities(point):
+        for position, intensity in self.sortMethod.getPositionsIntensities(
+                point):
             position = tuple(position)
             if self.mean is not None:
                 old_value = self.values[position]
                 if not np.isnan(old_value):
                     anz_values = self.density[position]
-                    mean = old_value + intensity * ( (value
-                           - old_value) / (anz_values+intensity) )
+                    mean = old_value + intensity * (((value
+                                                      - old_value) / (anz_values + intensity)))
                     self.mean[position] = mean
 
                     if self.variance is not None:
-                        self.variance[position] += abs(value - mean)/(anz_values+intensity)
+                        self.variance[
+                            position] += (abs(value - mean) / (anz_values + intensity))
 
             if self.mergeMethod(self.values, position, intensity, value):
                 for a in refs:
                     a.mergeMethod(a, position, intensity, value)
             if self.density is not None:
                 self.density[position] += intensity
-
 
 
 if __name__ == '__main__':
@@ -154,7 +158,7 @@ if __name__ == '__main__':
     z = np.sin(np.linspace(0, 10, 10000))
 
     # test on a uniform grid:
-    g = GridRender(range=((-1, 1), (-1, 1)),
+    g = GridRender(girdcoordrange=((-1, 1), (-1, 1)),
                    resolution=(200, 200))
     for xi, yi, zi in zip(x, y, z):
         g.add((xi, yi), zi)
@@ -163,8 +167,8 @@ if __name__ == '__main__':
     g2 = GridRender(grid=np.ogrid[-1:1:3e-2, -1:1:3e-2],
                     method='max',
                     antialiasing=True,
-                    #record_mean=True,
-                    #record_variance=True,
+                    # record_mean=True,
+                    # record_variance=True,
                     record_density=True)
 
     for xi, yi, zi in zip(x, y, z):
