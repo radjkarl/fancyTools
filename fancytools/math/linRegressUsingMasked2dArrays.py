@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import linregress
 
 
-def linRegressUsingMasked2dArrays(xVals, arrays, badMask):
+def linRegressUsingMasked2dArrays(xVals, arrays, badMask=None, calcError=False):
     """
     if you have multiple 2d arrays each with position given by
     xVals[array-index]
@@ -14,7 +14,8 @@ def linRegressUsingMasked2dArrays(xVals, arrays, badMask):
     """
 
     assert arrays.ndim == 3, 'need multiple 2d arrays'
-    assert arrays.shape == badMask.shape, 'mask needs to have same shape'
+    if badMask is not None:
+        assert arrays.shape == badMask.shape, 'mask needs to have same shape'
 
     s = arrays.shape
     # flatten to create array of 1d arrays:
@@ -26,21 +27,29 @@ def linRegressUsingMasked2dArrays(xVals, arrays, badMask):
 
     offset = solution[1].reshape(s)
     ascent = solution[0].reshape(s)
-
-    # do linear regression for all masked areas
-    # trying to find multiple 2d arrays that are not masked together
-    x, y = np.where(np.sum(badMask, axis=0))
-    for xi, yi in zip(x, y):
-        valid = ~badMask[:, xi, yi]
-        asc, offs, _, _, _ = linregress(x[valid], arrays[valid, xi, yi])
-        ascent[xi, yi] = asc
-        offset[xi, yi] = offs
-
-    # calculate RMSE of the regression:
-    error = np.empty(shape=arrays.shape)
-    for n, (y, x) in enumerate(zip(arrays, xVals)):
-        error[n] = (y - (x * ascent + offset))**2
-    error = error.mean(axis=0)**0.5
+    
+    if badMask is not None:
+        # do linear regression for all masked areas
+        # trying to find multiple 2d arrays that are not masked together
+        x, y = np.where(np.sum(badMask, axis=0))
+        for xi, yi in zip(x, y):
+            valid = ~badMask[:, xi, yi]
+            try:
+                asc, offs = linregress(x[valid], arrays[valid, xi, yi])[:2]
+                ascent[xi, yi] = asc
+                offset[xi, yi] = offs
+            except ValueError:
+                #if e.g. input is empty
+                ascent[xi, yi] = np.nan
+                offset[xi, yi] = np.nan
+    if calcError:
+        # calculate RMSE of the regression:
+        error = np.empty(shape=arrays.shape)
+        for n, (y, x) in enumerate(zip(arrays, xVals)):
+            error[n] = (y - (x * ascent + offset))**2
+        error = error.mean(axis=0)**0.5
+    else:
+        error = None
 
     return ascent, offset, error
 

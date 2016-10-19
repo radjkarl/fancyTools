@@ -29,8 +29,8 @@ def bringPlotOverSameX(data, nsample=None):
     bring all plots (x,y)
     to same x value base
     """
-    x0 = [x[0] for x, _ in data]
-    x1 = [x[-1] for x, _ in data]
+    x0 = [x[0] for x, _ in data if len(x)]
+    x1 = [x[-1] for x, _ in data if len(x)]
 
     xmin = min(np.min(x0), np.min(x1))
     xmax = max(np.max(x0), np.max(x1))
@@ -38,7 +38,7 @@ def bringPlotOverSameX(data, nsample=None):
     if nsample is None:
         # calc from mean point density:
         pn_per_dist = np.mean([len(x) / (abs(x[0] - x[-1]))
-                               for x, _ in data])
+                               for x, _ in data if len(x)])
         #...and max distance:
         nsample = round(pn_per_dist * abs(xmax - xmin))
 
@@ -47,10 +47,10 @@ def bringPlotOverSameX(data, nsample=None):
     if x0[0] > x1[0]:
         # values are reverse sorted
         interpol = [np.interp(xArr, x[::-1], y[::-1],
-                              left=np.nan, right=np.nan) for x, y in data]
+                              left=np.nan, right=np.nan) for x, y in data if len(x)]
     else:
         interpol = [np.interp(xArr, x, y,
-                              left=np.nan, right=np.nan) for x, y in data]
+                              left=np.nan, right=np.nan) for x, y in data if len(x)]
     return xArr, interpol
 
 
