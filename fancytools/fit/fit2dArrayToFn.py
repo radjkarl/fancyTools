@@ -7,7 +7,8 @@ import numpy as np
 
 
 def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
-                   output_shape=None, guess=None):
+                   output_shape=None, guess=None,
+                   outgrid=None):
     """Fit a 2d array to a 2d function
 
     *Ignore masked values
@@ -41,14 +42,18 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
     # ERROR:
     perr = np.sqrt(np.diag(cov_matrix))
 
-    if output_shape is None:
-        output_shape = arr.shape
-
-    fx = arr2.shape[0] / output_shape[0]
-    fy = arr2.shape[1] / output_shape[1]
-
-    rebuilt = np.fromfunction(lambda x, y: fn((x * fx, y * fy),
-                                              *parameters), output_shape)
+    if outgrid is not None:
+        yy,xx = outgrid
+        rebuilt = fn((yy,xx), *parameters)
+    else:
+        if output_shape is None:
+            output_shape = arr.shape
+    
+        fx = arr2.shape[0] / output_shape[0]
+        fy = arr2.shape[1] / output_shape[1]
+    
+        rebuilt = np.fromfunction(lambda x, y: fn((x * fx, y * fy),
+                                                  *parameters), output_shape)
 
     return rebuilt, parameters, perr
 
