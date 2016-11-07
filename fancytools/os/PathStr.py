@@ -147,7 +147,7 @@ class PathStr(str):
 
     def setFiletype(self, ftype):
         if '.' in self:
-            s = self[:self.index('.')]
+            s = self[:-self[::-1].index('.')-1]
         else:
             s = self
         return PathStr(s + '.' + ftype)
