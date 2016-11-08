@@ -11,7 +11,8 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
                    outgrid=None):
     """Fit a 2d array to a 2d function
 
-    *Ignore masked values
+    USE ONLY MASKED VALUES
+    
     * [down_scale_factor] map to speed up fitting procedure, set value smaller than 1
     * [output_shape] shape of the output array
     * [guess] must be scaled using [scale_factor]
@@ -20,10 +21,11 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
         Fitted map, fitting params (scaled), error
     """
     if mask is None:
+        #assert outgrid is not None
         mask = np.ones(shape=arr.shape, dtype=bool)
 
     if down_scale_factor is None:
-        if mask.sum() > 100:
+        if mask.sum() > 1000:
             down_scale_factor = 0.3
         else:
             down_scale_factor = 1
