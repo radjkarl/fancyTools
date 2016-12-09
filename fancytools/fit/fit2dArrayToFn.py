@@ -40,7 +40,6 @@ def fit2dArrayToFn(arr, fn, mask=None, down_scale_factor=None,
     x, y = np.where(mask)
     z = arr2[mask]
     # FIT:
-    print (guess,111)
     parameters, cov_matrix = curve_fit(fn, (x, y), z, p0=guess)
     # ERROR:
     perr = np.sqrt(np.diag(cov_matrix))

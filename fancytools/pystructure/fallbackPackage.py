@@ -21,8 +21,9 @@ class Loader():
         sys.modules[name] = mod
         return mod
 
+
+
 class Finder(object):
-    
     def __init__(self, package_name, fallback_package_name):
         self.package_name = package_name
         self.fallback_package_name = fallback_package_name
@@ -53,6 +54,21 @@ def fallbackPackage(package_name, fallback_package_name):
 
 
 if __name__ == '__main__':
-    fallbackPackage('math', 'numpy')
-    from math import array
+    
+    #fancytools does not have an item 'array',
+    #so, if we do the following, we get an import error:
+    try:
+        from fancytools import array
+    except ImportError as err:
+        print (err)
+    #now, if we set a fallpack package, it will work:
+    fallbackPackage('fancytools', 'numpy')
+
+    from fancytools import array
+    print ('now it works:', array)
+    
+    #this is very useful of you need to modify a package where only
+    #which only contains part of all items
+
+    
     

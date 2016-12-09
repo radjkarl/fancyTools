@@ -7,11 +7,11 @@ line given as:
 from __future__ import division
 from __future__ import print_function
 
-from numpy import pi, array, empty, argmax, ndarray
+from numpy import pi, array, empty, argmax
 from math import sin, cos, atan2, hypot, acos, copysign
 
 from fancytools.math.rotatePolygon import rotatePolygon
-from fancytools.math.pointInsidePolygon import pointInsidePolygon
+from fancytools.geometry.polygon import pointInsidePolygon
 
 from numba import jit
 

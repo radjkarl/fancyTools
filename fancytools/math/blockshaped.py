@@ -45,7 +45,7 @@ def into2dBlocks(arr, n0, n1):
     but splits an array into n0*n1 blocks
     """
     s0, s1 = arr.shape
-    b = blockshaped(arr, old_div(s0, n0), old_div(s1, n1))
+    b = blockshaped(arr, s0// n0, s1// n1)
     return b.reshape(n0, n1, *b.shape[1:])
 
 

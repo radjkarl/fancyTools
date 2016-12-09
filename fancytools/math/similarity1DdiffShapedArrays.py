@@ -1,7 +1,6 @@
 # coding=utf-8
 from __future__ import division
 from __future__ import print_function
-from past.utils import old_div
 from numba import jit
 
 
@@ -26,7 +25,7 @@ def similarity1DdiffShapedArrays(arr1, arr2, normalize=False):
         else:
             mn = min(arr1[0], arr2[0])
             mx = max(arr1[-1], arr2[-1])
-        out = old_div(float(out), (mx - mn))
+        out = out/ (mx - mn)
 
     return out
 

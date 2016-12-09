@@ -1,4 +1,45 @@
-# coding=utf-8
+'''
+mostly for 2d polygons
+'''
+import numpy as np
+
+
+
+def center(poly):
+    return poly.mean(axis=0)
+
+
+def area(x,y):
+    """
+    Calculate the area of a polygon given as x(...),y(...)
+    Implementation of Shoelace formula
+    """
+    # http://stackoverflow.com/questions/24467972/calculate-area-of-polygon-given-x-y-coordinates
+    return 0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1)))
+
+
+def scale(poly, factor, center=None):
+    poly = np.asarray(poly)
+    x = poly[:,0]
+    y = poly[:,1]
+    
+    try: fx,fy = factor
+    except TypeError: fx,fy = factor, factor
+    
+    if center is None:
+        center = x.mean(),y.mean() 
+    cx,cy = center
+    
+    dx = x-cx
+    dy = y-cy
+    
+    out = np.empty_like(poly)
+    out[:,0] = cx+dx*fx
+    out[:,1] = cy+dy*fy
+
+    return out
+
+
 def pointInsidePolygon(x, y, poly):
     """
     Determine if a point is inside a given polygon or not
@@ -33,6 +74,10 @@ def pointInsidePolygon(x, y, poly):
     return inside
 
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     import doctest
     doctest.testmod()
+    x = np.arange(0, 1, 0.001)
+    y = np.sqrt(1 - x**2)
+    print(area(x, y))
