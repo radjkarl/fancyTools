@@ -4,45 +4,13 @@ import shutil
 import sys
 
 
-escape_dict = {'\a': r'\a',
-               '\b': r'\b',
-               '\c': r'\c',
-               '\f': r'\f',
-               '\n': r'\n',
-               '\r': r'\r',
-               '\t': r'\t',
-               '\v': r'\v',
-               #'\x':r'\x',#cannot do \x - otherwise exception
-               '\'': r'\'',
-               '\"': r'\"',
-               #'\0':r'\0', #doesnt work
-               '\1': r'\1',
-               '\2': r'\2',
-               '\3': r'\3',
-               '\4': r'\4',
-               '\5': r'\5',
-               '\6': r'\6',
-               #'\7':r'\7',#same as \a is ASCI
-               }
-
-
-def raw(text):
-    """Returns a raw string representation of text"""
-    new_string = ''
-    for char in text:
-        try:
-            new_string += escape_dict[char]
-        except KeyError:
-            new_string += char
-    return new_string
-
 
 class PathStr(str):
     """
     easy path-string handling and manipulation using os.path and shutil
 
-    Windows only: there is no need of transforming
-    \ to \\ - it will be done automatically when a PathStr instance is created
+    Windows only: only pass raw strings, like r'c:\...' 
+                  in order to not confuse python
 
     >>> p = PathStr.home()
     >>> print p.isdir()
@@ -54,13 +22,47 @@ class PathStr(str):
 
     def __new__(cls, value):
         """transform raw-string and / to \ depending on the os"""
-        obj = str.__new__(cls, os.path.normpath(raw(str(value))))
+        obj = str.__new__(cls, os.path.normpath(str(value)))
         return obj
 
     @staticmethod
     def home():
         """return the home/user directory"""
         return PathStr(os.path.expanduser("~"))
+
+    def raw(self):
+        """Try to transform str to raw str"
+        ... this will not work every time
+        """
+        escape_dict = {'\a': r'\a',
+                       '\b': r'\b',
+                       '\c': r'\c',
+                       '\f': r'\f',
+                       '\n': r'\n',
+                       '\r': r'\r',
+                       '\t': r'\t',
+                       '\v': r'\v',
+                       #'\x':r'\x',#cannot do \x - otherwise exception
+                       '\'': r'\'',
+                       '\"': r'\"',
+                       #'\0':r'\0', #doesnt work
+                       '\1': r'\1',
+                       '\2': r'\2',
+                       '\3': r'\3',
+                       '\4': r'\4',
+                       '\5': r'\5',
+                       '\6': r'\6',
+                       #'\7':r'\7',#same as \a is ASCI
+                       }
+    
+        new_string = ''
+        for char in self:
+            try:
+                new_string += escape_dict[char]
+            except KeyError:
+                new_string += char
+        return new_string
+
 
     @staticmethod
     def getcwd(moduleName=None):

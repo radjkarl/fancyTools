@@ -132,7 +132,7 @@ def angle(line):
 
 @jit(nopython=True)
 def angle2(line1, line2):
-    # return angle between two lines
+    # return smallest angle between two lines
     # from
     # http://stackoverflow.com/questions/13226038/calculating-angle-between-two-lines-in-python
     x0, y0, x1, y1 = line1
