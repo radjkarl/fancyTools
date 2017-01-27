@@ -6,7 +6,7 @@ from setuptools import find_packages
 from setuptools import setup as setuptoolsSetup
 
 
-def setup(package):
+def setup(package, **kwargs):
     """a template for the  python setup.py installer routine
 
     * take setup information from the packages __init__.py file
@@ -51,7 +51,8 @@ def setup(package):
         long_description=(
             read('README.rst') + '\n\n' +
             read('CHANGES.rst') + '\n\n' +
-            read('AUTHORS.rst'))
+            read('AUTHORS.rst')),
+        **kwargs
     )
     # remove the build
     # else old and notexistent files could come again in the installed pkg
