@@ -12,4 +12,4 @@ import fancytools
 from fancytools.os.setup import setup
 import sys
 
-setup(fancytools)
+setup(fancytools, zip_safe=False)
