@@ -119,14 +119,25 @@ class PathStr(str):
         shutil.copyfile(self, dst)
         return PathStr(dst)
 
-    def mkdir(self, dname=None):
-        if dname is None:
-            n = self
-        else:
-            n = self.join(dname)
-        if not n.exists():
-            os.mkdir(n)
-        return n
+#     def mkdir(self, dname=None):
+#         if dname is None:
+#             n = self
+#         else:
+#             n = self.join(dname)
+#         if not n.exists():
+#             os.mkdir(n)
+#         return n
+
+    def mkdir(self, *dname):
+        if not self.exists():
+            os.mkdir(self)
+        s = self
+        for n in dname:
+            s = s.join(n)
+            if not s.exists():
+                os.mkdir(s)
+        return s
+
 
     def rename(self, new_file_name):
         newname = self.dirname().join(new_file_name)
