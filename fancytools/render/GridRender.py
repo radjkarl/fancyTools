@@ -1,14 +1,13 @@
 # coding=utf-8
 from __future__ import division
 from __future__ import print_function
-from __future__ import absolute_import
 
 import numpy as np
 from numpy import isnan
 
 # OWN
-from . import _sortMethods
-from . import _mergeMethods  # used for self.mergeMethod
+from fancytools.render import _sortMethods
+from fancytools.render import _mergeMethods  # used for self.mergeMethod
 
 
 class GridRender(object):
@@ -46,10 +45,9 @@ class GridRender(object):
 
     def reset(self):
         o = self.opts
-
-        # ATTRIBUTES
         isuniform = False
         self.grid = o['grid']
+
         if self.grid is None:
             isuniform = True
             self.grid = []
@@ -57,7 +55,6 @@ class GridRender(object):
                 self.grid.append(np.linspace(ra[0], ra[1], re))
             self.range = self.opts['range']
             self.resolution = self.opts['resolution']
-
         else:
             self.range = []
             self.resolution = []
@@ -71,8 +68,8 @@ class GridRender(object):
 
         # ARRAYS
         self.values = np.zeros(shape=tuple(self.resolution), dtype=o['dtype'])
-
         self.density, self.mean, self.variance = None, None, None
+
         if o['record_density'] or o['record_variance'] or o['record_mean']:
             self.density = self.values.copy()
             if o['record_variance'] or o['record_mean']:
@@ -95,7 +92,9 @@ class GridRender(object):
         else:
             self.sortMethod = _sortMethods.Aliased(
                 self.grid, self.resolution, isuniform)
-        self.mergeMethod = eval('_mergeMethods.%s' % o['method'])
+#         self.mergeMethod = eval('_mergeMethods.%s' % o['method'])
+        self.mergeMethod = getattr(_mergeMethods,
+                                   'mergemethod_' + o['method'])
 
     def averageValues(self):
         """
@@ -133,13 +132,14 @@ class GridRender(object):
                 old_value = self.values[position]
                 if not np.isnan(old_value):
                     anz_values = self.density[position]
-                    mean = old_value + intensity * (((value
-                                                      - old_value) / (anz_values + intensity)))
+                    mean = old_value + intensity * (
+                        ((value - old_value) / (anz_values + intensity)))
                     self.mean[position] = mean
 
                     if self.variance is not None:
                         self.variance[
-                            position] += (abs(value - mean) / (anz_values + intensity))
+                            position] += (abs(value - mean) / (
+                                anz_values + intensity))
 
             if self.mergeMethod(self.values, position, intensity, value):
                 for a in refs:
@@ -153,19 +153,19 @@ if __name__ == '__main__':
     from matplotlib import pyplot
 
     # create values:
-    x = np.sin(np.linspace(0, 40, 10000)) * np.linspace(0, 1, 10000)
-    y = np.cos(np.linspace(0, 30, 10000))
-    z = np.sin(np.linspace(0, 10, 10000))
+    x = np.sin(np.linspace(0, 100, 10000)) * np.linspace(0, 1, 10000)
+    y = np.cos(np.linspace(0, 100, 10000))
+    z = np.sin(np.linspace(0, 30, 10000))
 
     # test on a uniform grid:
     g = GridRender(girdcoordrange=((-1, 1), (-1, 1)),
-                   resolution=(200, 200))
+                   resolution=(400, 400))
     for xi, yi, zi in zip(x, y, z):
         g.add((xi, yi), zi)
 
     # individual grid
-    g2 = GridRender(grid=np.ogrid[-1:1:3e-2, -1:1:3e-2],
-                    method='max',
+    g2 = GridRender(grid=np.ogrid[-1:1:2e-2, -1:1:2e-2],
+                    method='sum',
                     antialiasing=True,
                     # record_mean=True,
                     # record_variance=True,
@@ -176,11 +176,11 @@ if __name__ == '__main__':
 
     if 'no_window' not in sys.argv:
         pyplot.figure('1')
-        pyplot.imshow(g.values)
+        pyplot.imshow(g.values, interpolation='none')
 
         pyplot.figure('2')
-        pyplot.imshow(g2.values)
+        pyplot.imshow(g2.values, interpolation='none')
 
         pyplot.figure('Density')
-        pyplot.imshow(g2.density)
+        pyplot.imshow(g2.density, interpolation='none')
         pyplot.show()

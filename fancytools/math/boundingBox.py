@@ -12,7 +12,7 @@ def boundingBox(booleanArray):
     ...                [0,0,1,0],
     ...                [1,0,0,0],
     ...                [0,0,0,0] ])
-    >>> print boundingBox(a)
+    >>> print ( boundingBox(a) ) 
     (slice(1, 3, None), slice(0, 3, None))
     """
 

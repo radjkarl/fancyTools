@@ -5,7 +5,6 @@ from six import string_types
 import os
 
 
-# TODO: default argument is mutable
 def countLines(paths, exclude_files_containing=[],
                exclude_folders_containing=[],
                exclude_blank_lines=True,
@@ -13,8 +12,14 @@ def countLines(paths, exclude_files_containing=[],
                count_only_py_files=True):
     """
     count and return lines  of all *.py files in the given directory/-ies
+
+    [paths] --> file path or list of paths to recursively count code line
+    [exclude_(files/folders)_containing]
+            --> list of phases in folder/file name to be excluded
+                e.g. ['test', 'build']
     """
     exclude_files_containing = list(exclude_files_containing)
+    #exclude this file:
     exclude_files_containing.append("countLines.py")
 
     loclist = []  # number of lines, filepath
@@ -64,6 +69,7 @@ def countLines(paths, exclude_files_containing=[],
 
     print("\nTotal: %s lines (%s paths)" %
           (sum([x[0] for x in loclist]), len(paths)))
+
 
 
 if __name__ == '__main__':
