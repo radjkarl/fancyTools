@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
-
 import os
 import stat
 
-from .isAdmin import isAdmin
+from fancytools.os.isAdmin import isAdmin
 
 
 class StartMenuEntry(object):
@@ -91,7 +89,7 @@ MimeType=PYZ''' % (
                 self.opts['categories']
             )
             # enable unicode-characters ('ä' etc.) and write to file
-            f.write(text.encode('UTF-8'))
+            f.write(text)  # .encode('UTF-8'))
         os.chmod(self.filename, os.stat(self.filename).st_mode | stat.S_IEXEC)
 
     def remove(self):
