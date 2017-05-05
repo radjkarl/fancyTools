@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import stat
+import sys
 
 from fancytools.os.isAdmin import isAdmin
 
@@ -69,6 +70,12 @@ class _LinuxStartMenuEntry(object):
         if not os.path.exists(d):
             os.mkdir(d)
 
+        
+        if getattr(sys, 'frozen', False):
+            py = ''
+        else:
+            py = sys.executable+' '
+
         with open(self.filename, 'w') as f:
             text = '''
 [Desktop Entry]
@@ -76,7 +83,7 @@ Version=%s
 Name=%s
 Comment=%s
 Icon=%s
-Exec=python %s
+Exec=%s%s
 Terminal=false
 Type=Application
 Categories=%s
@@ -85,7 +92,7 @@ MimeType=PYZ''' % (
                 self.opts['name'],
                 self.opts['description'],
                 self.opts['icon'],
-                self.opts['target'],
+                py, self.opts['target'],
                 self.opts['categories']
             )
             # enable unicode-characters ('ä' etc.) and write to file
