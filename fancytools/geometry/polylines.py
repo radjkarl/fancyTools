@@ -231,7 +231,7 @@ def connect(polylines, max_dist=10):
     """
     connect polylines that are close and have a similar orientation
      o---o  <->  o---o  ==> o----o--o----o
-    TODO: max_dist as faction of cell size
+    TODO: max_dist as function of cell size
     """
     ll = len(polylines)
     remove = []
